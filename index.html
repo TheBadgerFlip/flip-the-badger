@@ -45,6 +45,7 @@
     border-radius: 20px;
     font-weight: bold;
     transition: background 0.2s;
+    cursor: pointer;
   }
   .nav-link:hover, .nav-link.active {
     background: rgba(255,255,255,0.25);
@@ -150,10 +151,10 @@
 <!-- Navigation -->
 <nav>
   <div class="nav-container">
-    <a href="#home" class="nav-link active" data-section="home">🏠 Home</a>
-    <a href="#play" class="nav-link" data-section="play">🎮 Play</a>
-    <a href="#download" class="nav-link" data-section="download">📦 Box</a>
-    <a href="#rules" class="nav-link" data-section="rules">📖 Rules</a>
+    <span class="nav-link active" data-section="home">🏠 Home</span>
+    <span class="nav-link" data-section="play">🎮 Play</span>
+    <span class="nav-link" data-section="download">📦 Box</span>
+    <span class="nav-link" data-section="rules">📖 Rules</span>
   </div>
 </nav>
 
@@ -174,19 +175,19 @@
       <h3>🎮</h3>
       <h3>Play Online</h3>
       <p>Use the digital scorekeeper on any device</p>
-      <a href="#play" class="btn green" style="margin-top:10px;">Play Now</a>
+      <span class="btn green" style="margin-top:10px; cursor:pointer;" data-goto="play">Play Now</span>
     </div>
     <div class="feature-card">
       <h3>📦</h3>
       <h3>Make Your Box</h3>
       <p>Download the template, cut it out, start flipping!</p>
-      <a href="#download" class="btn" style="margin-top:10px;">Get Template</a>
+      <span class="btn" style="margin-top:10px; cursor:pointer;" data-goto="download">Get Template</span>
     </div>
     <div class="feature-card">
       <h3>📖</h3>
       <h3>Learn Rules</h3>
       <p>Basic, Intermediate and Advanced levels</p>
-      <a href="#rules" class="btn" style="margin-top:10px;">Read Rules</a>
+      <span class="btn" style="margin-top:10px; cursor:pointer;" data-goto="rules">Read Rules</span>
     </div>
   </div>
 </section>
@@ -233,6 +234,8 @@
         .mode-btn { padding: 10px; border: none; border-radius: 8px; background: #eee; cursor: pointer; margin: 2px; }
         .mode-btn.active { background: var(--red); color: white; }
         .status { padding: 12px; border-radius: 8px; margin: 10px 0; background: #e3f2fd; border-left: 4px solid #2196f3; }
+        .status.lose { background: #ffebee; border-left-color: #f44336; }
+        .status.warn { background: #fff8e1; border-left-color: #ffc107; }
         .win-box { text-align: center; padding: 30px; background: #e8f5e9; border-radius: 12px; }
       </style>
       <div class="game-body">
@@ -295,7 +298,7 @@
         function addP(){ const n=document.getElementById('pname').value.trim(); if(!n)return; ps.push({name:n,score:0}); document.getElementById('pname').value=''; renderPL(); }
         function renderPL(){ document.getElementById('plist').innerHTML=ps.map((p,i)=>`<span style="background:#fff9e6; padding:6px 12px; border-radius:20px; margin:3px; display:inline-block;">${p.name} <button onclick="ps.splice(${i},1);renderPL()" style="border:none; background:none; cursor:pointer; color:#999;">✕</button></span>`).join(''); }
         function startG(){ if(!ps.length){alert('Add at least one player!');return;} document.getElementById('game-setup').classList.add('hidden'); document.getElementById('game-play').classList.remove('hidden'); document.getElementById('cmode').textContent=mode.charAt(0).toUpperCase()+mode.slice(1); updateDisplay(); }
-        function doFlip(n){ if(over)return; if(n===0){tp=0;setStatus('🔴 ZERO! Turn points lost.','lose');}else{tp+=n;} let ns=ps[ci].score+tp; if(ns>15){let b=15-(ns-15);setStatus(`⚠️ Over 15! Back to ${b}.`,'warn');endT(b);return;} if(ns===15){ps[ci].score=15;over=true;showWin();return;}document.getElementById('turnp').textContent=tp;document.getElementById('totalscore').textContent=ns;if(n!==0)setStatus(`+${n}! Now ${ns}. Flip or Pass.`,'info'); }
+        function doFlip(n){ if(over)return; if(n===0){tp=0; setStatus('🔴 ZERO! Turn points lost.','lose');}else{tp+=n;} let ns=ps[ci].score+tp; if(ns>15){let b=15-(ns-15);setStatus(`⚠️ Over 15! Back to ${b}.`,'warn');endT(b);return;} if(ns===15){ps[ci].score=15;over=true;showWin();return;}document.getElementById('turnp').textContent=tp;document.getElementById('totalscore').textContent=ns;if(n!==0)setStatus(`+${n}! Now ${ns}. Flip or Pass.`,'info'); }
         function passT(){ if(!over)endT(ps[ci].score+tp); }
         function endT(fs){ if(fs<0)fs=0; ps[ci].score=fs; tp=0; ci=(ci+1)%ps.length; updateDisplay(); }
         function penal(){ if(!confirm('Reset to 0 & end turn?'))return; ps[ci].score=0; tp=0; ci=(ci+1)%ps.length; updateDisplay(); }
@@ -330,8 +333,7 @@
     <h2>⬇️ Download Printable Template</h2>
     <p style="margin:15px 0; font-size:16px;">Ready-to-print PDF — includes folding guides and scoring labels</p>
     
-    <!-- This is where your download link goes -->
-    <a href="#" class="btn large green" onclick="alert('Save your box template file here!\\n\\nReplace the # in the code with your actual file link.')">
+    <a href="#" class="btn large green" onclick="alert('Upload your box PDF to GitHub, then replace the # in the code with your file link!')">
       📄 Download Box Template (PDF)
     </a>
     
@@ -347,7 +349,7 @@
       <li>Cut around the outer solid black line</li>
       <li>Fold all dotted lines inward before applying glue</li>
       <li>Check each face shows the correct score</li>
-      <li>Glue the small tabs to form a cube/rectangular box</li>
+      <li>Glue the small tabs to form a box</li>
       <li>Make sure it closes securely — start flipping! 🦡</li>
     </ol>
   </div>
@@ -366,7 +368,7 @@
   <div class="card">
     <h2>✅ Scoring</h2>
     <ul style="line-height:2; padding-left:20px;">
-      <li>🦡 <strong>Top or Bottom face up</strong> = 10 points</li>
+      <li>🦡 <strong>Top face up</strong> = 10 points</li>
       <li>📏 <strong>Short End up</strong> = 5 points</li>
       <li>➡️ <strong>Long Side up</strong> = 1 point</li>
       <li>🔴 <strong>Zero Side up</strong> = 0 points — lose all points gained THIS TURN only</li>
@@ -418,16 +420,26 @@
 </footer>
 
 <script>
-// Navigation system
+// Navigation system — works for ALL buttons
+function showSection(id) {
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+  document.querySelectorAll(`[data-section="${id}"]`).forEach(l => l.classList.add('active'));
+  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// Top navigation
 document.querySelectorAll('.nav-link').forEach(link => {
-  link.addEventListener('click', e => {
-    e.preventDefault();
-    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-    link.classList.add('active');
-    const target = link.getAttribute('data-section');
-    document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-    document.getElementById(target).classList.add('active');
-    window.scrollTo(0,0);
+  link.addEventListener('click', () => {
+    showSection(link.getAttribute('data-section'));
+  });
+});
+
+// Home page big buttons
+document.querySelectorAll('[data-goto]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    showSection(btn.getAttribute('data-goto'));
   });
 });
 </script>
