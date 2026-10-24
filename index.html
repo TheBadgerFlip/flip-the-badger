@@ -17,7 +17,6 @@
     --green: #2ecc71;
     --gray: #888;
     --cream: #fff9e6;
-    --badger: #1a1a1a;
   }
   * { margin:0; padding:0; box-sizing:border-box; font-family:Arial, sans-serif; }
   
@@ -30,7 +29,7 @@
   /* Navigation Bar */
   nav {
     background: var(--red);
-    padding: 12px 20px;
+    padding: 12px 15px;
     position: sticky;
     top: 0;
     z-index: 100;
@@ -41,15 +40,16 @@
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 6px;
     justify-content: center;
   }
   .nav-link {
     color: white;
     text-decoration: none;
-    padding: 8px 16px;
+    padding: 8px 14px;
     border-radius: 20px;
     font-weight: bold;
+    font-size: 15px;
     transition: background 0.2s;
     cursor: pointer;
   }
@@ -61,68 +61,63 @@
   section {
     max-width: 900px;
     margin: 0 auto;
-    padding: 40px 20px;
+    padding: 30px 15px;
     display: none;
     animation: fadeIn 0.4s ease-out;
   }
   section.active { display: block; }
 
-  h1 { font-size: 32px; text-align: center; margin-bottom: 10px; color: var(--red); }
-  h2 { font-size: 22px; margin: 30px 0 15px; color: var(--red); border-bottom: 2px solid var(--red); padding-bottom: 8px; }
-  .subtitle { text-align: center; font-size: 18px; color: #666; margin-bottom: 30px; }
+  h1 { font-size: 28px; text-align: center; margin-bottom: 8px; color: var(--red); }
+  h2 { font-size: 19px; margin: 25px 0 12px; color: var(--red); border-bottom: 2px solid var(--red); padding-bottom: 6px; }
+  .subtitle { text-align: center; font-size: 16px; color: #666; margin-bottom: 25px; }
 
-  /* Badger Watermark — clean CSS-based, no external embed issues */
+  /* Badger Watermark — emoji fallback */
   .bg-badger {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 70%;
-    max-width: 450px;
-    height: auto;
-    opacity: 0.06;
+    font-size: 200px;
+    opacity: 0.04;
     z-index: -1;
     pointer-events: none;
+    content: "🦡";
   }
 
-  /* Animated Badger Hero */
+  /* Animated Badger Hero — emoji fallback */
   .badger-hero {
     text-align: center;
-    margin: 20px 0 30px;
+    margin: 10px 0 20px;
   }
-  .badger-hero img {
-    width: 120px;
-    height: auto;
+  .badger-hero .hero-icon {
+    font-size: 80px;
+    display: inline-block;
     animation: bounce 2s infinite ease-in-out;
-    border-radius: 50%;
-    background: var(--cream);
-    padding: 10px;
   }
 
   /* Cards & Buttons */
   .card {
     background: white;
     border-radius: 16px;
-    padding: 25px;
-    margin: 20px 0;
+    padding: 20px;
+    margin: 15px 0;
     box-shadow: 0 3px 12px rgba(0,0,0,0.08);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    overflow: hidden;
   }
   .card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
   }
   .btn {
     display: inline-block;
-    padding: 14px 28px;
+    padding: 12px 24px;
     background: var(--red);
     color: white;
     text-decoration: none;
-    border-radius: 12px;
+    border-radius: 10px;
     font-weight: bold;
-    font-size: 17px;
-    margin: 8px;
+    font-size: 16px;
+    margin: 6px;
     transition: transform 0.2s, background 0.2s;
     border: none;
     cursor: pointer;
@@ -133,64 +128,63 @@
   }
   .btn.green { background: var(--green); }
   .btn.green:hover { background: #27ae60; }
-  .btn.large { padding: 18px 35px; font-size: 19px; }
+  .btn.large { padding: 15px 30px; font-size: 17px; }
 
   .feature-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    margin: 25px 0;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
   }
   .feature-card {
     background: var(--cream);
-    padding: 20px;
+    padding: 18px;
     border-radius: 12px;
     text-align: center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease;
   }
   .feature-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    transform: translateY(-3px);
   }
-  .feature-card h3 { font-size: 40px; margin-bottom: 10px; }
+  .feature-card h3 { font-size: 32px; margin-bottom: 8px; }
 
-  /* Leaderboard — FIXED sizing */
+  /* Leaderboard — TIGHT FIT */
   .leaderboard {
     width: 100%;
     border-collapse: separate;
-    border-spacing: 0 6px;
-    margin-top: 15px;
+    border-spacing: 0 4px;
+    margin-top: 12px;
     table-layout: fixed;
   }
   .leaderboard th {
     color: var(--red);
     text-align: left;
-    padding: 0 8px 6px;
-    font-size: 13px;
+    padding: 4px 6px;
+    font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
-  .leaderboard th:nth-child(1) { width: 50px; text-align: center; }
-  .leaderboard th:nth-child(2) { width: calc(100% - 110px); }
+  .leaderboard th:nth-child(1) { width: 45px; text-align: center; }
+  .leaderboard th:nth-child(2) { width: calc(100% - 105px); }
   .leaderboard th:nth-child(3) { width: 60px; text-align: right; }
   
   .leaderboard td {
     background: white;
     padding: 10px 8px;
-    font-size: 15px;
+    font-size: 14px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
   .leaderboard tr td:first-child { 
-    border-radius: 10px 0 0 10px; 
+    border-radius: 8px 0 0 8px; 
     font-weight: bold; 
     color: var(--red); 
     text-align: center; 
-    width: 50px; 
+    width: 45px; 
   }
   .leaderboard tr td:last-child { 
-    border-radius: 0 10px 10px 0; 
+    border-radius: 0 8px 8px 0; 
     font-weight: bold; 
     color: var(--green); 
     text-align: right;
@@ -204,60 +198,56 @@
   .game-container {
     background: white;
     border-radius: 16px;
-    padding: 20px;
+    padding: 18px;
     box-shadow: 0 3px 12px rgba(0,0,0,0.08);
   }
   .game-note {
     background: #e3f2fd;
     border-left: 4px solid #2196f3;
-    padding: 15px;
-    margin-bottom: 20px;
+    padding: 12px 15px;
+    margin-bottom: 18px;
     border-radius: 0 10px 10px 0;
+    font-size: 14px;
   }
 
   footer {
     text-align: center;
-    padding: 30px;
+    padding: 25px;
     color: #888;
-    font-size: 14px;
+    font-size: 13px;
     border-top: 1px solid #eee;
-    margin-top: 20px;
+    margin-top: 15px;
   }
 
   /* Animations */
   @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
+    from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
   }
-
   @keyframes bounce {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
+    50% { transform: translateY(-10px); }
   }
-
   @keyframes wiggle {
     0%, 100% { transform: rotate(-3deg); }
     50% { transform: rotate(3deg); }
   }
-
-  .wiggle {
-    animation: wiggle 0.5s ease-in-out;
-  }
+  .wiggle { animation: wiggle 0.5s ease-in-out; }
 
   /* Mobile tweaks */
-  @media (max-width: 500px) {
-    h1 { font-size: 26px; }
-    .btn.large { width: 100%; margin: 8px 0; }
-    .leaderboard td { font-size: 14px; padding: 10px 6px; }
-    .leaderboard th { font-size: 12px; }
+  @media (max-width: 480px) {
+    h1 { font-size: 24px; }
+    .btn.large { width: 100%; margin: 6px 0; }
     input { width: 100% !important; margin: 6px 0 !important; }
+    .leaderboard td { font-size: 13px; padding: 8px 6px; }
+    .card { padding: 15px; }
   }
 </style>
 </head>
 <body>
 
-<!-- 🦡 Background Watermark -->
-<img src="https://i.imgur.com/KZpXv8L.jpg" alt="" class="bg-badger" aria-hidden="true">
+<!-- 🦡 Background Watermark — EMOJI = NO REGION ISSUES -->
+<div class="bg-badger">🦡</div>
 
 <!-- Navigation -->
 <nav>
@@ -273,10 +263,10 @@
 <!-- HOME SECTION -->
 <section id="home" class="active">
   <div class="badger-hero">
-    <img src="https://i.imgur.com/KZpXv8L.jpg" alt="Badger mascot" id="badgerMascot">
+    <span class="hero-icon" id="badgerMascot">🦡</span>
   </div>
 
-  <h1>🦡 FLIP THE BADGER</h1>
+  <h1>FLIP THE BADGER</h1>
   <p class="subtitle">The family game of skill, luck and badgers!</p>
 
   <div class="card">
@@ -290,33 +280,33 @@
     <div class="feature-card">
       <h3>🎮</h3>
       <h3>Play Online</h3>
-      <p>Use the digital scorekeeper on any device</p>
-      <button class="btn green" style="margin-top:10px;" onclick="showSection('play')">Play Now</button>
+      <p style="font-size:14px;">Use the digital scorekeeper on any device</p>
+      <button class="btn green" style="margin-top:8px;" onclick="showSection('play')">Play Now</button>
     </div>
     <div class="feature-card">
       <h3>📦</h3>
       <h3>Make Your Box</h3>
-      <p>Download the template, cut it out, start flipping!</p>
-      <button class="btn" style="margin-top:10px;" onclick="showSection('download')">Get Template</button>
+      <p style="font-size:14px;">Download the template, cut it out, start flipping!</p>
+      <button class="btn" style="margin-top:8px;" onclick="showSection('download')">Get Template</button>
     </div>
     <div class="feature-card">
       <h3>📖</h3>
       <h3>Learn Rules</h3>
-      <p>Basic, Intermediate and Advanced levels</p>
-      <button class="btn" style="margin-top:10px;" onclick="showSection('rules')">Read Rules</button>
+      <p style="font-size:14px;">Basic, Intermediate and Advanced levels</p>
+      <button class="btn" style="margin-top:8px;" onclick="showSection('rules')">Read Rules</button>
     </div>
     <div class="feature-card">
       <h3>🏆</h3>
       <h3>Leaderboard</h3>
-      <p>Track your highest scores and biggest wins</p>
-      <button class="btn" style="margin-top:10px;" onclick="showSection('leaderboard')">View Leaderboard</button>
+      <p style="font-size:14px;">Track your highest scores and biggest wins</p>
+      <button class="btn" style="margin-top:8px;" onclick="showSection('leaderboard')">View Leaderboard</button>
     </div>
   </div>
 </section>
 
 <!-- PLAY SECTION -->
 <section id="play">
-  <h1>🎮 Play Flip The Badger</h1>
+  <h1>Play Flip The Badger</h1>
   <p class="subtitle">Digital scorekeeper — tap the score that lands face up</p>
 
   <div class="game-note">
@@ -334,14 +324,14 @@
           --cream: #fff9e6;
         }
         * { margin:0; padding:0; box-sizing:border-box; font-family:Arial, sans-serif; -webkit-tap-highlight-color:transparent; }
-        .game-body { background: #fff; padding: 10px; }
-        .game-btn { padding: 12px 10px; border-radius: 10px; border: none; font-size: 16px; cursor: pointer; font-weight: bold; margin: 4px; width: calc(50% - 8px); }
+        .game-body { background: #fff; padding: 5px; }
+        .game-btn { padding: 10px 8px; border-radius: 10px; border: none; font-size: 15px; cursor: pointer; font-weight: bold; margin: 4px; width: calc(50% - 8px); }
         .game-btn.red { background: var(--red); color: white; }
         .game-btn.green { background: var(--green); color: white; }
         .game-btn.gray { background: var(--gray); color: white; }
-        .score-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 15px 0; }
-        @media (max-width: 500px) { .score-grid { grid-template-columns: repeat(2, 1fr); } }
-        .score-btn { padding: 15px 5px; font-size: 18px; border-radius: 10px; border: none; cursor: pointer; transition: transform 0.15s ease; }
+        .score-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin: 12px 0; }
+        @media (max-width: 480px) { .score-grid { grid-template-columns: repeat(2, 1fr); } }
+        .score-btn { padding: 12px 4px; font-size: 16px; border-radius: 10px; border: none; cursor: pointer; transition: transform 0.15s ease; }
         .score-btn:active { transform: scale(0.95); }
         .score-btn.zero { background: #ffebee; color: #c62828; }
         .score-btn.one { background: #e8f5e9; color: #2e7d32; }
@@ -349,43 +339,43 @@
         .score-btn.ten { background: #fff3e0; color: #e65100; }
         .player-row { display: flex; align-items: center; padding: 10px; border-bottom: 1px solid #eee; }
         .player-row.active { background: var(--cream); border-left: 4px solid var(--red); }
-        .player-name { flex: 1; font-weight: bold; }
-        .player-score { font-size: 22px; font-weight: bold; color: var(--red); min-width: 60px; text-align: right; }
+        .player-name { flex: 1; font-weight: bold; font-size: 15px; }
+        .player-score { font-size: 20px; font-weight: bold; color: var(--red); min-width: 55px; text-align: right; }
         .hidden { display: none !important; }
-        .mode-btn { padding: 10px; border: none; border-radius: 8px; background: #eee; cursor: pointer; margin: 2px; }
+        .mode-btn { padding: 8px 10px; border: none; border-radius: 8px; background: #eee; cursor: pointer; margin: 2px; font-size: 14px; }
         .mode-btn.active { background: var(--red); color: white; }
-        .status { padding: 12px; border-radius: 8px; margin: 10px 0; background: #e3f2fd; border-left: 4px solid #2196f3; }
+        .status { padding: 10px; border-radius: 8px; margin: 8px 0; background: #e3f2fd; border-left: 4px solid #2196f3; font-size: 14px; }
         .status.lose { background: #ffebee; border-left-color: #f44336; }
         .status.warn { background: #fff8e1; border-left-color: #ffc107; }
-        .win-box { text-align: center; padding: 30px; background: #e8f5e9; border-radius: 12px; }
+        .win-box { text-align: center; padding: 25px; background: #e8f5e9; border-radius: 12px; }
       </style>
       <div class="game-body">
         <div id="game-setup">
-          <h3 style="margin-bottom:10px;">Choose Level</h3>
-          <div style="display:flex; gap:5px; margin-bottom:15px; flex-wrap:wrap;">
+          <h3 style="margin-bottom:8px; font-size:16px;">Choose Level</h3>
+          <div style="display:flex; gap:4px; margin-bottom:12px; flex-wrap:wrap;">
             <button class="mode-btn active" data-m="basic" onclick="setM('basic')">⭐ Basic</button>
             <button class="mode-btn" data-m="intermediate" onclick="setM('intermediate')">⭐⭐ Intermediate</button>
             <button class="mode-btn" data-m="advanced" onclick="setM('advanced')">⭐⭐⭐ Advanced</button>
           </div>
-          <p style="font-size:14px; color:#666; margin-bottom:15px;">Be first to exactly 15 points! 0 = lose turn points only.</p>
-          <input type="text" id="pname" placeholder="Player name" style="padding:10px; border-radius:8px; border:1px solid #ddd; width:60%;">
+          <p style="font-size:13px; color:#666; margin-bottom:12px;">Be first to exactly 15 points! 0 = lose turn points only.</p>
+          <input type="text" id="pname" placeholder="Player name" style="padding:10px; border-radius:8px; border:1px solid #ddd; width:60%; font-size:15px;">
           <button class="game-btn red" onclick="addP()">+ Add</button>
-          <div id="plist" style="margin:10px 0;"></div>
-          <button class="game-btn green" style="width:100%; margin-top:10px; font-size:18px;" onclick="startG()">▶ START GAME</button>
+          <div id="plist" style="margin:8px 0;"></div>
+          <button class="game-btn green" style="width:100%; margin-top:8px; font-size:17px;" onclick="startG()">▶ START GAME</button>
         </div>
 
         <div id="game-play" class="hidden">
-          <h3 id="cmode" style="margin-bottom:10px;">Basic Mode</h3>
+          <h3 id="cmode" style="margin-bottom:8px; font-size:16px;">Basic Mode</h3>
           <div class="player-row active">
             <div style="flex:1;">
-              <div id="playername">—</div>
-              <div style="font-size:13px; color:#666;">Turn: +<span id="turnp">0</span></div>
+              <div id="playername" style="font-size:15px;">—</div>
+              <div style="font-size:12px; color:#666;">Turn: +<span id="turnp">0</span></div>
             </div>
             <div class="player-score" id="totalscore">0</div>
           </div>
           <div class="status" id="gstatus">Flip the Badger → tap the score up!</div>
           
-          <h4 style="text-align:center; margin:15px 0 5px;">Score facing up:</h4>
+          <h4 style="text-align:center; margin:12px 0 4px; font-size:14px;">Score facing up:</h4>
           <div class="score-grid">
             <button class="score-btn zero" onclick="doFlip(0)">🔴 0<br><small>lose</small></button>
             <button class="score-btn one" onclick="doFlip(1)">🦡 1<br><small>side</small></button>
@@ -393,23 +383,23 @@
             <button class="score-btn ten" onclick="doFlip(10)">⚽ 10<br><small>top</small></button>
           </div>
           
-          <div style="margin:10px 0; display:flex; gap:5px; justify-content:center; flex-wrap:wrap;">
+          <div style="margin:8px 0; display:flex; gap:4px; justify-content:center; flex-wrap:wrap;">
             <button class="game-btn gray" onclick="passT()">➡ Pass</button>
             <button class="game-btn gray" onclick="penal()">💥 Fell Off</button>
           </div>
           
-          <h4 style="margin-top:20px; border-top:1px solid #eee; padding-top:10px;">Scoreboard</h4>
+          <h4 style="margin-top:15px; border-top:1px solid #eee; padding-top:8px; font-size:14px;">Scoreboard</h4>
           <div id="scores"></div>
           
-          <button class="game-btn gray" style="width:100%; margin-top:15px;" onclick="resetG()">🔄 New Game</button>
+          <button class="game-btn gray" style="width:100%; margin-top:12px;" onclick="resetG()">🔄 New Game</button>
         </div>
 
         <div id="game-win" class="hidden">
           <div class="win-box">
-            <div style="font-size:50px;">🏆🦡🏆</div>
-            <h2 style="margin:20px 0;">WE HAVE A WINNER!</h2>
-            <p id="wname" style="font-size:22px; font-weight:bold; color:#EF0107;"></p>
-            <button class="game-btn green" style="font-size:18px; padding:15px 30px; margin-top:20px;" onclick="resetG()">Play Again 🎲</button>
+            <div style="font-size:40px;">🏆🦡🏆</div>
+            <h2 style="margin:15px 0; font-size:20px;">WE HAVE A WINNER!</h2>
+            <p id="wname" style="font-size:18px; font-weight:bold; color:#EF0107;"></p>
+            <button class="game-btn green" style="font-size:16px; padding:12px 25px; margin-top:15px;" onclick="resetG()">Play Again 🎲</button>
           </div>
         </div>
       </div>
@@ -417,14 +407,14 @@
         let ps = [], ci = 0, tp = 0, mode = 'basic', over = false;
         function setM(m){ mode=m; document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active')); document.querySelector(`[data-m="${m}"]`).classList.add('active'); }
         function addP(){ const n=document.getElementById('pname').value.trim(); if(!n)return; ps.push({name:n,score:0}); document.getElementById('pname').value=''; renderPL(); }
-        function renderPL(){ document.getElementById('plist').innerHTML=ps.map((p,i)=>`<span style="background:#fff9e6; padding:6px 12px; border-radius:20px; margin:3px; display:inline-block;">${p.name} <button onclick="ps.splice(${i},1);renderPL()" style="border:none; background:none; cursor:pointer; color:#999;">✕</button></span>`).join(''); }
+        function renderPL(){ document.getElementById('plist').innerHTML=ps.map((p,i)=>`<span style="background:#fff9e6; padding:5px 10px; border-radius:20px; margin:3px; display:inline-block; font-size:14px;">${p.name} <button onclick="ps.splice(${i},1);renderPL()" style="border:none; background:none; cursor:pointer; color:#999; font-size:12px;">✕</button></span>`).join(''); }
         function startG(){ if(!ps.length){alert('Add at least one player!');return;} document.getElementById('game-setup').classList.add('hidden'); document.getElementById('game-play').classList.remove('hidden'); document.getElementById('cmode').textContent=mode.charAt(0).toUpperCase()+mode.slice(1); updateDisplay(); }
         function doFlip(n){ if(over)return; if(n===0){tp=0; setStatus('🔴 ZERO! Turn points lost.','lose');}else{tp+=n;} let ns=ps[ci].score+tp; if(ns>15){let b=15-(ns-15);setStatus(`⚠️ Over 15! Back to ${b}.`,'warn');endT(b);return;} if(ns===15){ps[ci].score=15;over=true;showWin();return;}document.getElementById('turnp').textContent=tp;document.getElementById('totalscore').textContent=ns;if(n!==0)setStatus(`+${n}! Now ${ns}. Flip or Pass.`,'info'); }
         function passT(){ if(!over)endT(ps[ci].score+tp); }
         function endT(fs){ if(fs<0)fs=0; ps[ci].score=fs; tp=0; ci=(ci+1)%ps.length; updateDisplay(); }
         function penal(){ if(!confirm('Reset to 0 & end turn?'))return; ps[ci].score=0; tp=0; ci=(ci+1)%ps.length; updateDisplay(); }
         function updateDisplay(){ const p=ps[ci]; document.getElementById('playername').textContent=p.name+' playing...'; document.getElementById('turnp').textContent=tp; document.getElementById('totalscore').textContent=p.score+tp; renderSB(); }
-        function renderSB(){ document.getElementById('scores').innerHTML=ps.map((p,i)=>`<div class="player-row ${i===ci?'active':''}"><span style="flex:1; font-weight:bold;">${i===ci?'▶ ':''}${p.name}</span><span style="font-weight:bold; color:#EF0107; font-size:18px;">${p.score}</span></div>`).join(''); }
+        function renderSB(){ document.getElementById('scores').innerHTML=ps.map((p,i)=>`<div class="player-row ${i===ci?'active':''}"><span style="flex:1; font-weight:bold; font-size:14px;">${i===ci?'▶ ':''}${p.name}</span><span style="font-weight:bold; color:#EF0107; font-size:16px;">${p.score}</span></div>`).join(''); }
         function setStatus(m,t){ const b=document.getElementById('gstatus'); b.className='status '+t; b.textContent=m; }
         function showWin(){ document.getElementById('game-play').classList.add('hidden'); document.getElementById('game-win').classList.remove('hidden'); document.getElementById('wname').textContent=ps[ci].name+' reached 15!'; }
         function resetG(){ ps=[]; ci=0; tp=0; over=false; document.getElementById('game-win').classList.add('hidden'); document.getElementById('game-play').classList.add('hidden'); document.getElementById('game-setup').classList.remove('hidden'); renderPL(); }
@@ -435,7 +425,7 @@
 
 <!-- LEADERBOARD SECTION -->
 <section id="leaderboard">
-  <h1>🏆 Leaderboard</h1>
+  <h1>Leaderboard</h1>
   <p class="subtitle">Track the highest scores and biggest wins</p>
 
   <div class="card">
@@ -443,44 +433,48 @@
     <table class="leaderboard">
       <thead>
         <tr>
-          <th>Pos</th>
+          <th>#</th>
           <th>Name</th>
-          <th>Score</th>
+          <th>Pts</th>
         </tr>
       </thead>
       <tbody id="leaderBody">
-        <!-- Filled by JS -->
+        <tr class="gold"><td>1</td><td>BadgerMaster</td><td>15</td></tr>
+        <tr class="silver"><td>2</td><td>FlipKing</td><td>15</td></tr>
+        <tr class="bronze"><td>3</td><td>LuckyPaw</td><td>15</td></tr>
+        <tr><td>4</td><td>SharpShooter</td><td>14</td></tr>
+        <tr><td>5</td><td>CarefulFlipper</td><td>13</td></tr>
       </tbody>
     </table>
   </div>
 
   <div class="card">
     <h2>Add Your Score</h2>
-    <p>Got a great game? Add your name and highest score below.</p>
+    <p style="font-size:14px;">Got a great game? Add your name and highest score below.</p>
     <br>
-    <input type="text" id="newName" placeholder="Your name" style="padding:10px; border-radius:8px; border:1px solid #ddd; width:45%; margin-right:8px;">
-    <input type="number" id="newScore" placeholder="Score" min="0" max="15" style="padding:10px; border-radius:8px; border:1px solid #ddd; width:25%;">
+    <input type="text" id="newName" placeholder="Your name" style="padding:10px; border-radius:8px; border:1px solid #ddd; width:45%; margin-right:8px; font-size:14px;">
+    <input type="number" id="newScore" placeholder="Score" min="0" max="15" style="padding:10px; border-radius:8px; border:1px solid #ddd; width:25%; font-size:14px;">
     <button class="btn green" onclick="addScore()">Add Score</button>
     <br><br>
-    <p style="font-size:14px; color:#666;">Scores are stored on your device and stay until you clear your browser data.</p>
+    <p style="font-size:13px; color:#666;">Scores are stored on your device and stay until you clear your browser data.</p>
   </div>
 
   <div class="card">
     <h2>Recent Games</h2>
     <div id="recentGames">
-      <p style="color:#666;">No recent games yet. Play a game and record your first win!</p>
+      <p style="color:#666; font-size:14px;">No recent games yet. Play a game and record your first win!</p>
     </div>
   </div>
 </section>
 
 <!-- DOWNLOAD SECTION -->
 <section id="download">
-  <h1>📦 Make Your Badger Box</h1>
+  <h1>Make Your Badger Box</h1>
   <p class="subtitle">Print, cut, fold — start flipping in minutes!</p>
 
   <div class="card">
     <h2>Box Specifications</h2>
-    <ul style="font-size:16px; line-height:2; margin:15px 0; padding-left:20px;">
+    <ul style="font-size:15px; line-height:1.8; margin:12px 0; padding-left:20px;">
       <li><strong>Dimensions:</strong> 8.2cm tall × 5.5cm wide × 2.2cm deep</li>
       <li><strong>Top face:</strong> Badger illustration — <strong>10 points</strong></li>
       <li><strong>Bottom face:</strong> <strong>0 points</strong></li>
@@ -492,20 +486,20 @@
 
   <div class="card" style="text-align:center; background:#e8f5e9;">
     <h2>⬇️ Download Printable Template</h2>
-    <p style="margin:15px 0; font-size:16px;">Ready-to-print PDF — includes folding guides and scoring labels</p>
+    <p style="margin:12px 0; font-size:15px;">Ready-to-print PDF — includes folding guides and scoring labels</p>
     
     <a href="#" class="btn large green" onclick="alert('Upload your box PDF to GitHub, then replace the # in the code with your file link!'); return false;">
       📄 Download Box Template (PDF)
     </a>
     
-    <p style="margin-top:15px; font-size:14px; color:#666;">
+    <p style="margin-top:12px; font-size:13px; color:#666;">
       After downloading: Print → Cut out the shape → Fold along dotted lines → Glue tabs → Start playing!
     </p>
   </div>
 
   <div class="card">
     <h2>Assembly Instructions</h2>
-    <ol style="line-height:2; padding-left:20px;">
+    <ol style="line-height:1.8; padding-left:20px; font-size:15px;">
       <li>Print on thick paper or thin card (A4 is fine)</li>
       <li>Cut around the outer solid black line</li>
       <li>Fold all dotted lines inward before applying glue</li>
@@ -518,7 +512,7 @@
 
 <!-- RULES SECTION -->
 <section id="rules">
-  <h1>📖 How to Play</h1>
+  <h1>How to Play</h1>
   <p class="subtitle">Complete official rules for all levels</p>
 
   <div class="card">
@@ -528,7 +522,7 @@
 
   <div class="card">
     <h2>✅ Scoring</h2>
-    <ul style="line-height:2; padding-left:20px;">
+    <ul style="line-height:1.8; padding-left:20px; font-size:15px;">
       <li>🦡 <strong>Top face up</strong> = 10 points</li>
       <li>📏 <strong>Short End up</strong> = 5 points</li>
       <li>➡️ <strong>Long Side up</strong> = 1 point</li>
@@ -548,7 +542,7 @@
 
   <div class="card">
     <h2>⭐ Basic Mode</h2>
-    <ul style="line-height:1.8; padding-left:20px;">
+    <ul style="line-height:1.8; padding-left:20px; font-size:15px;">
       <li>Play on any flat, dry surface</li>
       <li>The Badger must make at least 1 full rotation to count</li>
       <li>Keep flipping until you pass to the next player or win</li>
@@ -557,7 +551,7 @@
 
   <div class="card">
     <h2>⭐⭐ Intermediate Mode</h2>
-    <ul style="line-height:1.8; padding-left:20px;">
+    <ul style="line-height:1.8; padding-left:20px; font-size:15px;">
       <li>All Basic rules apply</li>
       <li>The Badger must land at least <strong>1 full box length</strong> away from where it was flipped</li>
       <li>Lands too close → flip doesn't count, turn ends</li>
@@ -566,7 +560,7 @@
 
   <div class="card">
     <h2>⭐⭐⭐ Advanced Mode</h2>
-    <ul style="line-height:1.8; padding-left:20px;">
+    <ul style="line-height:1.8; padding-left:20px; font-size:15px;">
       <li>All Intermediate rules apply</li>
       <li>At the START of EVERY turn, you must <strong>announce your current score</strong></li>
       <li>Forget to announce → your score resets to 0 and turn passes</li>
@@ -622,13 +616,10 @@ function renderLeaderboard() {
   const tbody = document.getElementById('leaderBody');
   if (!tbody) return;
 
+  // Keep default sample if empty
+  if (board.length === 0) return;
+
   tbody.innerHTML = '';
-
-  if (board.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; padding:20px; color:#666;">No scores yet. Be the first!</td></tr>';
-    return;
-  }
-
   board.forEach((entry, index) => {
     const row = document.createElement('tr');
     if (index === 0) row.className = 'gold';
@@ -651,14 +642,8 @@ function addScore() {
   const name = nameInput.value.trim();
   const score = parseInt(scoreInput.value, 10);
 
-  if (!name) {
-    alert('Please enter a name.');
-    return;
-  }
-  if (isNaN(score) || score < 0 || score > 15) {
-    alert('Please enter a score between 0 and 15.');
-    return;
-  }
+  if (!name) { alert('Please enter a name.'); return; }
+  if (isNaN(score) || score < 0 || score > 15) { alert('Please enter 0–15.'); return; }
 
   const board = getLeaderboard();
   board.push({ name, score, date: new Date().toISOString() });
@@ -668,13 +653,10 @@ function addScore() {
   nameInput.value = '';
   scoreInput.value = '';
   renderLeaderboard();
-
   alert('Score added! 🦡🏆');
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  renderLeaderboard();
-});
+document.addEventListener('DOMContentLoaded', renderLeaderboard);
 </script>
 
 </body>
