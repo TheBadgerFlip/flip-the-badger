@@ -151,10 +151,10 @@
 <!-- Navigation -->
 <nav>
   <div class="nav-container">
-    <span class="nav-link active" data-section="home">🏠 Home</span>
-    <span class="nav-link" data-section="play">🎮 Play</span>
-    <span class="nav-link" data-section="download">📦 Box</span>
-    <span class="nav-link" data-section="rules">📖 Rules</span>
+    <span class="nav-link active" onclick="showSection('home')">🏠 Home</span>
+    <span class="nav-link" onclick="showSection('play')">🎮 Play</span>
+    <span class="nav-link" onclick="showSection('download')">📦 Box</span>
+    <span class="nav-link" onclick="showSection('rules')">📖 Rules</span>
   </div>
 </nav>
 
@@ -175,19 +175,19 @@
       <h3>🎮</h3>
       <h3>Play Online</h3>
       <p>Use the digital scorekeeper on any device</p>
-      <span class="btn green" style="margin-top:10px; cursor:pointer;" data-goto="play">Play Now</span>
+      <button class="btn green" style="margin-top:10px;" onclick="showSection('play')">Play Now</button>
     </div>
     <div class="feature-card">
       <h3>📦</h3>
       <h3>Make Your Box</h3>
       <p>Download the template, cut it out, start flipping!</p>
-      <span class="btn" style="margin-top:10px; cursor:pointer;" data-goto="download">Get Template</span>
+      <button class="btn" style="margin-top:10px;" onclick="showSection('download')">Get Template</button>
     </div>
     <div class="feature-card">
       <h3>📖</h3>
       <h3>Learn Rules</h3>
       <p>Basic, Intermediate and Advanced levels</p>
-      <span class="btn" style="margin-top:10px; cursor:pointer;" data-goto="rules">Read Rules</span>
+      <button class="btn" style="margin-top:10px;" onclick="showSection('rules')">Read Rules</button>
     </div>
   </div>
 </section>
@@ -202,7 +202,6 @@
   </div>
 
   <div class="game-container">
-    <!-- FULL GAME EMBEDDED HERE -->
     <div id="game-app">
       <style>
         :root {
@@ -214,7 +213,6 @@
         }
         * { margin:0; padding:0; box-sizing:border-box; font-family:Arial, sans-serif; -webkit-tap-highlight-color:transparent; }
         .game-body { background: #fff; padding: 10px; }
-        .game-card { background: #fefefe; border-radius: 12px; padding: 18px; margin-bottom: 15px; border: 1px solid #eee; }
         .game-btn { padding: 12px 10px; border-radius: 10px; border: none; font-size: 16px; cursor: pointer; font-weight: bold; margin: 4px; width: calc(50% - 8px); }
         .game-btn.red { background: var(--red); color: white; }
         .game-btn.green { background: var(--green); color: white; }
@@ -333,7 +331,7 @@
     <h2>⬇️ Download Printable Template</h2>
     <p style="margin:15px 0; font-size:16px;">Ready-to-print PDF — includes folding guides and scoring labels</p>
     
-    <a href="#" class="btn large green" onclick="alert('Upload your box PDF to GitHub, then replace the # in the code with your file link!')">
+    <a href="#" class="btn large green" onclick="alert('Upload your box PDF to GitHub, then replace the # in the code with your file link!'); return false;">
       📄 Download Box Template (PDF)
     </a>
     
@@ -420,28 +418,22 @@
 </footer>
 
 <script>
-// Navigation system — works for ALL buttons
+// Simple, reliable section switcher — directly called by onclick
 function showSection(id) {
-  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-  document.querySelectorAll(`[data-section="${id}"]`).forEach(l => l.classList.add('active'));
-  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+  // Update top nav
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('onclick').includes(`'${id}'`)) {
+      link.classList.add('active');
+    }
+  });
+  // Show correct section
+  document.querySelectorAll('section').forEach(sec => {
+    sec.classList.remove('active');
+  });
   document.getElementById(id).classList.add('active');
   window.scrollTo(0, 0);
 }
-
-// Top navigation
-document.querySelectorAll('.nav-link').forEach(link => {
-  link.addEventListener('click', () => {
-    showSection(link.getAttribute('data-section'));
-  });
-});
-
-// Home page big buttons
-document.querySelectorAll('[data-goto]').forEach(btn => {
-  btn.addEventListener('click', () => {
-    showSection(btn.getAttribute('data-goto'));
-  });
-});
 </script>
 
 </body>
