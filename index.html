@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Flip The Badger — Official Game</title>
+
+<!-- Home Screen App Icon -->
+<link rel="apple-touch-icon" sizes="180x180" href="https://i.imgur.com/KZpXv8L.jpg">
+<link rel="icon" type="image/jpg" href="https://i.imgur.com/KZpXv8L.jpg">
+
 <style>
   :root {
     --red: #EF0107;
@@ -12,6 +17,7 @@
     --green: #2ecc71;
     --gray: #888;
     --cream: #fff9e6;
+    --badger: #1a1a1a;
   }
   * { margin:0; padding:0; box-sizing:border-box; font-family:Arial, sans-serif; }
   
@@ -57,6 +63,7 @@
     margin: 0 auto;
     padding: 40px 20px;
     display: none;
+    animation: fadeIn 0.4s ease-out;
   }
   section.active { display: block; }
 
@@ -78,6 +85,17 @@
     pointer-events: none;
   }
 
+  /* Animated Badger Hero */
+  .badger-hero {
+    text-align: center;
+    margin: 20px 0 30px;
+  }
+  .badger-hero img {
+    width: 120px;
+    height: auto;
+    animation: bounce 2s infinite ease-in-out;
+  }
+
   /* Cards & Buttons */
   .card {
     background: white;
@@ -85,6 +103,11 @@
     padding: 25px;
     margin: 20px 0;
     box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
   }
   .btn {
     display: inline-block;
@@ -96,12 +119,16 @@
     font-weight: bold;
     font-size: 17px;
     margin: 8px;
-    transition: transform 0.2s;
+    transition: transform 0.2s, background 0.2s;
     border: none;
     cursor: pointer;
   }
-  .btn:hover { transform: scale(1.05); }
+  .btn:hover {
+    transform: scale(1.05);
+    background: #c10005;
+  }
   .btn.green { background: var(--green); }
+  .btn.green:hover { background: #27ae60; }
   .btn.large { padding: 18px 35px; font-size: 19px; }
 
   .feature-grid {
@@ -115,8 +142,39 @@
     padding: 20px;
     border-radius: 12px;
     text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
   }
   .feature-card h3 { font-size: 40px; margin-bottom: 10px; }
+
+  /* Leaderboard */
+  .leaderboard {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+    margin-top: 20px;
+  }
+  .leaderboard th {
+    color: var(--red);
+    text-align: left;
+    padding: 0 12px 4px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .leaderboard td {
+    background: white;
+    padding: 14px 12px;
+    font-size: 16px;
+  }
+  .leaderboard tr td:first-child { border-radius: 12px 0 0 12px; font-weight: bold; color: var(--red); text-align: center; width: 50px; }
+  .leaderboard tr td:last-child { border-radius: 0 12px 12px 0; font-weight: bold; color: var(--green); }
+  .leaderboard .gold td { background: linear-gradient(90deg, #fff9c4, #fff); }
+  .leaderboard .silver td { background: linear-gradient(90deg, #f5f5f5, #fff); }
+  .leaderboard .bronze td { background: linear-gradient(90deg, #fff3e0, #fff); }
 
   /* Game Embed Area */
   .game-container {
@@ -141,6 +199,33 @@
     border-top: 1px solid #eee;
     margin-top: 20px;
   }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+  }
+
+  .wiggle {
+    animation: wiggle 0.5s ease-in-out;
+  }
+
+  /* Mobile tweaks */
+  @media (max-width: 500px) {
+    h1 { font-size: 28px; }
+    .btn.large { width: 100%; margin: 8px 0; }
+    .leaderboard td { font-size: 14px; padding: 12px 8px; }
+  }
 </style>
 </head>
 <body>
@@ -153,6 +238,7 @@
   <div class="nav-container">
     <span class="nav-link active" onclick="showSection('home')">🏠 Home</span>
     <span class="nav-link" onclick="showSection('play')">🎮 Play</span>
+    <span class="nav-link" onclick="showSection('leaderboard')">🏆 Leaderboard</span>
     <span class="nav-link" onclick="showSection('download')">📦 Box</span>
     <span class="nav-link" onclick="showSection('rules')">📖 Rules</span>
   </div>
@@ -160,6 +246,10 @@
 
 <!-- HOME SECTION -->
 <section id="home" class="active">
+  <div class="badger-hero">
+    <img src="https://i.imgur.com/KZpXv8L.jpg" alt="Badger mascot" id="badgerMascot">
+  </div>
+
   <h1>🦡 FLIP THE BADGER</h1>
   <p class="subtitle">The family game of skill, luck and badgers!</p>
 
@@ -188,6 +278,12 @@
       <h3>Learn Rules</h3>
       <p>Basic, Intermediate and Advanced levels</p>
       <button class="btn" style="margin-top:10px;" onclick="showSection('rules')">Read Rules</button>
+    </div>
+    <div class="feature-card">
+      <h3>🏆</h3>
+      <h3>Leaderboard</h3>
+      <p>Track your highest scores and biggest wins</p>
+      <button class="btn" style="margin-top:10px;" onclick="showSection('leaderboard')">View Leaderboard</button>
     </div>
   </div>
 </section>
@@ -219,7 +315,8 @@
         .game-btn.gray { background: var(--gray); color: white; }
         .score-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 15px 0; }
         @media (max-width: 500px) { .score-grid { grid-template-columns: repeat(2, 1fr); } }
-        .score-btn { padding: 15px 5px; font-size: 18px; border-radius: 10px; border: none; cursor: pointer; }
+        .score-btn { padding: 15px 5px; font-size: 18px; border-radius: 10px; border: none; cursor: pointer; transition: transform 0.15s ease; }
+        .score-btn:active { transform: scale(0.95); }
         .score-btn.zero { background: #ffebee; color: #c62828; }
         .score-btn.one { background: #e8f5e9; color: #2e7d32; }
         .score-btn.five { background: #e3f2fd; color: #1565c0; }
@@ -306,6 +403,63 @@
         function showWin(){ document.getElementById('game-play').classList.add('hidden'); document.getElementById('game-win').classList.remove('hidden'); document.getElementById('wname').textContent=ps[ci].name+' reached 15!'; }
         function resetG(){ ps=[]; ci=0; tp=0; over=false; document.getElementById('game-win').classList.add('hidden'); document.getElementById('game-play').classList.add('hidden'); document.getElementById('game-setup').classList.remove('hidden'); renderPL(); }
       </script>
+    </div>
+  </div>
+</section>
+
+<!-- LEADERBOARD SECTION -->
+<section id="leaderboard">
+  <h1>🏆 Leaderboard</h1>
+  <p class="subtitle">Track the highest scores and most famous Flip The Badger wins</p>
+
+  <div class="card">
+    <h2>Top Wins</h2>
+    <table class="leaderboard">
+      <tbody>
+        <tr class="gold">
+          <td>1</td>
+          <td>BadgerMaster</td>
+          <td>15</td>
+        </tr>
+        <tr class="silver">
+          <td>2</td>
+          <td>FlipKing</td>
+          <td>15</td>
+        </tr>
+        <tr class="bronze">
+          <td>3</td>
+          <td>LuckyPaw</td>
+          <td>15</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>SharpShooter</td>
+          <td>14</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>CarefulFlipper</td>
+          <td>13</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Add Your Score</h2>
+    <p>Got a great game? Add your name and highest score to the leaderboard.</p>
+    <br>
+    <input type="text" id="newName" placeholder="Your name" style="padding:10px; border-radius:8px; border:1px solid #ddd; width:45%; margin-right:8px;">
+    <input type="number" id="newScore" placeholder="Score" min="0" max="15" style="padding:10px; border-radius:8px; border:1px solid #ddd; width:25%;">
+    <button class="btn green" onclick="addScore()">Add Score</button>
+    <br><br>
+    <p style="font-size:14px; color:#666;">This is a local leaderboard stored on your device. Scores will stay until you clear your browser data.</p>
+  </div>
+
+  <div class="card">
+    <h2>Recent Games</h2>
+    <div id="recentGames">
+      <p style="color:#666;">No recent games yet. Play a game and record your first win!</p>
     </div>
   </div>
 </section>
@@ -418,22 +572,100 @@
 </footer>
 
 <script>
-// Simple, reliable section switcher — directly called by onclick
+// Simple, reliable section switcher
 function showSection(id) {
-  // Update top nav
   document.querySelectorAll('.nav-link').forEach(link => {
     link.classList.remove('active');
     if (link.getAttribute('onclick').includes(`'${id}'`)) {
       link.classList.add('active');
     }
   });
-  // Show correct section
+
   document.querySelectorAll('section').forEach(sec => {
     sec.classList.remove('active');
   });
   document.getElementById(id).classList.add('active');
+
   window.scrollTo(0, 0);
+
+  // Badger animation on home
+  if (id === 'home') {
+    const badger = document.getElementById('badgerMascot');
+    if (badger) {
+      badger.classList.remove('wiggle');
+      void badger.offsetWidth;
+      badger.classList.add('wiggle');
+    }
+  }
 }
+
+// Leaderboard storage
+function getLeaderboard() {
+  return JSON.parse(localStorage.getItem('flipTheBadgerLeaderboard') || '[]');
+}
+
+function saveLeaderboard(data) {
+  localStorage.setItem('flipTheBadgerLeaderboard', JSON.stringify(data));
+}
+
+function renderLeaderboard() {
+  const board = getLeaderboard();
+  const tbody = document.querySelector('.leaderboard tbody');
+  if (!tbody) return;
+
+  tbody.innerHTML = '';
+
+  if (board.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#666;">No scores yet. Be the first!</td></tr>';
+    return;
+  }
+
+  board.forEach((entry, index) => {
+    const row = document.createElement('tr');
+    if (index === 0) row.className = 'gold';
+    if (index === 1) row.className = 'silver';
+    if (index === 2) row.className = 'bronze';
+
+    row.innerHTML = `
+      <td>${index + 1}</td>
+      <td>${entry.name}</td>
+      <td>${entry.score}</td>
+    `;
+    tbody.appendChild(row);
+  });
+}
+
+function addScore() {
+  const nameInput = document.getElementById('newName');
+  const scoreInput = document.getElementById('newScore');
+
+  const name = nameInput.value.trim();
+  const score = parseInt(scoreInput.value, 10);
+
+  if (!name) {
+    alert('Please enter a name.');
+    return;
+  }
+  if (isNaN(score) || score < 0 || score > 15) {
+    alert('Please enter a score between 0 and 15.');
+    return;
+  }
+
+  const board = getLeaderboard();
+  board.push({ name, score, date: new Date().toISOString() });
+  board.sort((a, b) => b.score - a.score);
+  saveLeaderboard(board.slice(0, 20));
+
+  nameInput.value = '';
+  scoreInput.value = '';
+  renderLeaderboard();
+
+  alert('Score added! 🦡🏆');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderLeaderboard();
+});
 </script>
 
 </body>
