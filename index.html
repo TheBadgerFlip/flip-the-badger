@@ -71,7 +71,7 @@
   h2 { font-size: 22px; margin: 30px 0 15px; color: var(--red); border-bottom: 2px solid var(--red); padding-bottom: 8px; }
   .subtitle { text-align: center; font-size: 18px; color: #666; margin-bottom: 30px; }
 
-  /* Badger Watermark */
+  /* Badger Watermark — clean CSS-based, no external embed issues */
   .bg-badger {
     position: fixed;
     top: 50%;
@@ -94,6 +94,9 @@
     width: 120px;
     height: auto;
     animation: bounce 2s infinite ease-in-out;
+    border-radius: 50%;
+    background: var(--cream);
+    padding: 10px;
   }
 
   /* Cards & Buttons */
@@ -104,6 +107,7 @@
     margin: 20px 0;
     box-shadow: 0 3px 12px rgba(0,0,0,0.08);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
   }
   .card:hover {
     transform: translateY(-3px);
@@ -150,28 +154,48 @@
   }
   .feature-card h3 { font-size: 40px; margin-bottom: 10px; }
 
-  /* Leaderboard */
+  /* Leaderboard — FIXED sizing */
   .leaderboard {
     width: 100%;
     border-collapse: separate;
-    border-spacing: 0 8px;
-    margin-top: 20px;
+    border-spacing: 0 6px;
+    margin-top: 15px;
+    table-layout: fixed;
   }
   .leaderboard th {
     color: var(--red);
     text-align: left;
-    padding: 0 12px 4px;
-    font-size: 14px;
+    padding: 0 8px 6px;
+    font-size: 13px;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
   }
+  .leaderboard th:nth-child(1) { width: 50px; text-align: center; }
+  .leaderboard th:nth-child(2) { width: calc(100% - 110px); }
+  .leaderboard th:nth-child(3) { width: 60px; text-align: right; }
+  
   .leaderboard td {
     background: white;
-    padding: 14px 12px;
-    font-size: 16px;
+    padding: 10px 8px;
+    font-size: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
-  .leaderboard tr td:first-child { border-radius: 12px 0 0 12px; font-weight: bold; color: var(--red); text-align: center; width: 50px; }
-  .leaderboard tr td:last-child { border-radius: 0 12px 12px 0; font-weight: bold; color: var(--green); }
+  .leaderboard tr td:first-child { 
+    border-radius: 10px 0 0 10px; 
+    font-weight: bold; 
+    color: var(--red); 
+    text-align: center; 
+    width: 50px; 
+  }
+  .leaderboard tr td:last-child { 
+    border-radius: 0 10px 10px 0; 
+    font-weight: bold; 
+    color: var(--green); 
+    text-align: right;
+    width: 60px;
+  }
   .leaderboard .gold td { background: linear-gradient(90deg, #fff9c4, #fff); }
   .leaderboard .silver td { background: linear-gradient(90deg, #f5f5f5, #fff); }
   .leaderboard .bronze td { background: linear-gradient(90deg, #fff3e0, #fff); }
@@ -222,9 +246,11 @@
 
   /* Mobile tweaks */
   @media (max-width: 500px) {
-    h1 { font-size: 28px; }
+    h1 { font-size: 26px; }
     .btn.large { width: 100%; margin: 8px 0; }
-    .leaderboard td { font-size: 14px; padding: 12px 8px; }
+    .leaderboard td { font-size: 14px; padding: 10px 6px; }
+    .leaderboard th { font-size: 12px; }
+    input { width: 100% !important; margin: 6px 0 !important; }
   }
 </style>
 </head>
@@ -336,7 +362,7 @@
       <div class="game-body">
         <div id="game-setup">
           <h3 style="margin-bottom:10px;">Choose Level</h3>
-          <div style="display:flex; gap:5px; margin-bottom:15px;">
+          <div style="display:flex; gap:5px; margin-bottom:15px; flex-wrap:wrap;">
             <button class="mode-btn active" data-m="basic" onclick="setM('basic')">⭐ Basic</button>
             <button class="mode-btn" data-m="intermediate" onclick="setM('intermediate')">⭐⭐ Intermediate</button>
             <button class="mode-btn" data-m="advanced" onclick="setM('advanced')">⭐⭐⭐ Advanced</button>
@@ -367,7 +393,7 @@
             <button class="score-btn ten" onclick="doFlip(10)">⚽ 10<br><small>top</small></button>
           </div>
           
-          <div style="margin:10px 0; display:flex; gap:5px; justify-content:center;">
+          <div style="margin:10px 0; display:flex; gap:5px; justify-content:center; flex-wrap:wrap;">
             <button class="game-btn gray" onclick="passT()">➡ Pass</button>
             <button class="game-btn gray" onclick="penal()">💥 Fell Off</button>
           </div>
@@ -410,50 +436,33 @@
 <!-- LEADERBOARD SECTION -->
 <section id="leaderboard">
   <h1>🏆 Leaderboard</h1>
-  <p class="subtitle">Track the highest scores and most famous Flip The Badger wins</p>
+  <p class="subtitle">Track the highest scores and biggest wins</p>
 
   <div class="card">
     <h2>Top Wins</h2>
     <table class="leaderboard">
-      <tbody>
-        <tr class="gold">
-          <td>1</td>
-          <td>BadgerMaster</td>
-          <td>15</td>
-        </tr>
-        <tr class="silver">
-          <td>2</td>
-          <td>FlipKing</td>
-          <td>15</td>
-        </tr>
-        <tr class="bronze">
-          <td>3</td>
-          <td>LuckyPaw</td>
-          <td>15</td>
-        </tr>
+      <thead>
         <tr>
-          <td>4</td>
-          <td>SharpShooter</td>
-          <td>14</td>
+          <th>Pos</th>
+          <th>Name</th>
+          <th>Score</th>
         </tr>
-        <tr>
-          <td>5</td>
-          <td>CarefulFlipper</td>
-          <td>13</td>
-        </tr>
+      </thead>
+      <tbody id="leaderBody">
+        <!-- Filled by JS -->
       </tbody>
     </table>
   </div>
 
   <div class="card">
     <h2>Add Your Score</h2>
-    <p>Got a great game? Add your name and highest score to the leaderboard.</p>
+    <p>Got a great game? Add your name and highest score below.</p>
     <br>
     <input type="text" id="newName" placeholder="Your name" style="padding:10px; border-radius:8px; border:1px solid #ddd; width:45%; margin-right:8px;">
     <input type="number" id="newScore" placeholder="Score" min="0" max="15" style="padding:10px; border-radius:8px; border:1px solid #ddd; width:25%;">
     <button class="btn green" onclick="addScore()">Add Score</button>
     <br><br>
-    <p style="font-size:14px; color:#666;">This is a local leaderboard stored on your device. Scores will stay until you clear your browser data.</p>
+    <p style="font-size:14px; color:#666;">Scores are stored on your device and stay until you clear your browser data.</p>
   </div>
 
   <div class="card">
@@ -610,13 +619,13 @@ function saveLeaderboard(data) {
 
 function renderLeaderboard() {
   const board = getLeaderboard();
-  const tbody = document.querySelector('.leaderboard tbody');
+  const tbody = document.getElementById('leaderBody');
   if (!tbody) return;
 
   tbody.innerHTML = '';
 
   if (board.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#666;">No scores yet. Be the first!</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; padding:20px; color:#666;">No scores yet. Be the first!</td></tr>';
     return;
   }
 
