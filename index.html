@@ -3,30 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Flip The Badger — Official Game</title>
+<title>Flip The Badger — The Game</title>
 
-<!-- Home Screen App Icon -->
-<link rel="apple-touch-icon" sizes="180x180" href="https://i.imgur.com/KZpXv8L.jpg">
-<link rel="icon" type="image/jpg" href="https://i.imgur.com/KZpXv8L.jpg">
+<!-- PWA Home-Screen App Setup -->
+<link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiRmxpcCBUaGUgQmFkZ2VyIiwic2hvcnRfbmFtZSI6IkZsaXAgQmFkZ2VyIiwiZGVzY3JpcHRpb24iOiJUaGUgZ2FtZSBvZiBza2lsbCBhbmQgZG9sbCBDaGFuY2UuIiwic3RhcnRfdXJsIjoiLiIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwiYmFja2dyb3VuZF9jb2xvciI6IiNmZmZmZmYiLCJ0aGVtZV9jb2xvciI6IiNFRjAxMDciLCJpY29ucyI6W3sic3JjIjoiZGF0YTppbWFnZS9zdmcreG1sLDxzdmcgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB2aWV3Qm94PScwIDAgMTkyIDE5MSc+PHJlY3Qgd2lkdGg9JzE5MicgaGVpZ2h0PScxOTInIGZpbGw9JyNFRjAxMDcnIHJvdW5kLXJhZGl1cz0nMzInLz48dGV4dCB4PSc5NicgeT0nMTIwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBmb250LXNpemU9JzgwJyBmaWxsPSd3aGl0ZSc+7YaxPC90ZXh0Pjwvc3ZnPiIsInNpemVzIjoiMTkyeDE5MiIsInR5cGUiOiJpbWFnZS9zdmcreG1sIn1dfQ==">
+<meta name="theme-color" content="#EF0107">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Flip Badger">
 
 <style>
   :root {
     --red: #EF0107;
     --dark: #2c2c2c;
-    --light: #f8f8f8;
     --green: #2ecc71;
-    --gray: #888;
     --cream: #fff9e6;
+    --light: #f8f8f8;
   }
-  * { margin:0; padding:0; box-sizing:border-box; font-family:Arial, sans-serif; }
-  
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
   body {
     background: linear-gradient(135deg, #fff 0%, #f5f5f5 100%);
     color: var(--dark);
     line-height: 1.6;
   }
 
-  /* Navigation Bar */
+  /* Navigation */
   nav {
     background: var(--red);
     padding: 12px 15px;
@@ -71,65 +72,55 @@
   h2 { font-size: 19px; margin: 25px 0 12px; color: var(--red); border-bottom: 2px solid var(--red); padding-bottom: 6px; }
   .subtitle { text-align: center; font-size: 16px; color: #666; margin-bottom: 25px; }
 
-  /* Badger Watermark — emoji fallback */
+  /* Background Badger */
   .bg-badger {
     position: fixed;
-    top: 50%;
-    left: 50%;
+    top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     font-size: 200px;
     opacity: 0.04;
     z-index: -1;
     pointer-events: none;
-    content: "🦡";
   }
 
-  /* Animated Badger Hero — emoji fallback */
-  .badger-hero {
-    text-align: center;
-    margin: 10px 0 20px;
-  }
-  .badger-hero .hero-icon {
+  /* Hero */
+  .badger-hero { text-align: center; margin: 10px 0 20px; }
+  .hero-icon {
     font-size: 80px;
     display: inline-block;
     animation: bounce 2s infinite ease-in-out;
   }
 
-  /* Cards & Buttons */
+  /* Cards */
   .card {
     background: white;
     border-radius: 16px;
     padding: 20px;
     margin: 15px 0;
     box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
-  .card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-  }
+
+  /* Buttons */
   .btn {
     display: inline-block;
-    padding: 12px 24px;
+    padding: 14px 28px;
     background: var(--red);
     color: white;
-    text-decoration: none;
+    border: none;
     border-radius: 10px;
     font-weight: bold;
-    font-size: 16px;
-    margin: 6px;
-    transition: transform 0.2s, background 0.2s;
-    border: none;
+    font-size: 17px;
     cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+    text-decoration: none;
   }
-  .btn:hover {
-    transform: scale(1.05);
-    background: #c10005;
-  }
+  .btn:hover { transform: scale(1.05); background: #d00006; }
   .btn.green { background: var(--green); }
-  .btn.green:hover { background: #27ae60; }
-  .btn.large { padding: 15px 30px; font-size: 17px; }
+  .btn.green:hover { background: #26b662; }
+  .btn.large { padding: 16px 32px; font-size: 18px; }
+  .btn.center { display: block; margin: 20px auto; text-align: center; max-width: 300px; }
 
+  /* Feature Grid */
   .feature-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -141,14 +132,32 @@
     padding: 18px;
     border-radius: 12px;
     text-align: center;
-    transition: transform 0.2s ease;
-  }
-  .feature-card:hover {
-    transform: translateY(-3px);
   }
   .feature-card h3 { font-size: 32px; margin-bottom: 8px; }
 
-  /* Leaderboard — TIGHT FIT */
+  /* Install Banner */
+  .install-banner {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    padding: 12px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    z-index: 200;
+    display: none;
+    max-width: 340px;
+    width: calc(100% - 30px);
+  }
+  .install-banner.show { display: flex; gap: 12px; align-items: center; justify-content: space-between; }
+  .install-banner p { font-size: 14px; flex: 1; }
+  .install-buttons { display: flex; gap: 8px; }
+  .install-btn { padding: 8px 14px; border-radius: 8px; border: none; font-weight: bold; cursor: pointer; font-size: 14px; }
+  .install-btn.ok { background: var(--green); color: white; }
+  .install-btn.later { background: #eee; color: #666; }
+
+  /* Leaderboard */
   .leaderboard {
     width: 100%;
     border-collapse: separate;
@@ -162,12 +171,10 @@
     padding: 4px 6px;
     font-size: 12px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    width: 15%;
   }
-  .leaderboard th:nth-child(1) { width: 45px; text-align: center; }
-  .leaderboard th:nth-child(2) { width: calc(100% - 105px); }
-  .leaderboard th:nth-child(3) { width: 60px; text-align: right; }
-  
+  .leaderboard th:nth-child(2) { width: 70%; }
+  .leaderboard th:nth-child(3) { width: 15%; text-align: right; }
   .leaderboard td {
     background: white;
     padding: 10px 8px;
@@ -176,39 +183,50 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  .leaderboard tr td:first-child { 
-    border-radius: 8px 0 0 8px; 
-    font-weight: bold; 
-    color: var(--red); 
-    text-align: center; 
-    width: 45px; 
+  .leaderboard tr td:first-child {
+    border-radius: 8px 0 0 8px;
+    font-weight: bold;
+    color: var(--red);
+    text-align: center;
   }
-  .leaderboard tr td:last-child { 
-    border-radius: 0 8px 8px 0; 
-    font-weight: bold; 
-    color: var(--green); 
+  .leaderboard tr td:last-child {
+    border-radius: 0 8px 8px 0;
+    font-weight: bold;
+    color: var(--green);
     text-align: right;
-    width: 60px;
   }
   .leaderboard .gold td { background: linear-gradient(90deg, #fff9c4, #fff); }
   .leaderboard .silver td { background: linear-gradient(90deg, #f5f5f5, #fff); }
   .leaderboard .bronze td { background: linear-gradient(90deg, #fff3e0, #fff); }
 
-  /* Game Embed Area */
-  .game-container {
-    background: white;
-    border-radius: 16px;
-    padding: 18px;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+  /* Game */
+  .game-container { background: white; border-radius: 16px; padding: 18px; box-shadow: 0 3px 12px rgba(0,0,0,0.08); }
+  .note { background: #e3f2fd; border-left: 4px solid #2196f3; padding: 12px 15px; margin-bottom: 18px; border-radius: 0 10px 10px 0; font-size: 14px; }
+  .game-btn {
+    padding: 10px 8px; border-radius: 10px; border: none; font-size: 15px; font-weight: bold; cursor: pointer;
+    margin: 4px; width: calc(50% - 8px);
   }
-  .game-note {
-    background: #e3f2fd;
-    border-left: 4px solid #2196f3;
-    padding: 12px 15px;
-    margin-bottom: 18px;
-    border-radius: 0 10px 10px 0;
-    font-size: 14px;
+  .game-btn.red { background: var(--red); color: white; }
+  .game-btn.green { background: var(--green); color: white; }
+  .game-btn.gray { background: #999; color: white; }
+  .score-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin: 12px 0;
   }
+  .score-btn {
+    padding: 12px 4px; font-size: 16px; border-radius: 10px; border: none; cursor: pointer;
+    transition: transform 0.15s;
+  }
+  .score-btn:active { transform: scale(0.95); }
+  .score-btn.zero { background: #ffebee; color: #c62828; }
+  .score-btn.one { background: #e8f5e9; color: #2e7d32; }
+  .score-btn.five { background: #e3f2fd; color: #1565c0; }
+  .score-btn.ten { background: #fff3e0; color: #e65100; }
+  .hidden { display: none !important; }
+  .mode-btn { padding: 8px 10px; border: none; border-radius: 8px; background: #eee; cursor: pointer; margin: 2px; font-size: 14px; }
+  .mode-btn.active { background: var(--red); color: white; }
+  .status { padding: 10px; border-radius: 8px; margin: 8px 0; background: #e3f2fd; border-left: 4px solid #2196f3; font-size: 14px; }
+  .status.lose { background: #ffebee; border-left-color: #f44336; }
+  .status.win { background: #e8f5e9; border-left-color: #4caf50; }
 
   footer {
     text-align: center;
@@ -219,217 +237,128 @@
     margin-top: 15px;
   }
 
-  /* Animations */
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
-  @keyframes wiggle {
-    0%, 100% { transform: rotate(-3deg); }
-    50% { transform: rotate(3deg); }
-  }
-  .wiggle { animation: wiggle 0.5s ease-in-out; }
-
-  /* Mobile tweaks */
+  @keyframes fadeIn { from {opacity:0; transform: translateY(8px);} to {opacity:1; transform: translateY(0);} }
+  @keyframes bounce { 0%,100% {transform: translateY(0);} 50% {transform: translateY(-10px);} }
   @media (max-width: 480px) {
     h1 { font-size: 24px; }
     .btn.large { width: 100%; margin: 6px 0; }
     input { width: 100% !important; margin: 6px 0 !important; }
-    .leaderboard td { font-size: 13px; padding: 8px 6px; }
-    .card { padding: 15px; }
+    .score-grid { grid-template-columns: repeat(2, 1fr); }
   }
 </style>
 </head>
 <body>
 
-<!-- 🦡 Background Watermark — EMOJI = NO REGION ISSUES -->
+<!-- Background Badger -->
 <div class="bg-badger">🦡</div>
+
+<!-- Install Banner -->
+<div class="install-banner" id="installBanner">
+  <p>📲 Install Flip The Badger for easy access!</p>
+  <div class="install-buttons">
+    <button class="install-btn later" onclick="dismissInstall()">Later</button>
+    <button class="install-btn ok" onclick="installApp()">Install</button>
+  </div>
+</div>
 
 <!-- Navigation -->
 <nav>
   <div class="nav-container">
-    <span class="nav-link active" onclick="showSection('home')">🏠 Home</span>
-    <span class="nav-link" onclick="showSection('play')">🎮 Play</span>
-    <span class="nav-link" onclick="showSection('leaderboard')">🏆 Leaderboard</span>
-    <span class="nav-link" onclick="showSection('download')">📦 Box</span>
-    <span class="nav-link" onclick="showSection('rules')">📖 Rules</span>
+    <span class="nav-link active" data-section="home">🏠 Home</span>
+    <span class="nav-link" data-section="play">🎮 Play</span>
+    <span class="nav-link" data-section="leaderboard">🏆 Scores</span>
+    <span class="nav-link" data-section="rules">📖 Rules</span>
+    <span class="nav-link" data-section="download">📦 Get Yours</span>
   </div>
 </nav>
 
-<!-- HOME SECTION -->
+<!-- HOME -->
 <section id="home" class="active">
   <div class="badger-hero">
-    <span class="hero-icon" id="badgerMascot">🦡</span>
+    <span class="hero-icon">🦡</span>
   </div>
-
-  <h1>FLIP THE BADGER</h1>
-  <p class="subtitle">The family game of skill, luck and badgers!</p>
+  <h1>Flip The Badger</h1>
+  <p class="subtitle">The addictive game of skill, chance and fun!</p>
 
   <div class="card">
     <h2>Welcome to Flip The Badger!</h2>
-    <p>This is the official home of Flip The Badger — a game you can play anywhere: on your table, in the pub, or right here on your device.</p>
-    <br>
-    <p>Be the first to reach <strong>exactly 15 points</strong> by flipping your very own Badger box. Simple to learn, impossible to put down!</p>
+    <p>Flip the custom Badger box and see which side lands facing up — score 1, 5 or 10 points, or hit ZERO and lose your turn points! First to 15 wins. Simple to learn, impossible to put down.</p>
   </div>
 
   <div class="feature-grid">
     <div class="feature-card">
       <h3>🎮</h3>
-      <h3>Play Online</h3>
-      <p style="font-size:14px;">Use the digital scorekeeper on any device</p>
-      <button class="btn green" style="margin-top:8px;" onclick="showSection('play')">Play Now</button>
+      <h3>Play Now</h3>
+      <p style="font-size:14px;">Use the digital scorekeeper to play with friends</p>
+      <button class="btn green" style="margin-top:10px;" onclick="showSection('play')">Start Playing</button>
     </div>
     <div class="feature-card">
       <h3>📦</h3>
-      <h3>Make Your Box</h3>
-      <p style="font-size:14px;">Download the template, cut it out, start flipping!</p>
-      <button class="btn" style="margin-top:8px;" onclick="showSection('download')">Get Template</button>
+      <h3>Get The Game</h3>
+      <p style="font-size:14px;">Make your own physical Badger box</p>
+      <button class="btn" style="margin-top:10px;" onclick="showSection('download')">Get Yours</button>
     </div>
-    <div class="feature-card">
-      <h3>📖</h3>
-      <h3>Learn Rules</h3>
-      <p style="font-size:14px;">Basic, Intermediate and Advanced levels</p>
-      <button class="btn" style="margin-top:8px;" onclick="showSection('rules')">Read Rules</button>
-    </div>
-    <div class="feature-card">
-      <h3>🏆</h3>
-      <h3>Leaderboard</h3>
-      <p style="font-size:14px;">Track your highest scores and biggest wins</p>
-      <button class="btn" style="margin-top:8px;" onclick="showSection('leaderboard')">View Leaderboard</button>
-    </div>
+  </div>
+
+  <!-- BUY BUTTON — Ready for your Gumroad link -->
+  <div class="card" style="text-align:center; background: linear-gradient(135deg, #fff9e6, #fff); border: 2px solid #EF0107;">
+    <h2 style="border-bottom:none; color:#EF0107;">Ready to Play?</h2>
+    <p style="margin-bottom:15px;">Get the full game — physical template + digital scorekeeper</p>
+    <!-- REPLACE # WITH YOUR GUMROAD LINK WHEN READY -->
+    <a href="#" class="btn large" style="background:#EF0107;" id="buyButton">🛒 Buy Now — Coming Soon</a>
+    <p style="font-size:12px; color:#888; margin-top:10px;">Link will go live when published</p>
   </div>
 </section>
 
-<!-- PLAY SECTION -->
+<!-- PLAY -->
 <section id="play">
   <h1>Play Flip The Badger</h1>
-  <p class="subtitle">Digital scorekeeper — tap the score that lands face up</p>
-
-  <div class="game-note">
-    <strong>💡 Tip:</strong> On iPhone/iPad, save this page to your Home Screen so it opens like an app!
-  </div>
+  <p class="subtitle">Digital scorekeeper — tap the score you flipped</p>
 
   <div class="game-container">
-    <div id="game-app">
-      <style>
-        :root {
-          --red: #EF0107;
-          --dark: #1a1a1a;
-          --green: #2ecc71;
-          --gray: #999;
-          --cream: #fff9e6;
-        }
-        * { margin:0; padding:0; box-sizing:border-box; font-family:Arial, sans-serif; -webkit-tap-highlight-color:transparent; }
-        .game-body { background: #fff; padding: 5px; }
-        .game-btn { padding: 10px 8px; border-radius: 10px; border: none; font-size: 15px; cursor: pointer; font-weight: bold; margin: 4px; width: calc(50% - 8px); }
-        .game-btn.red { background: var(--red); color: white; }
-        .game-btn.green { background: var(--green); color: white; }
-        .game-btn.gray { background: var(--gray); color: white; }
-        .score-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin: 12px 0; }
-        @media (max-width: 480px) { .score-grid { grid-template-columns: repeat(2, 1fr); } }
-        .score-btn { padding: 12px 4px; font-size: 16px; border-radius: 10px; border: none; cursor: pointer; transition: transform 0.15s ease; }
-        .score-btn:active { transform: scale(0.95); }
-        .score-btn.zero { background: #ffebee; color: #c62828; }
-        .score-btn.one { background: #e8f5e9; color: #2e7d32; }
-        .score-btn.five { background: #e3f2fd; color: #1565c0; }
-        .score-btn.ten { background: #fff3e0; color: #e65100; }
-        .player-row { display: flex; align-items: center; padding: 10px; border-bottom: 1px solid #eee; }
-        .player-row.active { background: var(--cream); border-left: 4px solid var(--red); }
-        .player-name { flex: 1; font-weight: bold; font-size: 15px; }
-        .player-score { font-size: 20px; font-weight: bold; color: var(--red); min-width: 55px; text-align: right; }
-        .hidden { display: none !important; }
-        .mode-btn { padding: 8px 10px; border: none; border-radius: 8px; background: #eee; cursor: pointer; margin: 2px; font-size: 14px; }
-        .mode-btn.active { background: var(--red); color: white; }
-        .status { padding: 10px; border-radius: 8px; margin: 8px 0; background: #e3f2fd; border-left: 4px solid #2196f3; font-size: 14px; }
-        .status.lose { background: #ffebee; border-left-color: #f44336; }
-        .status.warn { background: #fff8e1; border-left-color: #ffc107; }
-        .win-box { text-align: center; padding: 25px; background: #e8f5e9; border-radius: 12px; }
-      </style>
-      <div class="game-body">
-        <div id="game-setup">
-          <h3 style="margin-bottom:8px; font-size:16px;">Choose Level</h3>
-          <div style="display:flex; gap:4px; margin-bottom:12px; flex-wrap:wrap;">
-            <button class="mode-btn active" data-m="basic" onclick="setM('basic')">⭐ Basic</button>
-            <button class="mode-btn" data-m="intermediate" onclick="setM('intermediate')">⭐⭐ Intermediate</button>
-            <button class="mode-btn" data-m="advanced" onclick="setM('advanced')">⭐⭐⭐ Advanced</button>
-          </div>
-          <p style="font-size:13px; color:#666; margin-bottom:12px;">Be first to exactly 15 points! 0 = lose turn points only.</p>
-          <input type="text" id="pname" placeholder="Player name" style="padding:10px; border-radius:8px; border:1px solid #ddd; width:60%; font-size:15px;">
-          <button class="game-btn red" onclick="addP()">+ Add</button>
-          <div id="plist" style="margin:8px 0;"></div>
-          <button class="game-btn green" style="width:100%; margin-top:8px; font-size:17px;" onclick="startG()">▶ START GAME</button>
-        </div>
+    <div class="note">
+      <strong>How to play:</strong> Flip your Badger box. Tap the number that lands face up. 
+      Reach <strong>15 points</strong> to win! Hit 0 and lose this turn's points.
+    </div>
 
-        <div id="game-play" class="hidden">
-          <h3 id="cmode" style="margin-bottom:8px; font-size:16px;">Basic Mode</h3>
-          <div class="player-row active">
-            <div style="flex:1;">
-              <div id="playername" style="font-size:15px;">—</div>
-              <div style="font-size:12px; color:#666;">Turn: +<span id="turnp">0</span></div>
-            </div>
-            <div class="player-score" id="totalscore">0</div>
-          </div>
-          <div class="status" id="gstatus">Flip the Badger → tap the score up!</div>
-          
-          <h4 style="text-align:center; margin:12px 0 4px; font-size:14px;">Score facing up:</h4>
-          <div class="score-grid">
-            <button class="score-btn zero" onclick="doFlip(0)">🔴 0<br><small>lose</small></button>
-            <button class="score-btn one" onclick="doFlip(1)">🦡 1<br><small>side</small></button>
-            <button class="score-btn five" onclick="doFlip(5)">📏 5<br><small>end</small></button>
-            <button class="score-btn ten" onclick="doFlip(10)">⚽ 10<br><small>top</small></button>
-          </div>
-          
-          <div style="margin:8px 0; display:flex; gap:4px; justify-content:center; flex-wrap:wrap;">
-            <button class="game-btn gray" onclick="passT()">➡ Pass</button>
-            <button class="game-btn gray" onclick="penal()">💥 Fell Off</button>
-          </div>
-          
-          <h4 style="margin-top:15px; border-top:1px solid #eee; padding-top:8px; font-size:14px;">Scoreboard</h4>
-          <div id="scores"></div>
-          
-          <button class="game-btn gray" style="width:100%; margin-top:12px;" onclick="resetG()">🔄 New Game</button>
-        </div>
+    <div id="gameSetup">
+      <h3 style="margin-bottom:10px;">Add Players</h3>
+      <input type="text" id="playerName" placeholder="Player name" style="padding:10px; width:60%; border-radius:8px; border:1px solid #ddd; font-size:15px;">
+      <button class="game-btn green" onclick="addPlayer()">+ Add</button>
+      <div id="playerList" style="margin:10px 0;"></div>
+      <button class="btn large" style="width:100%; margin-top:15px;" onclick="startGame()">▶ Start Game</button>
+    </div>
 
-        <div id="game-win" class="hidden">
-          <div class="win-box">
-            <div style="font-size:40px;">🏆🦡🏆</div>
-            <h2 style="margin:15px 0; font-size:20px;">WE HAVE A WINNER!</h2>
-            <p id="wname" style="font-size:18px; font-weight:bold; color:#EF0107;"></p>
-            <button class="game-btn green" style="font-size:16px; padding:12px 25px; margin-top:15px;" onclick="resetG()">Play Again 🎲</button>
-          </div>
-        </div>
+    <div id="gameInProgress" class="hidden">
+      <h3 id="currentPlayer" style="margin-bottom:10px;"></h3>
+      <p style="font-size:14px; color:#666; margin-bottom:15px;">Running total this turn: <span id="turnTotal" style="font-weight:bold; color:#EF0107;">0</span></p>
+      
+      <div class="score-grid">
+        <button class="score-btn zero" onclick="flip(0)">0<br><small>ZERO!</small></button>
+        <button class="score-btn one" onclick="flip(1)">1<br><small>Point</small></button>
+        <button class="score-btn five" onclick="flip(5)">5<br><small>Points</small></button>
+        <button class="score-btn ten" onclick="flip(10)">10<br><small>Points</small></button>
       </div>
-      <script>
-        let ps = [], ci = 0, tp = 0, mode = 'basic', over = false;
-        function setM(m){ mode=m; document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active')); document.querySelector(`[data-m="${m}"]`).classList.add('active'); }
-        function addP(){ const n=document.getElementById('pname').value.trim(); if(!n)return; ps.push({name:n,score:0}); document.getElementById('pname').value=''; renderPL(); }
-        function renderPL(){ document.getElementById('plist').innerHTML=ps.map((p,i)=>`<span style="background:#fff9e6; padding:5px 10px; border-radius:20px; margin:3px; display:inline-block; font-size:14px;">${p.name} <button onclick="ps.splice(${i},1);renderPL()" style="border:none; background:none; cursor:pointer; color:#999; font-size:12px;">✕</button></span>`).join(''); }
-        function startG(){ if(!ps.length){alert('Add at least one player!');return;} document.getElementById('game-setup').classList.add('hidden'); document.getElementById('game-play').classList.remove('hidden'); document.getElementById('cmode').textContent=mode.charAt(0).toUpperCase()+mode.slice(1); updateDisplay(); }
-        function doFlip(n){ if(over)return; if(n===0){tp=0; setStatus('🔴 ZERO! Turn points lost.','lose');}else{tp+=n;} let ns=ps[ci].score+tp; if(ns>15){let b=15-(ns-15);setStatus(`⚠️ Over 15! Back to ${b}.`,'warn');endT(b);return;} if(ns===15){ps[ci].score=15;over=true;showWin();return;}document.getElementById('turnp').textContent=tp;document.getElementById('totalscore').textContent=ns;if(n!==0)setStatus(`+${n}! Now ${ns}. Flip or Pass.`,'info'); }
-        function passT(){ if(!over)endT(ps[ci].score+tp); }
-        function endT(fs){ if(fs<0)fs=0; ps[ci].score=fs; tp=0; ci=(ci+1)%ps.length; updateDisplay(); }
-        function penal(){ if(!confirm('Reset to 0 & end turn?'))return; ps[ci].score=0; tp=0; ci=(ci+1)%ps.length; updateDisplay(); }
-        function updateDisplay(){ const p=ps[ci]; document.getElementById('playername').textContent=p.name+' playing...'; document.getElementById('turnp').textContent=tp; document.getElementById('totalscore').textContent=p.score+tp; renderSB(); }
-        function renderSB(){ document.getElementById('scores').innerHTML=ps.map((p,i)=>`<div class="player-row ${i===ci?'active':''}"><span style="flex:1; font-weight:bold; font-size:14px;">${i===ci?'▶ ':''}${p.name}</span><span style="font-weight:bold; color:#EF0107; font-size:16px;">${p.score}</span></div>`).join(''); }
-        function setStatus(m,t){ const b=document.getElementById('gstatus'); b.className='status '+t; b.textContent=m; }
-        function showWin(){ document.getElementById('game-play').classList.add('hidden'); document.getElementById('game-win').classList.remove('hidden'); document.getElementById('wname').textContent=ps[ci].name+' reached 15!'; }
-        function resetG(){ ps=[]; ci=0; tp=0; over=false; document.getElementById('game-win').classList.add('hidden'); document.getElementById('game-play').classList.add('hidden'); document.getElementById('game-setup').classList.remove('hidden'); renderPL(); }
-      </script>
+
+      <div id="statusMsg" class="status" style="display:none;"></div>
+
+      <div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;">
+        <button class="game-btn green" onclick="endTurn()">✓ End Turn & Keep Points</button>
+        <button class="game-btn gray" onclick="resetGame()">↻ New Game</button>
+      </div>
+
+      <h4 style="margin-top:25px; margin-bottom:8px;">Scores</h4>
+      <div id="scoreboard"></div>
     </div>
   </div>
 </section>
 
-<!-- LEADERBOARD SECTION -->
+<!-- LEADERBOARD -->
 <section id="leaderboard">
-  <h1>Leaderboard</h1>
-  <p class="subtitle">Track the highest scores and biggest wins</p>
+  <h1>🏆 Leaderboard</h1>
+  <p class="subtitle">Track your highest scores</p>
 
   <div class="card">
-    <h2>Top Wins</h2>
     <table class="leaderboard">
       <thead>
         <tr>
@@ -449,215 +378,268 @@
   </div>
 
   <div class="card">
-    <h2>Add Your Score</h2>
-    <p style="font-size:14px;">Got a great game? Add your name and highest score below.</p>
-    <br>
-    <input type="text" id="newName" placeholder="Your name" style="padding:10px; border-radius:8px; border:1px solid #ddd; width:45%; margin-right:8px; font-size:14px;">
-    <input type="number" id="newScore" placeholder="Score" min="0" max="15" style="padding:10px; border-radius:8px; border:1px solid #ddd; width:25%; font-size:14px;">
-    <button class="btn green" onclick="addScore()">Add Score</button>
-    <br><br>
-    <p style="font-size:13px; color:#666;">Scores are stored on your device and stay until you clear your browser data.</p>
-  </div>
-
-  <div class="card">
-    <h2>Recent Games</h2>
-    <div id="recentGames">
-      <p style="color:#666; font-size:14px;">No recent games yet. Play a game and record your first win!</p>
-    </div>
+    <h3 style="margin-bottom:10px;">Add Your Score</h3>
+    <input type="text" id="newName" placeholder="Your name" style="padding:10px; border-radius:8px; border:1px solid #ddd; width:45%; margin-right:8px;">
+    <input type="number" id="newScore" placeholder="Score" min="0" max="15" style="padding:10px; border-radius:8px; border:1px solid #ddd; width:25%;">
+    <button class="btn green" style="padding:10px 15px; font-size:14px;" onclick="addScore()">Add</button>
+    <p style="font-size:13px; color:#666; margin-top:10px;">Scores saved on your device</p>
   </div>
 </section>
 
-<!-- DOWNLOAD SECTION -->
-<section id="download">
-  <h1>Make Your Badger Box</h1>
-  <p class="subtitle">Print, cut, fold — start flipping in minutes!</p>
-
-  <div class="card">
-    <h2>Box Specifications</h2>
-    <ul style="font-size:15px; line-height:1.8; margin:12px 0; padding-left:20px;">
-      <li><strong>Dimensions:</strong> 8.2cm tall × 5.5cm wide × 2.2cm deep</li>
-      <li><strong>Top face:</strong> Badger illustration — <strong>10 points</strong></li>
-      <li><strong>Bottom face:</strong> <strong>0 points</strong></li>
-      <li><strong>Long sides:</strong> <strong>1 point</strong> each</li>
-      <li><strong>Short ends:</strong> <strong>5 points</strong> each</li>
-      <li><strong>Paper:</strong> Cardstock or thick paper recommended</li>
-    </ul>
-  </div>
-
-  <div class="card" style="text-align:center; background:#e8f5e9;">
-    <h2>⬇️ Download Printable Template</h2>
-    <p style="margin:12px 0; font-size:15px;">Ready-to-print PDF — includes folding guides and scoring labels</p>
-    
-    <a href="#" class="btn large green" onclick="alert('Upload your box PDF to GitHub, then replace the # in the code with your file link!'); return false;">
-      📄 Download Box Template (PDF)
-    </a>
-    
-    <p style="margin-top:12px; font-size:13px; color:#666;">
-      After downloading: Print → Cut out the shape → Fold along dotted lines → Glue tabs → Start playing!
-    </p>
-  </div>
-
-  <div class="card">
-    <h2>Assembly Instructions</h2>
-    <ol style="line-height:1.8; padding-left:20px; font-size:15px;">
-      <li>Print on thick paper or thin card (A4 is fine)</li>
-      <li>Cut around the outer solid black line</li>
-      <li>Fold all dotted lines inward before applying glue</li>
-      <li>Check each face shows the correct score</li>
-      <li>Glue the small tabs to form a box</li>
-      <li>Make sure it closes securely — start flipping! 🦡</li>
-    </ol>
-  </div>
-</section>
-
-<!-- RULES SECTION -->
+<!-- RULES -->
 <section id="rules">
-  <h1>How to Play</h1>
-  <p class="subtitle">Complete official rules for all levels</p>
+  <h1>📖 How to Play</h1>
+  <p class="subtitle">Complete official rules</p>
 
   <div class="card">
     <h2>🎯 Objective</h2>
-    <p>Be the first player to reach <strong>exactly 15 points</strong> by flipping the Badger box and adding the score shown on the face that lands upward.</p>
+    <p>Be the first player to reach <strong>exactly 15 points</strong> by flipping the Badger box and scoring points each turn.</p>
   </div>
 
   <div class="card">
     <h2>✅ Scoring</h2>
-    <ul style="line-height:1.8; padding-left:20px; font-size:15px;">
-      <li>🦡 <strong>Top face up</strong> = 10 points</li>
-      <li>📏 <strong>Short End up</strong> = 5 points</li>
-      <li>➡️ <strong>Long Side up</strong> = 1 point</li>
-      <li>🔴 <strong>Zero Side up</strong> = 0 points — lose all points gained THIS TURN only</li>
+    <ul style="padding-left:20px;">
+      <li style="margin:8px 0;"><strong>Top face up = 1 point</strong></li>
+      <li style="margin:8px 0;"><strong>Short end up = 10 points</strong></li>
+      <li style="margin:8px 0;"><strong>Long side up = 5 points</strong></li>
+      <li style="margin:8px 0;"><strong>Bottom face up = 0 points</strong> — lose all points from this turn!</li>
     </ul>
   </div>
 
   <div class="card">
-    <h2>🔴 Zero Rule</h2>
-    <p>If the 0 side lands up: You lose all points collected during your current turn, but keep your score from the start of the turn. Your turn ends immediately.</p>
-  </div>
-
-  <div class="card">
-    <h2>🔄 Bounce-Back Rule</h2>
-    <p>If adding your flip score takes you over 15, you "bounce back" down by the excess amount. Example: 13 + 5 = 18 → 15 − 3 = 12. Your turn ends.</p>
-  </div>
-
-  <div class="card">
-    <h2>⭐ Basic Mode</h2>
-    <ul style="line-height:1.8; padding-left:20px; font-size:15px;">
-      <li>Play on any flat, dry surface</li>
-      <li>The Badger must make at least 1 full rotation to count</li>
-      <li>Keep flipping until you pass to the next player or win</li>
+    <h2>📋 Basic Rules</h2>
+    <ul style="padding-left:20px;">
+      <li style="margin:8px 0;">Play on any flat, dry surface with an edge to flip from</li>
+      <li style="margin:8px 0;">The Badger must make at least <strong>1 full rotation</strong> when flipped</li>
+      <li style="margin:8px 0;">Keep flipping and accumulating points until you decide to stop and pass to the next player</li>
+      <li style="margin:8px 0;">If you flip a <strong>0</strong>, you lose all points gained this turn and pass with your score unchanged</li>
+      <li style="margin:8px 0;">Reach 15 points = <strong>YOU WIN!</strong></li>
     </ul>
   </div>
 
   <div class="card">
-    <h2>⭐⭐ Intermediate Mode</h2>
-    <ul style="line-height:1.8; padding-left:20px; font-size:15px;">
-      <li>All Basic rules apply</li>
-      <li>The Badger must land at least <strong>1 full box length</strong> away from where it was flipped</li>
-      <li>Lands too close → flip doesn't count, turn ends</li>
+    <h2>⭐ Intermediate Rules</h2>
+    <ul style="padding-left:20px;">
+      <li style="margin:8px 0;">The Badger must land a minimum of <strong>one box length away</strong> from where it was flipped</li>
+      <li style="margin:8px 0;">If it falls off the playing area = <strong>0 points</strong> for that flip</li>
     </ul>
+  </div>
+</section>
+
+<!-- DOWNLOAD / GET YOURS -->
+<section id="download">
+  <h1>📦 Get The Badger Box</h1>
+  <p class="subtitle">Make your own physical game</p>
+
+  <div class="card" style="text-align:center; background: linear-gradient(135deg, #fff9e6, #fff); border: 2px solid #EF0107;">
+    <h2 style="border-bottom:none; color:#EF0107;">🛒 Full Game — Coming Soon</h2>
+    <p style="margin-bottom:15px;">Complete printable template + digital scorekeeper app</p>
+    <a href="#" class="btn large" style="background:#EF0107;" id="downloadBtn">Join Waitlist</a>
+    <p style="font-size:12px; color:#888; margin-top:10px;">Template will be available once published</p>
   </div>
 
   <div class="card">
-    <h2>⭐⭐⭐ Advanced Mode</h2>
-    <ul style="line-height:1.8; padding-left:20px; font-size:15px;">
-      <li>All Intermediate rules apply</li>
-      <li>At the START of EVERY turn, you must <strong>announce your current score</strong></li>
-      <li>Forget to announce → your score resets to 0 and turn passes</li>
-      <li>Falls off the table → reset to 0 and turn passes</li>
+    <h2>Box Specifications</h2>
+    <ul style="padding-left:20px;">
+      <li style="margin:8px 0;"><strong>Height:</strong> 8.2 cm</li>
+      <li style="margin:8px 0;"><strong>Width:</strong> 5.5 cm</li>
+      <li style="margin:8px 0;"><strong>Depth:</strong> 2.2 cm</li>
+      <li style="margin:8px 0;"><strong>Material:</strong> Cardstock or thin cardboard</li>
     </ul>
   </div>
 </section>
 
 <footer>
-  🦡 Flip The Badger — Family Game © 2026<br>
-  All rights reserved
+  🦡 Flip The Badger © 2026<br>
+  Add to your home screen for app-style access!
 </footer>
 
 <script>
-// Simple, reliable section switcher
+// ========= SECTION NAVIGATION =========
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', () => showSection(link.dataset.section));
+});
+
 function showSection(id) {
-  document.querySelectorAll('.nav-link').forEach(link => {
-    link.classList.remove('active');
-    if (link.getAttribute('onclick').includes(`'${id}'`)) {
-      link.classList.add('active');
-    }
-  });
-
-  document.querySelectorAll('section').forEach(sec => {
-    sec.classList.remove('active');
-  });
+  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-
+  document.querySelector(`[data-section="${id}"]`).classList.add('active');
   window.scrollTo(0, 0);
+}
 
-  // Badger animation on home
-  if (id === 'home') {
-    const badger = document.getElementById('badgerMascot');
-    if (badger) {
-      badger.classList.remove('wiggle');
-      void badger.offsetWidth;
-      badger.classList.add('wiggle');
-    }
+// ========= PWA INSTALL PROMPT =========
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  setTimeout(() => {
+    document.getElementById('installBanner').classList.add('show');
+  }, 3000);
+});
+
+function dismissInstall() {
+  document.getElementById('installBanner').classList.remove('show');
+}
+
+async function installApp() {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  const { outcome } = await deferredPrompt.userChoice;
+  console.log('Install outcome:', outcome);
+  deferredPrompt = null;
+  document.getElementById('installBanner').classList.remove('show');
+}
+
+// ========= GAME LOGIC =========
+let players = [];
+let currentIndex = 0;
+let turnPoints = 0;
+let gameRunning = false;
+
+function addPlayer() {
+  const name = document.getElementById('playerName').value.trim();
+  if (!name) return;
+  players.push({ name, score: 0 });
+  document.getElementById('playerName').value = '';
+  renderPlayerList();
+}
+
+function renderPlayerList() {
+  document.getElementById('playerList').innerHTML = players.map((p, i) => 
+    `<span style="background:#fff9e6; padding:5px 12px; border-radius:20px; margin:3px; display:inline-block;">${p.name} 
+     <button onclick="removePlayer(${i})" style="border:none; background:none; color:#EF0107; cursor:pointer; font-weight:bold; margin-left:5px;">×</button>
+    </span>`
+  ).join('');
+}
+
+function removePlayer(i) {
+  players.splice(i, 1);
+  renderPlayerList();
+}
+
+function startGame() {
+  if (players.length === 0) { alert('Add at least one player!'); return; }
+  gameRunning = true;
+  currentIndex = 0;
+  turnPoints = 0;
+  document.getElementById('gameSetup').classList.add('hidden');
+  document.getElementById('gameInProgress').classList.remove('hidden');
+  updateGameDisplay();
+}
+
+function flip(points) {
+  if (!gameRunning) return;
+  const statusEl = document.getElementById('statusMsg');
+  statusEl.style.display = 'block';
+  
+  if (points === 0) {
+    turnPoints = 0;
+    statusEl.className = 'status lose';
+    statusEl.innerHTML = '💥 ZERO! All turn points lost — your score stays the same.';
+  } else {
+    turnPoints += points;
+    statusEl.className = 'status';
+    statusEl.innerHTML = `+${points} points! This turn: ${turnPoints}`;
   }
+  
+  document.getElementById('turnTotal').textContent = turnPoints;
 }
 
-// Leaderboard storage
-function getLeaderboard() {
-  return JSON.parse(localStorage.getItem('flipTheBadgerLeaderboard') || '[]');
+function endTurn() {
+  if (!gameRunning) return;
+  players[currentIndex].score += turnPoints;
+  
+  if (players[currentIndex].score >= 15) {
+    gameRunning = false;
+    document.getElementById('statusMsg').style.display = 'block';
+    document.getElementById('statusMsg').className = 'status win';
+    document.getElementById('statusMsg').innerHTML = `🎉 <strong>${players[currentIndex].name.toUpperCase()} WINS!</strong> Final score: ${players[currentIndex].score} points!`;
+    updateGameDisplay();
+    return;
+  }
+  
+  turnPoints = 0;
+  currentIndex = (currentIndex + 1) % players.length;
+  document.getElementById('statusMsg').style.display = 'none';
+  updateGameDisplay();
 }
 
-function saveLeaderboard(data) {
-  localStorage.setItem('flipTheBadgerLeaderboard', JSON.stringify(data));
+function updateGameDisplay() {
+  document.getElementById('currentPlayer').innerHTML = `🎯 ${players[currentIndex].name}'s Turn`;
+  document.getElementById('turnTotal').textContent = turnPoints;
+  document.getElementById('scoreboard').innerHTML = players.map((p, i) => 
+    `<div style="padding:8px; background:${i === currentIndex && gameRunning ? '#fff9e6' : 'transparent'}; border-radius:8px; margin:4px 0; font-weight:${i === currentIndex ? 'bold' : 'normal'};">
+      ${i === currentIndex && gameRunning ? '➤ ' : '  '}${p.name}: ${p.score} points
+    </div>`
+  ).join('');
 }
 
-function renderLeaderboard() {
-  const board = getLeaderboard();
-  const tbody = document.getElementById('leaderBody');
-  if (!tbody) return;
+function resetGame() {
+  gameRunning = false;
+  players = [];
+  currentIndex = 0;
+  turnPoints = 0;
+  document.getElementById('gameSetup').classList.remove('hidden');
+  document.getElementById('gameInProgress').classList.add('hidden');
+  document.getElementById('playerList').innerHTML = '';
+}
 
-  // Keep default sample if empty
-  if (board.length === 0) return;
+// ========= LEADERBOARD =========
+function getScores() {
+  return JSON.parse(localStorage.getItem('flipBadgerScores') || '[]');
+}
 
-  tbody.innerHTML = '';
-  board.forEach((entry, index) => {
-    const row = document.createElement('tr');
-    if (index === 0) row.className = 'gold';
-    if (index === 1) row.className = 'silver';
-    if (index === 2) row.className = 'bronze';
-
-    row.innerHTML = `
-      <td>${index + 1}</td>
-      <td>${entry.name}</td>
-      <td>${entry.score}</td>
-    `;
-    tbody.appendChild(row);
-  });
+function saveScores(s) {
+  localStorage.setItem('flipBadgerScores', JSON.stringify(s));
 }
 
 function addScore() {
-  const nameInput = document.getElementById('newName');
-  const scoreInput = document.getElementById('newScore');
-
-  const name = nameInput.value.trim();
-  const score = parseInt(scoreInput.value, 10);
-
-  if (!name) { alert('Please enter a name.'); return; }
-  if (isNaN(score) || score < 0 || score > 15) { alert('Please enter 0–15.'); return; }
-
-  const board = getLeaderboard();
-  board.push({ name, score, date: new Date().toISOString() });
-  board.sort((a, b) => b.score - a.score);
-  saveLeaderboard(board.slice(0, 20));
-
-  nameInput.value = '';
-  scoreInput.value = '';
+  const name = document.getElementById('newName').value.trim();
+  const score = parseInt(document.getElementById('newScore').value);
+  if (!name || isNaN(score)) { alert('Enter a name and score'); return; }
+  
+  const scores = getScores();
+  scores.push({ name, score, date: new Date().toISOString() });
+  scores.sort((a, b) => b.score - a.score);
+  saveScores(scores.slice(0, 50));
+  
+  document.getElementById('newName').value = '';
+  document.getElementById('newScore').value = '';
   renderLeaderboard();
   alert('Score added! 🦡🏆');
 }
 
-document.addEventListener('DOMContentLoaded', renderLeaderboard);
-</script>
+function renderLeaderboard() {
+  const scores = getScores();
+  if (scores.length === 0) return;
+  
+  const tbody = document.getElementById('leaderBody');
+  tbody.innerHTML = scores.slice(0, 5).map((entry, i) => {
+    const rowClass = i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : '';
+    return `<tr class="${rowClass}">
+      <td>${i+1}</td>
+      <td>${entry.name}</td>
+      <td>${entry.score}</td>
+    </tr>`;
+  }).join('');
+}
+renderLeaderboard();
 
+// Register service worker for PWA
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    const swCode = `
+      self.addEventListener('install', e => self.skipWaiting());
+      self.addEventListener('activate', e => e.waitUntil(clients.claim()));
+      self.addEventListener('fetch', e => {
+        e.respondWith(fetch(e.request).catch(() => caches.match(e.request)));
+      });
+    `;
+    const blob = new Blob([swCode], {type: 'application/javascript'});
+    navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(() => {});
+  });
+}
+</script>
 </body>
 </html>
