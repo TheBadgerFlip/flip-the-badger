@@ -25,6 +25,10 @@
     --text-light: #E8E8E8;
     --shadow-gold: 0 0 30px rgba(212,175,55,0.25);
     --shadow-red: 0 0 25px rgba(207,0,0,0.2);
+    /* Box dimensions: 8.2cm × 5.5cm × 2.2cm → scaled for CSS 3D */
+    --box-h: 164px;   /* Height = 8.2cm */
+    --box-w: 110px;   /* Width = 5.5cm */
+    --box-d: 44px;    /* Depth = 2.2cm */
   }
   * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Georgia', 'Times New Roman', serif; }
   
@@ -75,6 +79,7 @@
     transition: all 0.3s ease;
     cursor: pointer;
     border: 1px solid transparent;
+    user-select: none;
   }
   .nav-link:hover, .nav-link.active {
     color: var(--gold);
@@ -118,82 +123,89 @@
     font-style: italic;
   }
 
-  /* Hero Flip Animation — The Animated Box 🎲 */
+  /* Hero Flip Animation — Authentic Proportions 🎲 */
   .hero-wrapper {
     position: relative;
     text-align: center;
     margin: 20px 0 50px;
+    perspective: 800px;
   }
   .flip-container {
     perspective: 1000px;
-    width: 160px;
-    height: 160px;
+    width: 200px;
+    height: 200px;
     margin: 0 auto;
+    position: relative;
   }
   .flipper {
     position: relative;
-    width: 100%;
-    height: 100%;
+    width: var(--box-w);
+    height: var(--box-h);
     transform-style: preserve-3d;
-    animation: luxuryFlip 4s infinite ease-in-out;
+    animation: authenticFlip 5s infinite ease-in-out;
+    margin: 0 auto;
   }
   .box-face {
     position: absolute;
-    width: 160px;
-    height: 160px;
-    border-radius: 16px;
+    border-radius: 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    backface-visibility: hidden;
-    border: 3px solid var(--gold);
+    border: 2px solid var(--gold);
     box-shadow: 
-      inset 0 0 30px rgba(0,0,0,0.4),
-      0 0 25px rgba(212,175,55,0.3);
+      inset 0 0 20px rgba(0,0,0,0.5),
+      0 0 20px rgba(212,175,55,0.25);
+    backface-visibility: hidden;
+    background: linear-gradient(145deg, #2A2A2A, #151515);
   }
+  /* Face dimensions & positioning based on 8.2 × 5.5 × 2.2 cm */
   .face-top {
-    background: linear-gradient(145deg, #2A2A2A, #1A1A1A);
-    transform: rotateY(0deg) translateZ(80px);
+    width: var(--box-w); height: var(--box-h);
+    transform: rotateX(0deg) translateZ(calc(var(--box-d) / 2));
   }
-  .face-top .score { color: var(--gold); font-size: 36px; font-weight: bold; }
-  .face-top .icon { font-size: 48px; margin-bottom: 5px; }
-  
-  .face-front {
-    background: linear-gradient(145deg, #333, #222);
-    transform: rotateY(90deg) translateZ(80px);
-  }
-  .face-front .score { color: var(--gold-light); font-size: 28px; font-weight: bold; }
-  
-  .face-right {
-    background: linear-gradient(145deg, #2B2B2B, #1C1C1C);
-    transform: rotateY(180deg) translateZ(80px);
-  }
-  .face-right .score { color: var(--gold); font-size: 36px; font-weight: bold; }
-  
-  .face-back {
-    background: linear-gradient(145deg, #1F1F1F, #121212);
-    transform: rotateY(-90deg) translateZ(80px);
-  }
-  .face-back .score { color: #888; font-size: 24px; font-weight: bold; }
+  .face-top .score { color: var(--gold); font-size: 32px; font-weight: bold; }
+  .face-top .icon { font-size: 40px; margin-bottom: 5px; }
   
   .face-bottom {
-    background: linear-gradient(145deg, #151515, #0A0A0A);
-    transform: rotateX(-90deg) translateZ(80px);
+    width: var(--box-w); height: var(--box-h);
+    transform: rotateX(180deg) translateZ(calc(var(--box-d) / 2));
   }
-  .face-bottom .score { color: #666; font-size: 20px; font-weight: bold; }
+  .face-bottom .score { color: #666; font-size: 24px; font-weight: bold; }
+  .face-bottom .icon { font-size: 32px; margin-bottom: 5px; }
   
-  .face-base {
-    background: linear-gradient(145deg, #181818, #080808);
-    transform: rotateX(90deg) translateZ(80px);
+  .face-front {
+    width: var(--box-w); height: var(--box-d);
+    transform: rotateX(90deg) translateZ(calc(var(--box-h) / 2));
   }
-  .face-base .score { color: #555; font-size: 18px; font-weight: bold; }
+  .face-front .score { color: #4CAF50; font-size: 26px; font-weight: bold; }
+  .face-front .icon { font-size: 28px; margin-bottom: 3px; }
+  
+  .face-back {
+    width: var(--box-w); height: var(--box-d);
+    transform: rotateX(-90deg) translateZ(calc(var(--box-h) / 2));
+  }
+  .face-back .score { color: #4CAF50; font-size: 26px; font-weight: bold; }
+  .face-back .icon { font-size: 28px; margin-bottom: 3px; }
+  
+  .face-left {
+    width: var(--box-d); height: var(--box-h);
+    transform: rotateY(-90deg) translateZ(calc(var(--box-w) / 2));
+  }
+  .face-left .score { color: var(--gold); font-size: 28px; font-weight: bold; }
+  .face-left .icon { font-size: 32px; margin-bottom: 5px; }
+  
+  .face-right {
+    width: var(--box-d); height: var(--box-h);
+    transform: rotateY(90deg) translateZ(calc(var(--box-w) / 2));
+  }
+  .face-right .score { color: var(--gold); font-size: 28px; font-weight: bold; }
+  .face-right .icon { font-size: 32px; margin-bottom: 5px; }
 
-  @keyframes luxuryFlip {
+  @keyframes authenticFlip {
     0% { transform: rotateX(0deg) rotateY(0deg); }
-    15% { transform: rotateX(360deg) rotateY(180deg); }
-    30% { transform: rotateX(720deg) rotateY(360deg); }
-    45% { transform: rotateX(1080deg) rotateY(540deg); }
+    20% { transform: rotateX(360deg) rotateY(180deg); }
+    40% { transform: rotateX(720deg) rotateY(360deg); }
     60% { transform: rotateX(1080deg) rotateY(540deg); }
     80% { transform: rotateX(1080deg) rotateY(540deg); }
     100% { transform: rotateX(1080deg) rotateY(540deg); }
@@ -214,7 +226,7 @@
     transition: border-color 0.4s ease;
   }
 
-  /* Buttons — Luxury Style */
+  /* Buttons — Fully Fixed */
   .btn {
     display: inline-block;
     padding: 16px 36px;
@@ -230,10 +242,15 @@
     letter-spacing: 1px;
     text-transform: uppercase;
     box-shadow: 0 4px 15px rgba(212,175,55,0.3);
+    text-align: center;
+    user-select: none;
   }
   .btn:hover {
     transform: translateY(-3px) scale(1.02);
     box-shadow: 0 8px 25px rgba(212,175,55,0.45);
+  }
+  .btn:active {
+    transform: translateY(0) scale(0.98);
   }
   .btn.red {
     background: linear-gradient(135deg, var(--luxury-red), var(--deep-red), var(--luxury-red));
@@ -267,7 +284,7 @@
   }
   .feature-card .icon { font-size: 36px; margin-bottom: 10px; }
   .feature-card h3 { font-size: 18px; margin-bottom: 8px; color: var(--gold); letter-spacing: 0.5px; }
-  .feature-card p { font-size: 14px; color: #999; line-height: 1.5; }
+  .feature-card p { font-size: 14px; color: #999; line-height: 1.5; margin-bottom: 15px; }
 
   /* Install Banner */
   .install-banner {
@@ -356,6 +373,7 @@
     padding: 12px 10px; border-radius: 8px; border: none; font-size: 15px; font-weight: bold; cursor: pointer;
     margin: 5px; width: calc(50% - 10px);
     letter-spacing: 0.5px;
+    user-select: none;
   }
   .game-btn.red { background: linear-gradient(135deg, #9E0000, #CF0000); color: white; }
   .game-btn.green { background: linear-gradient(135deg, #2E7D32, #4CAF50); color: white; }
@@ -366,6 +384,7 @@
   .score-btn {
     padding: 18px 8px; font-size: 18px; border-radius: 10px; border: 2px solid transparent; cursor: pointer;
     transition: all 0.2s ease; background: #1A1A1A; color: white;
+    user-select: none;
   }
   .score-btn:hover { border-color: var(--gold); box-shadow: 0 0 15px rgba(212,175,55,0.2); }
   .score-btn:active { transform: scale(0.95); }
@@ -380,6 +399,11 @@
   .status.lose { background: rgba(207,0,0,0.1); border-left-color: var(--deep-red); }
   .status.win { background: rgba(212,175,55,0.15); border-left-color: var(--gold); color: var(--gold); }
 
+  input {
+    padding: 14px; border-radius: 8px; border: 1px solid #444;
+    background: #111; color: white; font-size: 16px;
+  }
+
   footer {
     text-align: center;
     padding: 40px 25px;
@@ -391,18 +415,16 @@
 
   @keyframes fadeIn { from {opacity:0; transform: translateY(15px);} to {opacity:1; transform: translateY(0);} }
   @media (max-width: 480px) {
+    :root {
+      --box-h: 130px;
+      --box-w: 88px;
+      --box-d: 35px;
+    }
     h1 { font-size: 28px; }
     .btn.large { width: 100%; margin: 8px 0; }
     input { width: 100% !important; margin: 8px 0 !important; }
     .score-grid { grid-template-columns: repeat(2, 1fr); }
-    .flip-container { width: 130px; height: 130px; }
-    .box-face { width: 130px; height: 130px; }
-    .face-top { transform: rotateY(0deg) translateZ(65px); }
-    .face-front { transform: rotateY(90deg) translateZ(65px); }
-    .face-right { transform: rotateY(180deg) translateZ(65px); }
-    .face-back { transform: rotateY(-90deg) translateZ(65px); }
-    .face-bottom { transform: rotateX(-90deg) translateZ(65px); }
-    .face-base { transform: rotateX(90deg) translateZ(65px); }
+    .flip-container { height: 180px; }
   }
 </style>
 </head>
@@ -431,35 +453,47 @@
   </div>
 </nav>
 
-<!-- HOME — The Premium Experience -->
+<!-- HOME — Authentic Proportions & Correct Scores -->
 <section id="home" class="active">
   <div class="hero-wrapper">
-    <!-- The Animated Flip Box 🎲 -->
+    <!-- The Authentic Flip Box — 8.2 × 5.5 × 2.2 cm 🎲 -->
     <div class="flip-container">
       <div class="flipper">
+        <!-- Top face = 1 point -->
         <div class="box-face face-top">
           <div class="icon">🦡</div>
-          <div class="score">10</div>
-        </div>
-        <div class="box-face face-front">
-          <div class="icon" style="font-size:36px;">📏</div>
-          <div class="score">5</div>
-        </div>
-        <div class="box-face face-right">
-          <div class="icon" style="font-size:36px;">➡️</div>
           <div class="score">1</div>
+          <small style="color:#888; font-size:11px; margin-top:2px;">Top</small>
         </div>
-        <div class="box-face face-back">
-          <div class="icon" style="font-size:36px;">⚖️</div>
-          <div class="score">5</div>
-        </div>
+        <!-- Bottom face = 0 points -->
         <div class="box-face face-bottom">
-          <div class="icon" style="font-size:36px;">❌</div>
+          <div class="icon">❌</div>
           <div class="score">0</div>
+          <small style="color:#555; font-size:11px; margin-top:2px;">Bottom</small>
         </div>
-        <div class="box-face face-base">
-          <div class="icon" style="font-size:36px;">⬇️</div>
-          <div class="score">1</div>
+        <!-- Front long side = 5 points -->
+        <div class="box-face face-front">
+          <div class="icon">📏</div>
+          <div class="score">5</div>
+          <small style="color:#888; font-size:10px; margin-top:2px;">Long Side</small>
+        </div>
+        <!-- Back long side = 5 points -->
+        <div class="box-face face-back">
+          <div class="icon">📏</div>
+          <div class="score">5</div>
+          <small style="color:#888; font-size:10px; margin-top:2px;">Long Side</small>
+        </div>
+        <!-- Left short end = 10 points -->
+        <div class="box-face face-left">
+          <div class="icon">👑</div>
+          <div class="score">10</div>
+          <small style="color:#888; font-size:10px; margin-top:2px;">Short End</small>
+        </div>
+        <!-- Right short end = 10 points -->
+        <div class="box-face face-right">
+          <div class="icon">👑</div>
+          <div class="score">10</div>
+          <small style="color:#888; font-size:10px; margin-top:2px;">Short End</small>
         </div>
       </div>
     </div>
@@ -483,25 +517,25 @@
       <div class="icon">🎮</div>
       <h3>Digital Scorekeeper</h3>
       <p>Track every flip automatically — no pen, no paper, pure play</p>
-      <button class="btn" style="margin-top:12px; padding:10px 20px; font-size:15px;" onclick="showSection('play')">Play Now</button>
+      <button class="btn" onclick="showSection('play')">Play Now</button>
     </div>
     <div class="feature-card">
       <div class="icon">📦</div>
       <h3>Premium Box Template</h3>
       <p>Print, craft, and own your very own Badger box — precision engineered</p>
-      <button class="btn red" style="margin-top:12px; padding:10px 20px; font-size:15px;" onclick="showSection('download')">Get Yours</button>
+      <button class="btn red" onclick="showSection('download')">Get Yours</button>
     </div>
     <div class="feature-card">
       <div class="icon">📖</div>
       <h3>Master the Rules</h3>
       <p>From beginner to advanced — three levels of play, endless entertainment</p>
-      <button class="btn" style="margin-top:12px; padding:10px 20px; font-size:15px;" onclick="showSection('rules')">Discover</button>
+      <button class="btn" onclick="showSection('rules')">Discover</button>
     </div>
     <div class="feature-card">
       <div class="icon">🏆</div>
       <h3>Hall of Fame</h3>
       <p>Record your greatest triumphs and see who rules the roost</p>
-      <button class="btn red" style="margin-top:12px; padding:10px 20px; font-size:15px;" onclick="showSection('leaderboard')">View Scores</button>
+      <button class="btn red" onclick="showSection('leaderboard')">View Scores</button>
     </div>
   </div>
 
@@ -512,7 +546,7 @@
       Premium printable template • Digital scorekeeper app • Lifetime updates
     </p>
     <!-- REPLACE # WITH YOUR GUMROAD LINK WHEN READY -->
-    <a href="#" class="btn large" id="buyButton" style="background: linear-gradient(135deg, #B8860B, #D4AF37, #B8860B);">🛒 Join the Exclusive List</a>
+    <a href="#" class="btn large" id="buyButton">🛒 Join the Exclusive List</a>
     <p style="font-size:13px; color:#777; margin-top:15px;">Launching Soon — Be First to Know</p>
   </div>
 </section>
@@ -530,7 +564,7 @@
 
     <div id="gameSetup">
       <h3 style="margin-bottom:15px; color:var(--gold);">Add Your Players</h3>
-      <input type="text" id="playerName" placeholder="Enter player name..." style="padding:14px; width:65%; border-radius:8px; border:1px solid #444; background:#111; color:white; font-size:16px;">
+      <input type="text" id="playerName" placeholder="Enter player name...">
       <button class="game-btn green" onclick="addPlayer()">+ Add Player</button>
       <div id="playerList" style="margin:20px 0;"></div>
       <button class="btn large" style="width:100%; margin-top:20px;" onclick="startGame()">▶ Begin Game</button>
@@ -604,8 +638,8 @@
 
   <div class="card">
     <h3 style="margin-bottom:15px; color:var(--gold);">Inscribe Your Name</h3>
-    <input type="text" id="newName" placeholder="Your name..." style="padding:12px; border-radius:6px; border:1px solid #444; background:#111; color:white; width:45%; margin-right:10px;">
-    <input type="number" id="newScore" placeholder="Score" min="0" max="15" style="padding:12px; border-radius:6px; border:1px solid #444; background:#111; color:white; width:25%;">
+    <input type="text" id="newName" placeholder="Your name..." style="width:45%; margin-right:10px;">
+    <input type="number" id="newScore" placeholder="Score" min="0" max="15" style="width:25%;">
     <button class="btn" style="padding:12px 20px; font-size:14px;" onclick="addScore()">Record</button>
     <p style="font-size:13px; color:#666; margin-top:12px;">Your achievements saved locally</p>
   </div>
@@ -624,10 +658,20 @@
   <div class="card">
     <h2>✅ The Scoring</h2>
     <ul style="padding-left:25px; color:#CCC;">
-      <li style="margin:12px 0;"><span style="color:var(--gold); font-weight:bold;">👑 Top face up = 10 points</span> — the ultimate prize</li>
-      <li style="margin:12px 0;"><span style="color:#4CAF50; font-weight:bold;">📏 Short end up = 5 points</span> — steady progress</li>
-      <li style="margin:12px 0;"><span style="color:#64B5F6; font-weight:bold;">🦡 Long side up = 1 point</span> — safe and sure</li>
+      <li style="margin:12px 0;"><span style="color:var(--gold); font-weight:bold;">👑 Short ends up = 10 points</span> — the ultimate prize</li>
+      <li style="margin:12px 0;"><span style="color:#4CAF50; font-weight:bold;">📏 Long sides up = 5 points</span> — steady progress</li>
+      <li style="margin:12px 0;"><span style="color:#64B5F6; font-weight:bold;">🦡 Top face up = 1 point</span> — safe and sure</li>
       <li style="margin:12px 0;"><span style="color:#EF5350; font-weight:bold;">❌ Bottom face up = 0 points</span> — all turn points forfeit, score remains unchanged</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>📐 Box Specifications</h2>
+    <ul style="padding-left:25px; color:#CCC;">
+      <li style="margin:8px 0;"><strong>Height:</strong> 8.2 cm</li>
+      <li style="margin:8px 0;"><strong>Width:</strong> 5.5 cm</li>
+      <li style="margin:8px 0;"><strong>Depth:</strong> 2.2 cm</li>
+      <li style="margin:8px 0;"><strong>Recommended:</strong> 200–250gsm cardstock for perfect balance</li>
     </ul>
   </div>
 
@@ -677,7 +721,7 @@
       <li style="margin:10px 0;">🏆 Exclusive leaderboard access</li>
     </ul>
     <!-- REPLACE # WITH YOUR GUMROAD LINK WHEN READY -->
-    <a href="#" class="btn large" id="downloadBtn" style="background: linear-gradient(135deg, #B8860B, #D4AF37, #B8860B);">Join the Waiting List</a>
+    <a href="#" class="btn large" id="downloadBtn">Join the Waiting List</a>
     <p style="font-size:13px; color:#777; margin-top:20px;">Be notified first at launch</p>
   </div>
 
@@ -699,9 +743,11 @@
 </footer>
 
 <script>
-// ========= SECTION NAVIGATION =========
+// ========= SECTION NAVIGATION — FULLY FIXED =========
 document.querySelectorAll('.nav-link').forEach(link => {
-  link.addEventListener('click', () => showSection(link.dataset.section));
+  link.addEventListener('click', function() {
+    showSection(this.getAttribute('data-section'));
+  });
 });
 
 function showSection(id) {
@@ -745,9 +791,13 @@ function addPlayer() {
 function renderPL() {
   document.getElementById('playerList').innerHTML = players.map((p,i) => 
     `<span style="background:rgba(212,175,55,0.1); border:1px solid rgba(212,175,55,0.2); padding:8px 16px; border-radius:4px; margin:4px; display:inline-block; color:var(--gold-light);">
-      ${p.name} <button onclick="players.splice(${i},1);renderPL()" style="border:none; background:none; color:#888; cursor:pointer; margin-left:8px;">✕</button>
+      ${p.name} <button onclick="removePlayer(${i})" style="border:none; background:none; color:#888; cursor:pointer; margin-left:8px;">✕</button>
     </span>`
   ).join('');
+}
+function removePlayer(i) {
+  players.splice(i, 1);
+  renderPL();
 }
 function startGame() {
   if (!players.length) {alert('Add at least one player!');return;}
@@ -800,37 +850,3 @@ function resetGame() {
   players = []; ci=0; turnPts=0; running=false;
   document.getElementById('gameSetup').classList.remove('hidden');
   document.getElementById('gameInProgress').classList.add('hidden');
-  renderPL();
-}
-
-// ========= LEADERBOARD =========
-function getScores() { return JSON.parse(localStorage.getItem('flipBadgerScores')||'[]'); }
-function saveScores(d) { localStorage.setItem('flipBadgerScores', JSON.stringify(d)); }
-function addScore() {
-  const n = document.getElementById('newName').value.trim();
-  const s = parseInt(document.getElementById('newScore').value);
-  if (!n || isNaN(s)) { alert('Enter a name and score'); return; }
-  const scores = getScores();
-  scores.push({name:n, score:s, date:new Date().toISOString()});
-  scores.sort((a,b)=>b.score-a.score);
-  saveScores(scores.slice(0,50));
-  document.getElementById('newName').value = '';
-  document.getElementById('newScore').value = '';
-  renderLB();
-  alert('Your name has been inscribed! 🦡🏆');
-}
-function renderLB() {
-  const scores = getScores();
-  if (!scores.length) return;
-  document.getElementById('leaderBody').innerHTML = scores.slice(0,5).map((e,i) => {
-    const c = i===0?'gold':i===1?'silver':i===2?'bronze':'';
-    return `<tr class="${c}"><td>${i+1}</td><td>${e.name}</td><td>${e.score}</td></tr>`;
-  }).join('');
-}
-renderLB();
-
-// Service Worker for PWA
-if ('serviceWorker' in navigator) {
-  new Blob([`
-    self.addEventListener('install',e=>self.skipWaiting());
-    self.addEventListener('activate',e=>e.waitUntil
