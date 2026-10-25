@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Flip The Badger — The Premium Game</title>
 
-<!-- PWA Home-Screen App Setup -->
 <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiRmxpcCBUaGUgQmFkZ2VyIiwic2hvcnRfbmFtZSI6IkZsaXAgQmFkZ2VyIiwiZGVzY3JpcHRpb24iOiJUaGUgcHJlbWl1bSBnYW1lIG9mIHNraWxsIGFuZCBjaGFuY2UuIiwic3RhcnRfdXJsIjoiLiIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwiYmFja2dyb3VuZF9jb2xvciI6IiMwMDAwMDAiLCJ0aGVtZV9jb2xvciI6IiNDRjAwMDAiLCJpY29ucyI6W3sic3JjIjoiZGF0YTppbWFnZS9zdmcreG1sLDxzdmcgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB2aWV3Qm94PScwIDAgMTkyIDE5MSc+PHJlY3Qgd2lkdGg9JzE5MicgaGVpZ2h0PScxOTInIGZpbGw9JyNDRjAwMDAnIHJvdW5kLXJhZGl1cz0nMzInLz48dGV4dCB4PSc5NicgeT0nMTIwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBmb250LXNpemU9JzgwJyBmaWxsPSdnb2xkZW4nPvB+oDwvdGV4dD48L3N2Zz4iLCJzaXplcyI6IjE5MngxOTIiLCJ0eXBlIjoiaW1hZ2Uvc3ZnK3htbCJ9XX0=">
 <meta name="theme-color" content="#CF0000">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -21,14 +20,11 @@
     --gold-light: #F4E4BC;
     --gold-dark: #B8860B;
     --velvet: #1A1A1A;
-    --cream: #FFF8DC;
     --text-light: #E8E8E8;
     --shadow-gold: 0 0 30px rgba(212,175,55,0.25);
-    --shadow-red: 0 0 25px rgba(207,0,0,0.2);
-    /* Box dimensions: 8.2cm × 5.5cm × 2.2cm → scaled for CSS 3D */
-    --box-h: 164px;   /* Height = 8.2cm */
-    --box-w: 110px;   /* Width = 5.5cm */
-    --box-d: 44px;    /* Depth = 2.2cm */
+    --box-h: 164px;   /* 8.2cm */
+    --box-w: 110px;   /* 5.5cm */
+    --box-d: 44px;    /* 2.2cm */
   }
   * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Georgia', 'Times New Roman', serif; }
   
@@ -39,7 +35,6 @@
     min-height: 100vh;
   }
 
-  /* Luxury Background Pattern */
   .luxury-bg {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -50,7 +45,6 @@
     pointer-events: none;
   }
 
-  /* Navigation */
   nav {
     background: linear-gradient(180deg, rgba(0,0,0,0.95), rgba(26,26,26,0.9));
     padding: 14px 15px;
@@ -80,6 +74,8 @@
     cursor: pointer;
     border: 1px solid transparent;
     user-select: none;
+    position: relative;
+    z-index: 10;
   }
   .nav-link:hover, .nav-link.active {
     color: var(--gold);
@@ -87,13 +83,14 @@
     background: rgba(212,175,55,0.08);
   }
 
-  /* Sections */
   section {
     max-width: 960px;
     margin: 0 auto;
     padding: 40px 20px;
     display: none;
     animation: fadeIn 0.6s ease-out;
+    position: relative;
+    z-index: 1;
   }
   section.active { display: block; }
 
@@ -123,95 +120,98 @@
     font-style: italic;
   }
 
-  /* Hero Flip Animation — Authentic Proportions 🎲 */
+  /* Hero Flip — ALL faces visible in animation 🎲 */
   .hero-wrapper {
     position: relative;
     text-align: center;
     margin: 20px 0 50px;
-    perspective: 800px;
+    perspective: 600px;
+    height: 220px;
   }
   .flip-container {
-    perspective: 1000px;
     width: 200px;
     height: 200px;
     margin: 0 auto;
-    position: relative;
+    perspective: 1000px;
   }
   .flipper {
     position: relative;
     width: var(--box-w);
     height: var(--box-h);
     transform-style: preserve-3d;
-    animation: authenticFlip 5s infinite ease-in-out;
+    animation: fullFlip 6s infinite ease-in-out;
     margin: 0 auto;
   }
   .box-face {
     position: absolute;
-    border-radius: 12px;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     border: 2px solid var(--gold);
-    box-shadow: 
-      inset 0 0 20px rgba(0,0,0,0.5),
-      0 0 20px rgba(212,175,55,0.25);
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.5), 0 0 15px rgba(212,175,55,0.2);
     backface-visibility: hidden;
     background: linear-gradient(145deg, #2A2A2A, #151515);
   }
-  /* Face dimensions & positioning based on 8.2 × 5.5 × 2.2 cm */
+  /* Top face = 1 point */
   .face-top {
     width: var(--box-w); height: var(--box-h);
     transform: rotateX(0deg) translateZ(calc(var(--box-d) / 2));
   }
-  .face-top .score { color: var(--gold); font-size: 32px; font-weight: bold; }
-  .face-top .icon { font-size: 40px; margin-bottom: 5px; }
+  .face-top .score { color: #4CAF50; font-size: 32px; font-weight: bold; }
+  .face-top .icon { font-size: 36px; margin-bottom: 4px; }
   
+  /* Bottom face = 0 points */
   .face-bottom {
     width: var(--box-w); height: var(--box-h);
     transform: rotateX(180deg) translateZ(calc(var(--box-d) / 2));
   }
-  .face-bottom .score { color: #666; font-size: 24px; font-weight: bold; }
-  .face-bottom .icon { font-size: 32px; margin-bottom: 5px; }
+  .face-bottom .score { color: #8B0000; font-size: 28px; font-weight: bold; }
+  .face-bottom .icon { font-size: 28px; margin-bottom: 4px; }
   
+  /* Front long side = 5 points */
   .face-front {
     width: var(--box-w); height: var(--box-d);
     transform: rotateX(90deg) translateZ(calc(var(--box-h) / 2));
   }
-  .face-front .score { color: #4CAF50; font-size: 26px; font-weight: bold; }
-  .face-front .icon { font-size: 28px; margin-bottom: 3px; }
+  .face-front .score { color: #1565C0; font-size: 26px; font-weight: bold; }
+  .face-front .icon { font-size: 26px; margin-bottom: 3px; }
   
+  /* Back long side = 5 points */
   .face-back {
     width: var(--box-w); height: var(--box-d);
     transform: rotateX(-90deg) translateZ(calc(var(--box-h) / 2));
   }
-  .face-back .score { color: #4CAF50; font-size: 26px; font-weight: bold; }
-  .face-back .icon { font-size: 28px; margin-bottom: 3px; }
+  .face-back .score { color: #1565C0; font-size: 26px; font-weight: bold; }
+  .face-back .icon { font-size: 26px; margin-bottom: 3px; }
   
+  /* Left short end = 10 points */
   .face-left {
     width: var(--box-d); height: var(--box-h);
     transform: rotateY(-90deg) translateZ(calc(var(--box-w) / 2));
   }
   .face-left .score { color: var(--gold); font-size: 28px; font-weight: bold; }
-  .face-left .icon { font-size: 32px; margin-bottom: 5px; }
+  .face-left .icon { font-size: 28px; margin-bottom: 4px; }
   
+  /* Right short end = 10 points */
   .face-right {
     width: var(--box-d); height: var(--box-h);
     transform: rotateY(90deg) translateZ(calc(var(--box-w) / 2));
   }
   .face-right .score { color: var(--gold); font-size: 28px; font-weight: bold; }
-  .face-right .icon { font-size: 32px; margin-bottom: 5px; }
+  .face-right .icon { font-size: 28px; margin-bottom: 4px; }
 
-  @keyframes authenticFlip {
-    0% { transform: rotateX(0deg) rotateY(0deg); }
-    20% { transform: rotateX(360deg) rotateY(180deg); }
-    40% { transform: rotateX(720deg) rotateY(360deg); }
-    60% { transform: rotateX(1080deg) rotateY(540deg); }
-    80% { transform: rotateX(1080deg) rotateY(540deg); }
-    100% { transform: rotateX(1080deg) rotateY(540deg); }
+  @keyframes fullFlip {
+    0%      { transform: rotateX(0deg)    rotateY(0deg); }      /* Show 1 */
+    16%     { transform: rotateX(180deg)  rotateY(60deg); }     /* Show 0 */
+    33%     { transform: rotateX(360deg)  rotateY(120deg); }    /* Show 5 */
+    50%     { transform: rotateX(540deg)  rotateY(180deg); }    /* Show 10 */
+    66%     { transform: rotateX(720deg)  rotateY(240deg); }    /* Show 5 */
+    83%     { transform: rotateX(900deg)  rotateY(300deg); }    /* Show 10 */
+    100%    { transform: rotateX(1080deg) rotateY(360deg); }    /* Back to 1 */
   }
 
-  /* Cards */
   .card {
     background: linear-gradient(135deg, rgba(26,26,26,0.9), rgba(10,10,10,0.95));
     border-radius: 12px;
@@ -219,14 +219,8 @@
     margin: 20px 0;
     border: 1px solid rgba(212,175,55,0.15);
     box-shadow: var(--shadow-gold);
-    backdrop-filter: blur(5px);
-  }
-  .card:hover {
-    border-color: rgba(212,175,55,0.3);
-    transition: border-color 0.4s ease;
   }
 
-  /* Buttons — Fully Fixed */
   .btn {
     display: inline-block;
     padding: 16px 36px;
@@ -244,26 +238,22 @@
     box-shadow: 0 4px 15px rgba(212,175,55,0.3);
     text-align: center;
     user-select: none;
+    position: relative;
+    z-index: 10;
   }
   .btn:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 8px 25px rgba(212,175,55,0.45);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212,175,55,0.4);
   }
-  .btn:active {
-    transform: translateY(0) scale(0.98);
-  }
+  .btn:active { transform: translateY(0); }
   .btn.red {
     background: linear-gradient(135deg, var(--luxury-red), var(--deep-red), var(--luxury-red));
     color: white;
     box-shadow: 0 4px 15px rgba(207,0,0,0.3);
   }
-  .btn.red:hover {
-    box-shadow: 0 8px 25px rgba(207,0,0,0.45);
-  }
+  .btn.red:hover { box-shadow: 0 6px 20px rgba(207,0,0,0.4); }
   .btn.large { padding: 20px 45px; font-size: 20px; }
-  .btn.center { display: block; margin: 25px auto; text-align: center; max-width: 360px; }
 
-  /* Feature Grid */
   .feature-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -276,17 +266,11 @@
     border-radius: 10px;
     text-align: center;
     border: 1px solid rgba(212,175,55,0.12);
-    transition: all 0.3s ease;
-  }
-  .feature-card:hover {
-    transform: translateY(-5px);
-    border-color: rgba(212,175,55,0.3);
   }
   .feature-card .icon { font-size: 36px; margin-bottom: 10px; }
-  .feature-card h3 { font-size: 18px; margin-bottom: 8px; color: var(--gold); letter-spacing: 0.5px; }
-  .feature-card p { font-size: 14px; color: #999; line-height: 1.5; margin-bottom: 15px; }
+  .feature-card h3 { font-size: 18px; margin-bottom: 8px; color: var(--gold); }
+  .feature-card p { font-size: 14px; color: #999; margin-bottom: 15px; }
 
-  /* Install Banner */
   .install-banner {
     position: fixed;
     bottom: 20px;
@@ -299,23 +283,18 @@
     z-index: 200;
     display: none;
     max-width: 360px;
-    width: calc(100% - 40px);
     border: 1px solid rgba(212,175,55,0.25);
   }
-  .install-banner.show { display: flex; gap: 15px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
-  .install-banner p { font-size: 14px; flex: 1; color: var(--gold-light); }
-  .install-buttons { display: flex; gap: 10px; }
-  .install-btn { padding: 10px 16px; border-radius: 6px; border: none; font-weight: bold; cursor: pointer; font-size: 14px; letter-spacing: 0.5px; }
+  .install-banner.show { display: flex; gap: 15px; align-items: center; }
+  .install-btn { padding: 10px 16px; border-radius: 6px; border: none; font-weight: bold; cursor: pointer; }
   .install-btn.ok { background: var(--gold); color: black; }
   .install-btn.later { background: #333; color: #999; }
 
-  /* Leaderboard */
   .leaderboard {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0 6px;
     margin-top: 15px;
-    table-layout: fixed;
   }
   .leaderboard th {
     color: var(--gold);
@@ -323,38 +302,18 @@
     padding: 10px 8px;
     font-size: 13px;
     text-transform: uppercase;
-    letter-spacing: 1px;
     border-bottom: 1px solid rgba(212,175,55,0.15);
   }
   .leaderboard th:nth-child(1) { width: 15%; text-align: center; }
   .leaderboard th:nth-child(2) { width: 70%; }
   .leaderboard th:nth-child(3) { width: 15%; text-align: right; }
-  .leaderboard td {
-    background: rgba(20,20,20,0.6);
-    padding: 12px 10px;
-    font-size: 15px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    color: var(--text-light);
-  }
-  .leaderboard tr td:first-child {
-    border-radius: 8px 0 0 8px;
-    font-weight: bold;
-    color: var(--gold);
-    text-align: center;
-  }
-  .leaderboard tr td:last-child {
-    border-radius: 0 8px 8px 0;
-    font-weight: bold;
-    color: var(--gold);
-    text-align: right;
-  }
+  .leaderboard td { background: rgba(20,20,20,0.6); padding: 12px 10px; font-size: 15px; }
+  .leaderboard tr td:first-child { border-radius: 8px 0 0 8px; font-weight: bold; color: var(--gold); text-align: center; }
+  .leaderboard tr td:last-child { border-radius: 0 8px 8px 0; font-weight: bold; color: var(--gold); text-align: right; }
   .leaderboard .gold td { background: linear-gradient(90deg, rgba(212,175,55,0.15), rgba(20,20,20,0.4)); }
   .leaderboard .silver td { background: linear-gradient(90deg, rgba(192,192,192,0.1), rgba(20,20,20,0.4)); }
   .leaderboard .bronze td { background: linear-gradient(90deg, rgba(205,127,50,0.12), rgba(20,20,20,0.4)); }
 
-  /* Game */
   .game-container { 
     background: linear-gradient(135deg, rgba(26,26,26,0.9), rgba(10,10,10,0.95));
     border-radius: 12px; 
@@ -371,9 +330,7 @@
   }
   .game-btn {
     padding: 12px 10px; border-radius: 8px; border: none; font-size: 15px; font-weight: bold; cursor: pointer;
-    margin: 5px; width: calc(50% - 10px);
-    letter-spacing: 0.5px;
-    user-select: none;
+    margin: 5px; width: calc(50% - 10px); user-select: none; position: relative; z-index: 10;
   }
   .game-btn.red { background: linear-gradient(135deg, #9E0000, #CF0000); color: white; }
   .game-btn.green { background: linear-gradient(135deg, #2E7D32, #4CAF50); color: white; }
@@ -384,17 +341,15 @@
   .score-btn {
     padding: 18px 8px; font-size: 18px; border-radius: 10px; border: 2px solid transparent; cursor: pointer;
     transition: all 0.2s ease; background: #1A1A1A; color: white;
-    user-select: none;
+    user-select: none; position: relative; z-index: 10;
   }
   .score-btn:hover { border-color: var(--gold); box-shadow: 0 0 15px rgba(212,175,55,0.2); }
   .score-btn:active { transform: scale(0.95); }
   .score-btn.zero { border-color: #8B0000; background: linear-gradient(135deg, #2A0000, #1A0000); }
-  .score-btn.one { border-color: #2E7D32; background: linear-gradient(135deg, #0A2A0A, #051A05); }
+  .score-btn.one { border-color: #4CAF50; background: linear-gradient(135deg, #0A2A0A, #051A05); }
   .score-btn.five { border-color: #1565C0; background: linear-gradient(135deg, #0A1A2A, #05101A); }
   .score-btn.ten { border-color: var(--gold); background: linear-gradient(135deg, #2A2510, #1A1508); color: var(--gold); }
   .hidden { display: none !important; }
-  .mode-btn { padding: 10px 14px; border: 1px solid #444; border-radius: 6px; background: transparent; color: #999; cursor: pointer; margin: 3px; font-size: 14px; }
-  .mode-btn.active { border-color: var(--gold); color: var(--gold); background: rgba(212,175,55,0.1); }
   .status { padding: 15px; border-radius: 8px; margin: 12px 0; background: rgba(255,255,255,0.05); border-left: 3px solid #555; }
   .status.lose { background: rgba(207,0,0,0.1); border-left-color: var(--deep-red); }
   .status.win { background: rgba(212,175,55,0.15); border-left-color: var(--gold); color: var(--gold); }
@@ -415,34 +370,25 @@
 
   @keyframes fadeIn { from {opacity:0; transform: translateY(15px);} to {opacity:1; transform: translateY(0);} }
   @media (max-width: 480px) {
-    :root {
-      --box-h: 130px;
-      --box-w: 88px;
-      --box-d: 35px;
-    }
+    :root { --box-h: 130px; --box-w: 88px; --box-d: 35px; }
     h1 { font-size: 28px; }
-    .btn.large { width: 100%; margin: 8px 0; }
-    input { width: 100% !important; margin: 8px 0 !important; }
+    .btn.large { width: 100%; }
     .score-grid { grid-template-columns: repeat(2, 1fr); }
-    .flip-container { height: 180px; }
   }
 </style>
 </head>
 <body>
 
-<!-- Luxury Background -->
 <div class="luxury-bg"></div>
 
-<!-- Install Banner -->
 <div class="install-banner" id="installBanner">
   <p>📲 Add to Home Screen for app-style access!</p>
   <div class="install-buttons">
-    <button class="install-btn later" onclick="dismissInstall()">Later</button>
-    <button class="install-btn ok" onclick="installApp()">Install</button>
+    <button class="install-btn later" id="dismissBtn">Later</button>
+    <button class="install-btn ok" id="installBtn">Install</button>
   </div>
 </div>
 
-<!-- Navigation -->
 <nav>
   <div class="nav-container">
     <span class="nav-link active" data-section="home">🏠 Home</span>
@@ -453,47 +399,39 @@
   </div>
 </nav>
 
-<!-- HOME — Authentic Proportions & Correct Scores -->
 <section id="home" class="active">
   <div class="hero-wrapper">
-    <!-- The Authentic Flip Box — 8.2 × 5.5 × 2.2 cm 🎲 -->
     <div class="flip-container">
       <div class="flipper">
-        <!-- Top face = 1 point -->
         <div class="box-face face-top">
           <div class="icon">🦡</div>
           <div class="score">1</div>
-          <small style="color:#888; font-size:11px; margin-top:2px;">Top</small>
+          <small style="color:#888; font-size:11px;">Top</small>
         </div>
-        <!-- Bottom face = 0 points -->
         <div class="box-face face-bottom">
           <div class="icon">❌</div>
           <div class="score">0</div>
-          <small style="color:#555; font-size:11px; margin-top:2px;">Bottom</small>
+          <small style="color:#555; font-size:11px;">Bottom</small>
         </div>
-        <!-- Front long side = 5 points -->
         <div class="box-face face-front">
           <div class="icon">📏</div>
           <div class="score">5</div>
-          <small style="color:#888; font-size:10px; margin-top:2px;">Long Side</small>
+          <small style="color:#888; font-size:10px;">Long Side</small>
         </div>
-        <!-- Back long side = 5 points -->
         <div class="box-face face-back">
           <div class="icon">📏</div>
           <div class="score">5</div>
-          <small style="color:#888; font-size:10px; margin-top:2px;">Long Side</small>
+          <small style="color:#888; font-size:10px;">Long Side</small>
         </div>
-        <!-- Left short end = 10 points -->
         <div class="box-face face-left">
           <div class="icon">👑</div>
           <div class="score">10</div>
-          <small style="color:#888; font-size:10px; margin-top:2px;">Short End</small>
+          <small style="color:#888; font-size:10px;">Short End</small>
         </div>
-        <!-- Right short end = 10 points -->
         <div class="box-face face-right">
           <div class="icon">👑</div>
           <div class="score">10</div>
-          <small style="color:#888; font-size:10px; margin-top:2px;">Short End</small>
+          <small style="color:#888; font-size:10px;">Short End</small>
         </div>
       </div>
     </div>
@@ -517,41 +455,38 @@
       <div class="icon">🎮</div>
       <h3>Digital Scorekeeper</h3>
       <p>Track every flip automatically — no pen, no paper, pure play</p>
-      <button class="btn" onclick="showSection('play')">Play Now</button>
+      <button class="btn" id="playNowBtn">Play Now</button>
     </div>
     <div class="feature-card">
       <div class="icon">📦</div>
       <h3>Premium Box Template</h3>
       <p>Print, craft, and own your very own Badger box — precision engineered</p>
-      <button class="btn red" onclick="showSection('download')">Get Yours</button>
+      <button class="btn red" id="getYoursBtn">Get Yours</button>
     </div>
     <div class="feature-card">
       <div class="icon">📖</div>
       <h3>Master the Rules</h3>
       <p>From beginner to advanced — three levels of play, endless entertainment</p>
-      <button class="btn" onclick="showSection('rules')">Discover</button>
+      <button class="btn" id="discoverBtn">Discover</button>
     </div>
     <div class="feature-card">
       <div class="icon">🏆</div>
       <h3>Hall of Fame</h3>
       <p>Record your greatest triumphs and see who rules the roost</p>
-      <button class="btn red" onclick="showSection('leaderboard')">View Scores</button>
+      <button class="btn red" id="viewScoresBtn">View Scores</button>
     </div>
   </div>
 
-  <!-- Exclusive Buy Button -->
   <div class="card" style="text-align:center; background: linear-gradient(135deg, rgba(45,35,10,0.6), rgba(20,15,5,0.8)); border: 2px solid var(--gold); margin-top:40px;">
     <h2 style="border-bottom:none; color:var(--gold); font-size:26px;">✨ Claim Your Game ✨</h2>
     <p style="color:var(--gold-light); margin-bottom:20px; font-size:17px;">
       Premium printable template • Digital scorekeeper app • Lifetime updates
     </p>
-    <!-- REPLACE # WITH YOUR GUMROAD LINK WHEN READY -->
     <a href="#" class="btn large" id="buyButton">🛒 Join the Exclusive List</a>
     <p style="font-size:13px; color:#777; margin-top:15px;">Launching Soon — Be First to Know</p>
   </div>
 </section>
 
-<!-- PLAY -->
 <section id="play">
   <h1>🎮 Play Flip The Badger</h1>
   <p class="subtitle">Your digital scorekeeper — precision engineered</p>
@@ -565,9 +500,9 @@
     <div id="gameSetup">
       <h3 style="margin-bottom:15px; color:var(--gold);">Add Your Players</h3>
       <input type="text" id="playerName" placeholder="Enter player name...">
-      <button class="game-btn green" onclick="addPlayer()">+ Add Player</button>
+      <button class="game-btn green" id="addPlayerBtn">+ Add Player</button>
       <div id="playerList" style="margin:20px 0;"></div>
-      <button class="btn large" style="width:100%; margin-top:20px;" onclick="startGame()">▶ Begin Game</button>
+      <button class="btn large" style="width:100%; margin-top:20px;" id="startGameBtn">▶ Begin Game</button>
     </div>
 
     <div id="gameInProgress" class="hidden">
@@ -577,22 +512,22 @@
       </p>
       
       <div class="score-grid">
-        <button class="score-btn zero" onclick="flip(0)">
+        <button class="score-btn zero" data-score="0">
           <span style="font-size:22px;">❌</span><br>
           <strong>0</strong><br>
           <small>ZERO</small>
         </button>
-        <button class="score-btn one" onclick="flip(1)">
+        <button class="score-btn one" data-score="1">
           <span style="font-size:22px;">🦡</span><br>
           <strong>1</strong><br>
           <small>Point</small>
         </button>
-        <button class="score-btn five" onclick="flip(5)">
+        <button class="score-btn five" data-score="5">
           <span style="font-size:22px;">📏</span><br>
           <strong>5</strong><br>
           <small>Points</small>
         </button>
-        <button class="score-btn ten" onclick="flip(10)">
+        <button class="score-btn ten" data-score="10">
           <span style="font-size:22px;">👑</span><br>
           <strong>10</strong><br>
           <small>Top Score</small>
@@ -602,8 +537,8 @@
       <div id="statusMsg" class="status" style="display:none;"></div>
 
       <div style="margin-top:25px; display:flex; gap:12px; flex-wrap:wrap;">
-        <button class="game-btn green" onclick="endTurn()">✓ Secure & Pass</button>
-        <button class="game-btn gray" onclick="resetGame()">↻ Fresh Start</button>
+        <button class="game-btn green" id="endTurnBtn">✓ Secure & Pass</button>
+        <button class="game-btn gray" id="resetGameBtn">↻ Fresh Start</button>
       </div>
 
       <h4 style="margin-top:30px; margin-bottom:12px; color:var(--gold); border-bottom:1px solid rgba(212,175,55,0.15); padding-bottom:8px;">Scoreboard</h4>
@@ -612,7 +547,6 @@
   </div>
 </section>
 
-<!-- LEADERBOARD -->
 <section id="leaderboard">
   <h1>🏆 Hall of Fame</h1>
   <p class="subtitle">Champions recorded in gold</p>
@@ -640,12 +574,11 @@
     <h3 style="margin-bottom:15px; color:var(--gold);">Inscribe Your Name</h3>
     <input type="text" id="newName" placeholder="Your name..." style="width:45%; margin-right:10px;">
     <input type="number" id="newScore" placeholder="Score" min="0" max="15" style="width:25%;">
-    <button class="btn" style="padding:12px 20px; font-size:14px;" onclick="addScore()">Record</button>
+    <button class="btn" style="padding:12px 20px; font-size:14px;" id="recordBtn">Record</button>
     <p style="font-size:13px; color:#666; margin-top:12px;">Your achievements saved locally</p>
   </div>
 </section>
 
-<!-- RULES -->
 <section id="rules">
   <h1>📖 The Official Rules</h1>
   <p class="subtitle">Etiquette, strategy, and standards of play</p>
@@ -659,9 +592,9 @@
     <h2>✅ The Scoring</h2>
     <ul style="padding-left:25px; color:#CCC;">
       <li style="margin:12px 0;"><span style="color:var(--gold); font-weight:bold;">👑 Short ends up = 10 points</span> — the ultimate prize</li>
-      <li style="margin:12px 0;"><span style="color:#4CAF50; font-weight:bold;">📏 Long sides up = 5 points</span> — steady progress</li>
-      <li style="margin:12px 0;"><span style="color:#64B5F6; font-weight:bold;">🦡 Top face up = 1 point</span> — safe and sure</li>
-      <li style="margin:12px 0;"><span style="color:#EF5350; font-weight:bold;">❌ Bottom face up = 0 points</span> — all turn points forfeit, score remains unchanged</li>
+      <li style="margin:12px 0;"><span style="color:#1565C0; font-weight:bold;">📏 Long sides up = 5 points</span> — steady progress</li>
+      <li style="margin:12px 0;"><span style="color:#4CAF50; font-weight:bold;">🦡 Top face up = 1 point</span> — safe and sure</li>
+      <li style="margin:12px 0;"><span style="color:#8B0000; font-weight:bold;">❌ Bottom face up = 0 points</span> — all turn points forfeit, score remains unchanged</li>
     </ul>
   </div>
 
@@ -704,7 +637,6 @@
   </div>
 </section>
 
-<!-- DOWNLOAD / GET YOURS -->
 <section id="download">
   <h1>🛒 Secure Your Game</h1>
   <p class="subtitle">Crafted with precision, designed for enjoyment</p>
@@ -720,8 +652,7 @@
       <li style="margin:10px 0;">📲 App-style scorekeeper — works on all devices</li>
       <li style="margin:10px 0;">🏆 Exclusive leaderboard access</li>
     </ul>
-    <!-- REPLACE # WITH YOUR GUMROAD LINK WHEN READY -->
-    <a href="#" class="btn large" id="downloadBtn">Join the Waiting List</a>
+    <a href="#" class="btn large">Join the Waiting List</a>
     <p style="font-size:13px; color:#777; margin-top:20px;">Be notified first at launch</p>
   </div>
 
@@ -738,18 +669,11 @@
 
 <footer>
   🦡 Flip The Badger — A Game of Skill & Fortune<br>
-  © 2026 • All Rights Reserved<br>
-  <span style="color:#444; font-size:12px; margin-top:8px; display:block;">Add to Home Screen for the full app experience</span>
+  © 2026 • All Rights Reserved
 </footer>
 
 <script>
-// ========= SECTION NAVIGATION — FULLY FIXED =========
-document.querySelectorAll('.nav-link').forEach(link => {
-  link.addEventListener('click', function() {
-    showSection(this.getAttribute('data-section'));
-  });
-});
-
+// ========= SECTION NAVIGATION — DIRECT BINDINGS =========
 function showSection(id) {
   document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
@@ -758,59 +682,77 @@ function showSection(id) {
   window.scrollTo(0, 0);
 }
 
-// ========= PWA INSTALL =========
-let deferredPrompt;
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  setTimeout(() => {
-    document.getElementById('installBanner').classList.add('show');
-  }, 4000);
+// Navigation links
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.onclick = () => showSection(link.getAttribute('data-section'));
 });
 
-function dismissInstall() {
+// Home feature buttons
+document.getElementById('playNowBtn').onclick = () => showSection('play');
+document.getElementById('getYoursBtn').onclick = () => showSection('download');
+document.getElementById('discoverBtn').onclick = () => showSection('rules');
+document.getElementById('viewScoresBtn').onclick = () => showSection('leaderboard');
+
+// Install banner
+document.getElementById('dismissBtn').onclick = () => {
   document.getElementById('installBanner').classList.remove('show');
-}
-async function installApp() {
-  if (!deferredPrompt) return;
-  deferredPrompt.prompt();
-  deferredPrompt = null;
+};
+document.getElementById('installBtn').onclick = async () => {
+  if (window.deferredPrompt) {
+    window.deferredPrompt.prompt();
+    window.deferredPrompt = null;
+  }
   document.getElementById('installBanner').classList.remove('show');
-}
+};
+window.addEventListener('beforeinstallprompt', e => {
+  window.deferredPrompt = e;
+  setTimeout(() => document.getElementById('installBanner').classList.add('show'), 4000);
+});
 
 // ========= GAME LOGIC =========
 let players = [], ci = 0, turnPts = 0, running = false;
 
-function addPlayer() {
-  const n = document.getElementById('playerName').value.trim();
-  if (!n) return;
-  players.push({name:n, score:0});
-  document.getElementById('playerName').value = '';
-  renderPL();
-}
 function renderPL() {
-  document.getElementById('playerList').innerHTML = players.map((p,i) => 
+  document.getElementById('playerList').innerHTML = players.map((p, i) => 
     `<span style="background:rgba(212,175,55,0.1); border:1px solid rgba(212,175,55,0.2); padding:8px 16px; border-radius:4px; margin:4px; display:inline-block; color:var(--gold-light);">
-      ${p.name} <button onclick="removePlayer(${i})" style="border:none; background:none; color:#888; cursor:pointer; margin-left:8px;">✕</button>
+      ${p.name} <button data-remove="${i}" style="border:none; background:none; color:#888; cursor:pointer; margin-left:8px;">✕</button>
     </span>`
   ).join('');
+  // Bind remove buttons
+  document.querySelectorAll('[data-remove]').forEach(btn => {
+    btn.onclick = () => {
+      players.splice(parseInt(btn.dataset.remove), 1);
+      renderPL();
+    };
+  });
 }
-function removePlayer(i) {
-  players.splice(i, 1);
+
+document.getElementById('addPlayerBtn').onclick = () => {
+  const n = document.getElementById('playerName').value.trim();
+  if (!n) return;
+  players.push({name: n, score: 0});
+  document.getElementById('playerName').value = '';
   renderPL();
-}
-function startGame() {
-  if (!players.length) {alert('Add at least one player!');return;}
-  running = true; ci=0; turnPts=0;
+};
+
+document.getElementById('startGameBtn').onclick = () => {
+  if (!players.length) { alert('Add at least one player!'); return; }
+  running = true; ci = 0; turnPts = 0;
   document.getElementById('gameSetup').classList.add('hidden');
   document.getElementById('gameInProgress').classList.remove('hidden');
   updateDisplay();
-}
+};
+
+// Score buttons
+document.querySelectorAll('.score-btn').forEach(btn => {
+  btn.onclick = () => flip(parseInt(btn.dataset.score));
+});
+
 function flip(p) {
   if (!running) return;
   const s = document.getElementById('statusMsg');
   s.style.display = 'block';
-  if (p===0) {
+  if (p === 0) {
     turnPts = 0;
     s.className = 'status lose';
     s.innerHTML = '💥 ZERO! Turn points lost — your score remains unchanged.';
@@ -821,7 +763,8 @@ function flip(p) {
   }
   document.getElementById('turnTotal').textContent = turnPts;
 }
-function endTurn() {
+
+document.getElementById('endTurnBtn').onclick = () => {
   if (!running) return;
   players[ci].score += turnPts;
   if (players[ci].score >= 15) {
@@ -833,20 +776,56 @@ function endTurn() {
     return;
   }
   turnPts = 0;
-  ci = (ci+1)%players.length;
+  ci = (ci + 1) % players.length;
   document.getElementById('statusMsg').style.display = 'none';
   updateDisplay();
-}
+};
+
+document.getElementById('resetGameBtn').onclick = () => {
+  players = []; ci = 0; turnPts = 0; running = false;
+  document.getElementById('gameSetup').classList.remove('hidden');
+  document.getElementById('gameInProgress').classList.add('hidden');
+  renderPL();
+};
+
 function updateDisplay() {
   document.getElementById('currentPlayer').textContent = `${players[ci].name}'s Turn`;
   document.getElementById('turnTotal').textContent = turnPts;
-  document.getElementById('scoreboard').innerHTML = players.map((p,i) => 
-    `<div style="padding:12px; background:${i===ci&&running?'rgba(212,175,55,0.1)':'transparent'}; border-radius:6px; margin:6px 0; border-left:3px solid ${i===ci&&running?'var(--gold)':'transparent'};">
-      ${i===ci&&running?'➤ ':''}<strong>${p.name}</strong> — ${p.score} points
+  document.getElementById('scoreboard').innerHTML = players.map((p, i) => 
+    `<div style="padding:12px; background:${i === ci && running ? 'rgba(212,175,55,0.1)' : 'transparent'}; border-radius:6px; margin:6px 0; border-left:3px solid ${i === ci && running ? 'var(--gold)' : 'transparent'};">
+      ${i === ci && running ? '➤ ' : ''}<strong>${p.name}</strong> — ${p.score} points
     </div>`
   ).join('');
 }
-function resetGame() {
-  players = []; ci=0; turnPts=0; running=false;
-  document.getElementById('gameSetup').classList.remove('hidden');
-  document.getElementById('gameInProgress').classList.add('hidden');
+
+// ========= LEADERBOARD =========
+function getScores() { return JSON.parse(localStorage.getItem('flipBadgerScores') || '[]'); }
+function saveScores(d) { localStorage.setItem('flipBadgerScores', JSON.stringify(d)); }
+
+function renderLB() {
+  const scores = getScores();
+  if (!scores.length) return;
+  document.getElementById('leaderBody').innerHTML = scores.slice(0,5).map((e, i) => {
+    const c = i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : '';
+    return `<tr class="${c}"><td>${i+1}</td><td>${e.name}</td><td>${e.score}</td></tr>`;
+  }).join('');
+}
+
+document.getElementById('recordBtn').onclick = () => {
+  const n = document.getElementById('newName').value.trim();
+  const s = parseInt(document.getElementById('newScore').value);
+  if (!n || isNaN(s)) { alert('Enter a name and score'); return; }
+  const scores = getScores();
+  scores.push({name: n, score: s});
+  scores.sort((a, b) => b.score - a.score);
+  saveScores(scores.slice(0, 50));
+  document.getElementById('newName').value = '';
+  document.getElementById('newScore').value = '';
+  renderLB();
+  alert('Your name has been inscribed! 🦡🏆');
+};
+
+renderLB();
+</script>
+</body>
+</html>
