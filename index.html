@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Flip The Badger — Where Precision Meets Fortune</title>
 <meta name="copyright" content="© 2026 Flip The Badger — All Rights Reserved">
-<meta name="robots" content="noindex, noarchive">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <style>
 :root {
   --black: #050505;
@@ -16,6 +18,9 @@
   --gold-dark: #B8860B;
   --text-light: #E8E8E8;
   --shadow-gold: 0 0 30px rgba(212,175,55,0.25);
+  --box-h: 164px;
+  --box-w: 110px;
+  --box-d: 44px;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Georgia', 'Times New Roman', serif; }
 html { -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
@@ -85,17 +90,78 @@ h2 {
   font-style: italic;
 }
 .hero-wrapper {
+  position: relative;
   text-align: center;
-  margin: 20px 0 40px;
+  margin: 20px 0 50px;
+  perspective: 800px;
+  height: 260px;
 }
-.flip-icon {
-  font-size: 80px;
-  margin: 20px 0;
-  animation: pulse 2s infinite ease-in-out;
+.flip-container {
+  width: 220px;
+  height: 220px;
+  margin: 0 auto;
+  perspective: 1200px;
 }
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
+.flipper {
+  position: relative;
+  width: var(--box-w);
+  height: var(--box-h);
+  transform-style: preserve-3d;
+  animation: fullFlip 8s infinite ease-in-out;
+  margin: 0 auto;
+}
+.box-face {
+  position: absolute;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--gold);
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.5), 0 0 15px rgba(212,175,55,0.2);
+  backface-visibility: visible;
+  background: linear-gradient(145deg, #2A2A2A, #151515);
+}
+.face-top {
+  width: var(--box-w); height: var(--box-h);
+  transform: rotateX(0deg) translateZ(calc(var(--box-d)/2));
+}
+.face-top .score { color: #4CAF50; font-size: 32px; font-weight: bold; }
+.face-bottom {
+  width: var(--box-w); height: var(--box-h);
+  transform: rotateX(180deg) translateZ(calc(var(--box-d)/2));
+}
+.face-bottom .score { color: #EF5350; font-size: 28px; font-weight: bold; }
+.face-front {
+  width: var(--box-w); height: var(--box-d);
+  transform: rotateX(90deg) translateZ(calc(var(--box-h)/2));
+}
+.face-front .score { color: #42A5F5; font-size: 26px; font-weight: bold; }
+.face-back {
+  width: var(--box-w); height: var(--box-d);
+  transform: rotateX(-90deg) translateZ(calc(var(--box-h)/2));
+}
+.face-back .score { color: #42A5F5; font-size: 26px; font-weight: bold; }
+.face-left {
+  width: var(--box-d); height: var(--box-h);
+  transform: rotateY(-90deg) translateZ(calc(var(--box-w)/2));
+}
+.face-left .score { color: var(--gold); font-size: 28px; font-weight: bold; }
+.face-right {
+  width: var(--box-d); height: var(--box-h);
+  transform: rotateY(90deg) translateZ(calc(var(--box-w)/2));
+}
+.face-right .score { color: var(--gold); font-size: 28px; font-weight: bold; }
+.box-face .icon { font-size: 32px; margin-bottom: 4px; }
+.box-face small { color: #888; font-size: 10px; }
+@keyframes fullFlip {
+  0%    { transform: rotateX(0deg)   rotateY(0deg); }
+  17%   { transform: rotateX(180deg) rotateY(60deg); }
+  33%   { transform: rotateX(360deg) rotateY(120deg); }
+  50%   { transform: rotateX(540deg) rotateY(180deg); }
+  67%   { transform: rotateX(720deg) rotateY(240deg); }
+  83%   { transform: rotateX(900deg) rotateY(300deg); }
+  100%  { transform: rotateX(1080deg) rotateY(360deg); }
 }
 .card {
   background: rgba(30,30,30,0.8);
@@ -151,8 +217,45 @@ ul { color: #ccc; margin-left: 25px; margin-bottom: 15px; }
 li { margin: 10px 0; }
 strong.gold { color: var(--gold); }
 strong.green { color: #4CAF50; }
-strong.blue { color: #1565C0; }
+strong.blue { color: #42A5F5; }
 strong.red { color: #EF5350; }
+.leaderboard {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+  margin-top: 20px;
+}
+.leaderboard th {
+  color: var(--gold);
+  text-align: left;
+  padding: 12px 10px;
+  font-size: 13px;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(212,175,55,0.15);
+}
+.leaderboard th:nth-child(1) { width: 15%; text-align: center; }
+.leaderboard th:nth-child(2) { width: 70%; }
+.leaderboard th:nth-child(3) { width: 15%; text-align: right; }
+.leaderboard td {
+  background: rgba(20,20,20,0.6);
+  padding: 14px 12px;
+  font-size: 15px;
+}
+.leaderboard tr td:first-child {
+  border-radius: 8px 0 0 8px;
+  font-weight: bold;
+  color: var(--gold);
+  text-align: center;
+}
+.leaderboard tr td:last-child {
+  border-radius: 0 8px 8px 0;
+  font-weight: bold;
+  color: var(--gold);
+  text-align: right;
+}
+.leaderboard .gold td { background: linear-gradient(90deg, rgba(212,175,55,0.15), rgba(20,20,20,0.4)); }
+.leaderboard .silver td { background: linear-gradient(90deg, rgba(192,192,192,0.1), rgba(20,20,20,0.4)); }
+.leaderboard .bronze td { background: linear-gradient(90deg, rgba(205,127,50,0.12), rgba(20,20,20,0.4)); }
 footer {
   text-align: center;
   padding: 30px 20px;
@@ -166,8 +269,10 @@ footer {
   to { opacity: 1; transform: translateY(0); }
 }
 @media (max-width: 480px) {
+  :root { --box-h: 130px; --box-w: 88px; --box-d: 35px; }
   h1 { font-size: 24px; }
   .btn { width: 100%; }
+  .hero-wrapper { height: 220px; }
 }
 </style>
 </head>
@@ -188,7 +293,40 @@ footer {
   <p class="subtitle">Where Precision Meets Fortune</p>
   
   <div class="hero-wrapper">
-    <div class="flip-icon">🦡</div>
+    <div class="flip-container">
+      <div class="flipper">
+        <div class="box-face face-top">
+          <span class="icon">🦡</span>
+          <span class="score">1</span>
+          <small>Top</small>
+        </div>
+        <div class="box-face face-bottom">
+          <span class="icon">❌</span>
+          <span class="score">0</span>
+          <small>Bottom</small>
+        </div>
+        <div class="box-face face-front">
+          <span class="icon">📏</span>
+          <span class="score">5</span>
+          <small>Long Side</small>
+        </div>
+        <div class="box-face face-back">
+          <span class="icon">📏</span>
+          <span class="score">5</span>
+          <small>Long Side</small>
+        </div>
+        <div class="box-face face-left">
+          <span class="icon">👑</span>
+          <span class="score">10</span>
+          <small>Short End</small>
+        </div>
+        <div class="box-face face-right">
+          <span class="icon">👑</span>
+          <span class="score">10</span>
+          <small>Short End</small>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="card">
@@ -203,25 +341,25 @@ footer {
 
   <div class="feature-grid">
     <div class="feature-card">
-      <div class="icon">🎮</div>
+      <span class="icon">🎮</span>
       <h3>Digital Scorekeeper</h3>
       <p>Track every flip automatically — no pen, no paper, pure play</p>
       <button class="btn" onclick="showSection('play')">Play Now</button>
     </div>
     <div class="feature-card">
-      <div class="icon">📦</div>
+      <span class="icon">📦</span>
       <h3>Premium Box Template</h3>
       <p>Print, craft, and own your very own Badger box — precision engineered</p>
       <button class="btn red" onclick="showSection('download')">Get Yours</button>
     </div>
     <div class="feature-card">
-      <div class="icon">📖</div>
+      <span class="icon">📖</span>
       <h3>Master the Rules</h3>
       <p>From beginner to advanced — three levels of play, endless entertainment</p>
       <button class="btn" onclick="showSection('rules')">Discover</button>
     </div>
     <div class="feature-card">
-      <div class="icon">🏆</div>
+      <span class="icon">🏆</span>
       <h3>Hall of Fame</h3>
       <p>Record your greatest triumphs and see who rules the roost</p>
       <button class="btn red" onclick="showSection('scores')">View Scores</button>
@@ -237,11 +375,11 @@ footer {
     <p style="color:#ccc; margin-bottom:20px;">
       The full interactive scorekeeper is being prepared. In the meantime, use the rules section to guide your play!
     </p>
-    <p style="color:var(--gold-light); margin-bottom:20px;">
+    <p style="color:var(--gold-light); margin-bottom:20px; font-size:17px;">
       <strong>Quick Reference:</strong><br>
-      🦡 Top = 1 | ❌ Bottom = 0<br>
-      📏 Long Side = 5 | 👑 Short End = 10<br>
-      ✅ Reach exactly 15 to win!
+      🦡 Top = <strong class="green">1</strong> | ❌ Bottom = <strong class="red">0</strong><br>
+      📏 Long Side = <strong class="blue">5</strong> | 👑 Short End = <strong class="gold">10</strong><br>
+      ✅ Reach exactly <strong class="gold">15</strong> to win!
     </p>
     <button class="btn" onclick="showSection('rules')">📖 Read Rules</button>
     <button class="btn red" onclick="showSection('home')">← Back Home</button>
@@ -256,17 +394,41 @@ footer {
     <p style="color:#ccc; margin-bottom:20px;">
       Score tracking will be available in the next update. Start playing today and be ready to record your first victory!
     </p>
-    <table style="width:100%; border-collapse:separate; border-spacing:0 8px; margin-top:20px;">
-      <tr style="background:linear-gradient(90deg,rgba(212,175,55,0.15),transparent);">
-        <td style="padding:12px; border-radius:8px 0 0 8px; font-weight:bold; color:var(--gold);">1</td>
-        <td style="padding:12px; color:#fff;">—</td>
-        <td style="padding:12px; text-align:right; font-weight:bold; color:var(--gold);">—</td>
-      </tr>
-      <tr style="background:rgba(255,255,255,0.05);">
-        <td style="padding:12px; color:#999;">2</td>
-        <td style="padding:12px; color:#999;">Be the first champion!</td>
-        <td style="padding:12px; text-align:right; color:#999;">—</td>
-      </tr>
+    <table class="leaderboard">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Player</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="gold">
+          <td>1</td>
+          <td>— Be the First Champion —</td>
+          <td>—</td>
+        </tr>
+        <tr class="silver">
+          <td>2</td>
+          <td>Claim your place in history</td>
+          <td>—</td>
+        </tr>
+        <tr class="bronze">
+          <td>3</td>
+          <td>Flip to glory</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Your Name Here</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Your Name Here</td>
+          <td>—</td>
+        </tr>
+      </tbody>
     </table>
     <button class="btn center" onclick="showSection('home')">← Back Home</button>
   </div>
@@ -304,84 +466,3 @@ footer {
   <div class="card">
     <h2>⭐ Basic Play</h2>
     <ul>
-      <li>Play on any flat, dry surface with a defined edge</li>
-      <li>The Badger must complete at least <strong>one full rotation</strong> in the air for the flip to count</li>
-      <li>Continue flipping until you choose to end your turn or flip a zero</li>
-      <li>Reach exactly 15 points = <strong class="gold">VICTORY!</strong></li>
-    </ul>
-  </div>
-
-  <div class="card">
-    <h2>⭐⭐ Intermediate Play</h2>
-    <ul>
-      <li>All Basic rules apply</li>
-      <li>The Badger must land a minimum of <strong>one box length away</strong> from the launch point</li>
-      <li>Falls off the playing surface = zero points, turn ends</li>
-    </ul>
-  </div>
-
-  <div class="card">
-    <h2>⭐⭐⭐ Advanced Play</h2>
-    <ul>
-      <li>All Intermediate rules apply</li>
-      <li>Announce your current score <strong>at the start of every turn</strong></li>
-      <li>Failure to announce = score resets to zero, turn passes immediately</li>
-    </ul>
-  </div>
-
-  <button class="btn center" onclick="showSection('home')">← Back Home</button>
-</section>
-
-<section id="download">
-  <h1>🛒 Secure Your Game</h1>
-  <p class="subtitle">Crafted with precision, designed for enjoyment</p>
-  
-  <div class="card" style="text-align:center; border:2px solid var(--gold); background:linear-gradient(135deg,rgba(45,35,10,0.6),rgba(20,15,5,0.8));">
-    <h2 style="border-bottom:none; color:var(--gold); font-size:26px;">✨ The Complete Flip The Badger Experience ✨</h2>
-    <p style="color:var(--gold-light); margin:20px 0; font-size:17px;">
-      Premium box template • Digital scorekeeper app • Lifetime updates
-    </p>
-    <ul style="text-align:left; max-width:400px; margin:0 auto 25px;">
-      <li>📦 Precision-engineered template — cut, fold, play</li>
-      <li>🦡 Fully illustrated faces with correct scoring</li>
-      <li>📲 App-style scorekeeper — works on all devices</li>
-      <li>🏆 Exclusive leaderboard access</li>
-    </ul>
-    <button class="btn large">Join the Waiting List</button>
-    <p style="font-size:13px; color:#777; margin-top:20px;">Be notified first at launch</p>
-  </div>
-
-  <div class="card">
-    <h2>Box Specifications</h2>
-    <ul>
-      <li><strong>Height:</strong> 8.2 cm</li>
-      <li><strong>Width:</strong> 5.5 cm</li>
-      <li><strong>Depth:</strong> 2.2 cm</li>
-      <li><strong>Recommended:</strong> 200–250gsm cardstock for durability and perfect balance</li>
-    </ul>
-  </div>
-
-  <button class="btn center" onclick="showSection('home')">← Back Home</button>
-</section>
-
-<footer>
-  <p>© 2026 Flip The Badger — All Rights Reserved</p>
-  <p style="margin-top:8px;">Unauthorised copying, distribution, or reproduction prohibited.</p>
-</footer>
-
-<script>
-function showSection(id) {
-  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-  document.querySelectorAll(`[data-target="${id}"]`).forEach(l => l.classList.add('active'));
-  window.scrollTo(0, 0);
-}
-
-document.querySelectorAll('.nav-link').forEach(link => {
-  link.addEventListener('click', () => showSection(link.getAttribute('data-target')));
-});
-</script>
-
-</body>
-</html>
