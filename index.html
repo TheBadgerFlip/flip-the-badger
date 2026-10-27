@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Flip The Badger — Where Precision Meets Fortune</title>
 <meta name="copyright" content="© 2026 Flip The Badger — All Rights Reserved">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <style>
 :root {
   --black: #050505;
@@ -155,13 +154,8 @@ h2 {
 .box-face .icon { font-size: 32px; margin-bottom: 4px; }
 .box-face small { color: #888; font-size: 10px; }
 @keyframes fullFlip {
-  0%    { transform: rotateX(0deg)   rotateY(0deg); }
-  17%   { transform: rotateX(180deg) rotateY(60deg); }
-  33%   { transform: rotateX(360deg) rotateY(120deg); }
-  50%   { transform: rotateX(540deg) rotateY(180deg); }
-  67%   { transform: rotateX(720deg) rotateY(240deg); }
-  83%   { transform: rotateX(900deg) rotateY(300deg); }
-  100%  { transform: rotateX(1080deg) rotateY(360deg); }
+  0% { transform: rotateX(0deg) rotateY(0deg); }
+  100% { transform: rotateX(1080deg) rotateY(360deg); }
 }
 .card {
   background: rgba(30,30,30,0.8);
@@ -473,4 +467,10 @@ footer {
     <ul>
       <li>Play on any flat, dry surface with a defined edge</li>
       <li>The Badger must complete at least <strong>one full rotation</strong> in the air for the flip to count</li>
-      <li>Continue flipping until you choose to end your turn
+      <li>Continue flipping until you choose to end your turn or flip a zero</li>
+      <li>Reach exactly 15 points = <strong class="gold">VICTORY!</strong></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>⭐⭐ Intermediate Play</
