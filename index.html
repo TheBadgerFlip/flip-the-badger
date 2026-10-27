@@ -4,117 +4,157 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Flip The Badger — Protected Edition</title>
-<meta name="description" content="Flip The Badger — A Game of Skill & Fortune. © 2026 All Rights Reserved.">
-<meta name="robots" content="noindex, noarchive, nocache">
-<meta name="author" content="Flip The Badger">
 <meta name="copyright" content="© 2026 Flip The Badger — All Rights Reserved">
-
-<link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiRmxpcCBUaGUgQmFkZ2VyIiwic2hvcnRfbmFtZSI6IkZsaXAgQmFkZ2VyIiwiZGVzY3JpcHRpb24iOiJUaGUgcHJlbWl1bSBnYW1lIG9mIHNraWxsIGFuZCBjaGFuY2UuIiwic3RhcnRfdXJsIjoiLiIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwiYmFja2dyb3VuZF9jb2xvciI6IiMwMDAwMDAiLCJ0aGVtZV9jb2xvciI6IiNDRjAwMDAiLCJpY29ucyI6W3sic3JjIjoiZGF0YTppbWFnZS9zdmcreG1sLDxzdmcgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB2aWV3Qm94PScwIDAgMTkyIDE5MSc+PHJlY3Qgd2lkdGg9JzE5MicgaGVpZ2h0PScxOTInIGZpbGw9JyNDRjAwMDAnIHJvdW5kLXJhZGl1cz0nMzInLz48dGV4dCB4PSc5NicgeT0nMTIwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBmb250LXNpemU9JzgwJyBmaWxsPSdnb2xkZW4nPvB+oDwvdGV4dD48L3N2Zz4iLCJzaXplcyI6IjE5MngxOTIiLCJ0eXBlIjoiaW1hZ2Uvc3ZnK3htbCJ9XX0=">
-<meta name="theme-color" content="#CF0000">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Flip Badger">
-
+<meta name="robots" content="noindex, noarchive">
 <style>
-/* PROTECTED INTELLECTUAL PROPERTY — UNAUTHORISED COPYING PROHIBITED */
 :root{--black:#050505;--deep-red:#CF0000;--luxury-red:#9E0000;--gold:#D4AF37;--gold-light:#F4E4BC;--gold-dark:#B8860B;--velvet:#1A1A1A;--text-light:#E8E8E8;--shadow-gold:0 0 30px rgba(212,175,55,.25);--box-h:164px;--box-w:110px;--box-d:44px}
-*{margin:0;padding:0;box-sizing:border-box;font-family:Georgia,'Times New Roman',serif}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
 html{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
-body{background:radial-gradient(ellipse at top,#1A1A1A 0%,#050505 70%);color:var(--text-light);line-height:1.7;min-height:100vh}
-.luxury-bg{position:fixed;top:0;left:0;width:100%;height:100%;background-image:radial-gradient(circle at 20% 30%,rgba(212,175,55,.03) 0%,transparent 50%),radial-gradient(circle at 80% 70%,rgba(207,0,0,.05) 0%,transparent 50%);z-index:-2;pointer-events:none}
-nav{background:linear-gradient(180deg,rgba(0,0,0,.95),rgba(26,26,26,.9));padding:14px 15px;position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(212,175,55,.2);backdrop-filter:blur(10px)}
+body{background:linear-gradient(180deg,#1A1A1A 0%,#050505 100%);color:var(--text-light);line-height:1.7;min-height:100vh}
+nav{background:rgba(0,0,0,.9);padding:15px;position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(212,175,55,.2)}
 .nav-container{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
-.nav-link{color:var(--gold-light);text-decoration:none;padding:10px 18px;border-radius:4px;font-weight:600;font-size:15px;letter-spacing:.5px;transition:all .3s ease;cursor:pointer;border:1px solid transparent;position:relative;z-index:10;-webkit-user-select:none;user-select:none}
+.nav-link{color:var(--gold-light);padding:10px 18px;border-radius:4px;cursor:pointer;border:1px solid transparent}
 .nav-link:hover,.nav-link.active{color:var(--gold);border-color:var(--gold);background:rgba(212,175,55,.08)}
-section{max-width:960px;margin:0 auto;padding:40px 20px;display:none;animation:fadeIn .6s ease-out;position:relative;z-index:1}
+section{max-width:960px;margin:0 auto;padding:40px 20px;display:none}
 section.active{display:block}
-h1{font-size:42px;text-align:center;margin-bottom:10px;color:var(--gold);font-weight:bold;letter-spacing:2px;text-transform:uppercase;text-shadow:0 0 20px rgba(212,175,55,.3)}
-h2{font-size:22px;margin:30px 0 15px;color:var(--gold);border-bottom:1px solid rgba(212,175,55,.25);padding-bottom:10px;letter-spacing:1px}
-.subtitle{text-align:center;font-size:18px;color:var(--gold-light);margin-bottom:40px;font-style:italic}
-.hero-wrapper{position:relative;text-align:center;margin:20px 0 50px;perspective:600px;height:220px}
-.flip-container{width:200px;height:200px;margin:0 auto;perspective:1000px}
-.flipper{position:relative;width:var(--box-w);height:var(--box-h);transform-style:preserve-3d;animation:fullFlip 6s infinite ease-in-out;margin:0 auto}
-.box-face{position:absolute;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:2px solid var(--gold);box-shadow:inset 0 0 20px rgba(0,0,0,.5),0 0 15px rgba(212,175,55,.2);backface-visibility:hidden;background:linear-gradient(145deg,#2A2A2A,#151515)}
-.face-top{width:var(--box-w);height:var(--box-h);transform:rotateX(0deg) translateZ(calc(var(--box-d)/2))}
-.face-top .score{color:#4CAF50;font-size:32px;font-weight:bold}
-.face-top .icon{font-size:36px;margin-bottom:4px}
-.face-bottom{width:var(--box-w);height:var(--box-h);transform:rotateX(180deg) translateZ(calc(var(--box-d)/2))}
-.face-bottom .score{color:#8B0000;font-size:28px;font-weight:bold}
-.face-bottom .icon{font-size:28px;margin-bottom:4px}
-.face-front{width:var(--box-w);height:var(--box-d);transform:rotateX(90deg) translateZ(calc(var(--box-h)/2))}
-.face-front .score{color:#1565C0;font-size:26px;font-weight:bold}
-.face-front .icon{font-size:26px;margin-bottom:3px}
-.face-back{width:var(--box-w);height:var(--box-d);transform:rotateX(-90deg) translateZ(calc(var(--box-h)/2))}
-.face-back .score{color:#1565C0;font-size:26px;font-weight:bold}
-.face-back .icon{font-size:26px;margin-bottom:3px}
-.face-left{width:var(--box-d);height:var(--box-h);transform:rotateY(-90deg) translateZ(calc(var(--box-w)/2))}
-.face-left .score{color:var(--gold);font-size:28px;font-weight:bold}
-.face-left .icon{font-size:28px;margin-bottom:4px}
-.face-right{width:var(--box-d);height:var(--box-h);transform:rotateY(90deg) translateZ(calc(var(--box-w)/2))}
-.face-right .score{color:var(--gold);font-size:28px;font-weight:bold}
-.face-right .icon{font-size:28px;margin-bottom:4px}
-@keyframes fullFlip{0%{transform:rotateX(0deg) rotateY(0deg)}16%{transform:rotateX(180deg) rotateY(60deg)}33%{transform:rotateX(360deg) rotateY(120deg)}50%{transform:rotateX(540deg) rotateY(180deg)}66%{transform:rotateX(720deg) rotateY(240deg)}83%{transform:rotateX(900deg) rotateY(300deg)}100%{transform:rotateX(1080deg) rotateY(360deg)}}
-.card{background:linear-gradient(135deg,rgba(26,26,26,.9),rgba(10,10,10,.95));border-radius:12px;padding:30px;margin:20px 0;border:1px solid rgba(212,175,55,.15);box-shadow:var(--shadow-gold)}
-.btn{display:inline-block;padding:16px 36px;background:linear-gradient(135deg,var(--gold-dark),var(--gold),var(--gold-dark));color:var(--black);border:none;border-radius:6px;font-weight:bold;font-size:18px;cursor:pointer;transition:all .3s ease;text-decoration:none;letter-spacing:1px;text-transform:uppercase;box-shadow:0 4px 15px rgba(212,175,55,.3);text-align:center;position:relative;z-index:10;-webkit-user-select:none;user-select:none}
-.btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(212,175,55,.4)}
-.btn:active{transform:translateY(0)}
-.btn.red{background:linear-gradient(135deg,var(--luxury-red),var(--deep-red),var(--luxury-red));color:white;box-shadow:0 4px 15px rgba(207,0,0,.3)}
-.btn.red:hover{box-shadow:0 6px 20px rgba(207,0,0,.4)}
-.btn.large{padding:20px 45px;font-size:20px}
+h1{font-size:32px;text-align:center;margin-bottom:10px;color:var(--gold)}
+.subtitle{text-align:center;color:var(--gold-light);margin-bottom:30px}
+.hero-wrapper{text-align:center;margin:20px 0 40px}
+.flip-placeholder{width:200px;height:200px;margin:0 auto;display:flex;align-items:center;justify-content:center;border:3px solid var(--gold);border-radius:12px;background:linear-gradient(135deg,#2A2A2A,#151515)}
+.flip-placeholder .icon{font-size:60px}
+.card{background:rgba(30,30,30,.8);border-radius:12px;padding:30px;margin:20px 0;border:1px solid rgba(212,175,55,.15)}
+.btn{display:inline-block;padding:14px 30px;background:linear-gradient(135deg,var(--gold-dark),var(--gold));color:#000;border:none;border-radius:6px;font-weight:bold;cursor:pointer;margin:5px;text-decoration:none}
+.btn:hover{transform:translateY(-2px)}
+.btn.red{background:linear-gradient(135deg,var(--luxury-red),var(--deep-red));color:#fff}
 .feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin:30px 0}
-.feature-card{background:linear-gradient(135deg,rgba(35,35,35,.8),rgba(15,15,15,.9));padding:25px 20px;border-radius:10px;text-align:center;border:1px solid rgba(212,175,55,.12)}
-.feature-card .icon{font-size:36px;margin-bottom:10px}
-.feature-card h3{font-size:18px;margin-bottom:8px;color:var(--gold)}
-.feature-card p{font-size:14px;color:#999;margin-bottom:15px}
-.install-banner{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#1A1A1A,#0A0A0A);padding:15px 25px;border-radius:10px;box-shadow:0 0 30px rgba(212,175,55,.25);z-index:200;display:none;max-width:360px;border:1px solid rgba(212,175,55,.25)}
-.install-banner.show{display:flex;gap:15px;align-items:center;flex-wrap:wrap}
-.install-btn{padding:10px 16px;border-radius:6px;border:none;font-weight:bold;cursor:pointer}
-.install-btn.ok{background:var(--gold);color:black}
-.install-btn.later{background:#333;color:#999}
-.leaderboard{width:100%;border-collapse:separate;border-spacing:0 6px;margin-top:15px}
-.leaderboard th{color:var(--gold);text-align:left;padding:10px 8px;font-size:13px;text-transform:uppercase;border-bottom:1px solid rgba(212,175,55,.15)}
-.leaderboard th:nth-child(1){width:15%;text-align:center}
-.leaderboard th:nth-child(2){width:70%}
-.leaderboard th:nth-child(3){width:15%;text-align:right}
-.leaderboard td{background:rgba(20,20,20,.6);padding:12px 10px;font-size:15px}
-.leaderboard tr td:first-child{border-radius:8px 0 0 8px;font-weight:bold;color:var(--gold);text-align:center}
-.leaderboard tr td:last-child{border-radius:0 8px 8px 0;font-weight:bold;color:var(--gold);text-align:right}
-.leaderboard .gold td{background:linear-gradient(90deg,rgba(212,175,55,.15),rgba(20,20,20,.4))}
-.leaderboard .silver td{background:linear-gradient(90deg,rgba(192,192,192,.1),rgba(20,20,20,.4))}
-.leaderboard .bronze td{background:linear-gradient(90deg,rgba(205,127,50,.12),rgba(20,20,20,.4))}
-.game-container{background:linear-gradient(135deg,rgba(26,26,26,.9),rgba(10,10,10,.95));border-radius:12px;padding:25px;border:1px solid rgba(212,175,55,.15)}
-.note{background:rgba(207,0,0,.1);border-left:3px solid var(--deep-red);padding:15px;margin-bottom:20px;border-radius:0 8px 8px 0;color:#ddd}
-.game-btn{padding:12px 10px;border-radius:8px;border:none;font-size:15px;font-weight:bold;cursor:pointer;margin:5px;width:calc(50% - 10px);position:relative;z-index:10;-webkit-user-select:none;user-select:none}
-.game-btn.red{background:linear-gradient(135deg,#9E0000,#CF0000);color:white}
-.game-btn.green{background:linear-gradient(135deg,#2E7D32,#4CAF50);color:white}
-.game-btn.gray{background:#333;color:#ccc}
-.score-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0}
-.score-btn{padding:18px 8px;font-size:18px;border-radius:10px;border:2px solid transparent;cursor:pointer;transition:all .2s ease;background:#1A1A1A;color:white;position:relative;z-index:10;-webkit-user-select:none;user-select:none}
-.score-btn:hover{border-color:var(--gold);box-shadow:0 0 15px rgba(212,175,55,.2)}
-.score-btn:active{transform:scale(.95)}
-.score-btn.zero{border-color:#8B0000;background:linear-gradient(135deg,#2A0000,#1A0000)}
-.score-btn.one{border-color:#4CAF50;background:linear-gradient(135deg,#0A2A0A,#051A05)}
-.score-btn.five{border-color:#1565C0;background:linear-gradient(135deg,#0A1A2A,#05101A)}
-.score-btn.ten{border-color:var(--gold);background:linear-gradient(135deg,#2A2510,#1A1508);color:var(--gold)}
-.hidden{display:none!important}
-.status{padding:15px;border-radius:8px;margin:12px 0;background:rgba(255,255,255,.05);border-left:3px solid #555}
-.status.lose{background:rgba(207,0,0,.1);border-left-color:var(--deep-red)}
-.status.win{background:rgba(212,175,55,.15);border-left-color:var(--gold);color:var(--gold)}
-input{padding:14px;border-radius:8px;border:1px solid #444;background:#111;color:white;font-size:16px;-webkit-user-select:text;user-select:text}
-footer{text-align:center;padding:40px 25px;color:#555;font-size:13px;border-top:1px solid rgba(212,175,55,.1);margin-top:30px}
-footer .copyright{color:#777;margin-top:10px;font-size:12px}
-@keyframes fadeIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
-@media(max-width:480px){:root{--box-h:130px;--box-w:88px;--box-d:35px}h1{font-size:28px}.btn.large{width:100%}.score-grid{grid-template-columns:repeat(2,1fr)}}
+.feature-card{background:rgba(40,40,40,.6);padding:25px;border-radius:10px;text-align:center;border:1px solid rgba(212,175,55,.1)}
+.feature-card .icon{font-size:30px;margin-bottom:10px}
+footer{text-align:center;padding:30px 20px;color:#666;font-size:12px;border-top:1px solid #333;margin-top:30px}
+@media(max-width:480px){h1{font-size:24px}.btn{width:100%}}
 </style>
 </head>
-<body oncontextmenu="return false;" oncopy="return false;" oncut="return false;">
+<body oncontextmenu="return false;" oncopy="return false;">
 
-<div class="luxury-bg"></div>
-
-<div class="install-banner" id="installBanner">
-  <p>📲 Add to Home Screen for app-style access!</p>
-  <div class="install-buttons">
-    <button class="install-btn later" id="dismissBtn">Later</button>
-    <button class="install-btn ok" id="installBtn">Install</button>
+<nav>
+  <div class="nav-container">
+    <span class="nav-link active" data-target="home">🏠 Home</span>
+    <span class="nav-link" data-target="play">🎮 Play</span>
+    <span class="nav-link" data-target="scores">🏆 Scores</span>
+    <span class="nav-link" data-target="rules">📖 Rules</span>
+    <span class="nav-link" data-target="download">🛒 Get Yours</span>
   </div>
-</div>
+</nav>
+
+<section id="home" class="active">
+  <h1>🦡 Flip The Badger</h1>
+  <p class="subtitle">Where Precision Meets Fortune</p>
+  
+  <div class="hero-wrapper">
+    <div class="flip-placeholder">
+      <span class="icon">🦡</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2 style="color:var(--gold);margin-bottom:15px">Welcome</h2>
+    <p style="color:#ccc">More than a game — a pastime of skill, strategy, and delightful unpredictability. Flip the Badger box and see where it lands. Reach exactly 15 points to win!</p>
+  </div>
+
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="icon">🎮</div>
+      <h3>Play Now</h3>
+      <p>Keep score as you play</p>
+      <button class="btn" onclick="showSection('play')">Play</button>
+    </div>
+    <div class="feature-card">
+      <div class="icon">📦</div>
+      <h3>Box Template</h3>
+      <p>Print your own game piece</p>
+      <button class="btn red" onclick="showSection('download')">Download</button>
+    </div>
+    <div class="feature-card">
+      <div class="icon">📖</div>
+      <h3>Rules</h3>
+      <p>How to play</p>
+      <button class="btn" onclick="showSection('rules')">Read</button>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🏆</div>
+      <h3>Scores</h3>
+      <p>Your game history</p>
+      <button class="btn red" onclick="showSection('scores')">View</button>
+    </div>
+  </div>
+</section>
+
+<section id="play">
+  <h1>🎮 Play Flip The Badger</h1>
+  <div class="card">
+    <p style="color:#ccc;margin-bottom:20px">Game scorekeeper coming soon!</p>
+    <button class="btn" onclick="showSection('home')">← Back Home</button>
+  </div>
+</section>
+
+<section id="scores">
+  <h1>🏆 Hall of Fame</h1>
+  <div class="card">
+    <p style="color:#ccc;margin-bottom:20px">Your scores will appear here once you start playing.</p>
+    <button class="btn" onclick="showSection('home')">← Back Home</button>
+  </div>
+</section>
+
+<section id="rules">
+  <h1>📖 Game Rules</h1>
+  <div class="card">
+    <h3 style="color:var(--gold);margin:15px 0 10px">Objective</h3>
+    <p style="color:#ccc;margin-bottom:15px">Be the first to reach exactly 15 points.</p>
+    <h3 style="color:var(--gold);margin:15px 0 10px">Scoring</h3>
+    <ul style="color:#ccc;margin-left:20px;margin-bottom:15px">
+      <li>Top face up = <strong style="color:#4CAF50">1 point</strong></li>
+      <li>Bottom face up = <strong style="color:#8B0000">0 points</strong> — all points from this turn are lost!</li>
+      <li>Long sides = <strong style="color:#1565C0">5 points</strong> each</li>
+      <li>Short ends = <strong style="color:var(--gold)">10 points</strong> each</li>
+    </ul>
+    <h3 style="color:var(--gold);margin:15px 0 10px">Gameplay</h3>
+    <p style="color:#ccc">Flip the Badger from a flat surface. It must make at least one full rotation. Continue flipping until you decide to pass to the next player.</p>
+    <button class="btn" onclick="showSection('home')">← Back Home</button>
+  </div>
+</section>
+
+<section id="download">
+  <h1>📦 Get Your Badger Box</h1>
+  <div class="card">
+    <p style="color:#ccc;margin-bottom:20px">Printable template coming soon! Dimensions: 8.2cm × 5.5cm × 2.2cm.</p>
+    <button class="btn red" onclick="showSection('home')">← Back Home</button>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Flip The Badger — All Rights Reserved</p>
+  <p style="margin-top:5px">Unauthorised copying, distribution, or reproduction prohibited.</p>
+</footer>
+
+<script>
+// DOMAIN LOCK — ONLY WORKS ON YOUR SITE
+const allowedDomains = ['your-github-username.github.io', 'localhost', '127.0.0.1'];
+const currentDomain = window.location.hostname;
+const isAuthorized = allowedDomains.some(d => currentDomain.includes(d) || currentDomain === d);
+if (!isAuthorized && currentDomain !== '') {
+  document.body.innerHTML = '<div style="padding:40px;text-align:center;color:#8B0000"><h1>🔒 Unauthorised</h1><p>This content is protected intellectual property.</p></div>';
+}
+
+function showSection(id) {
+  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+  document.querySelectorAll(`[data-target="${id}"]`).forEach(l => l.classList.add('active'));
+}
+
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', () => showSection(link.getAttribute('data-target')));
+});
+</script>
+
+</body>
+</html>
