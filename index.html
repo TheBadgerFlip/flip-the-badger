@@ -6,8 +6,6 @@
 <title>Flip The Badger — Where Precision Meets Fortune</title>
 <meta name="copyright" content="© 2026 Flip The Badger — All Rights Reserved">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
 <style>
 :root {
   --black: #050505;
@@ -23,7 +21,7 @@
   --box-d: 44px;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Georgia', 'Times New Roman', serif; }
-html { -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+html { -webkit-user-select: none; user-select: none; }
 body {
   background: linear-gradient(180deg, #1A1A1A 0%, #050505 100%);
   color: var(--text-light);
@@ -68,7 +66,7 @@ section {
 }
 section.active { display: block; }
 h1 {
-  font-size: 36px;
+  font-size: 32px;
   text-align: center;
   margin-bottom: 10px;
   color: var(--gold);
@@ -76,7 +74,7 @@ h1 {
   text-transform: uppercase;
 }
 h2 {
-  font-size: 24px;
+  font-size: 22px;
   margin: 30px 0 15px;
   color: var(--gold);
   border-bottom: 1px solid rgba(212,175,55,0.25);
@@ -86,15 +84,17 @@ h2 {
   text-align: center;
   font-size: 18px;
   color: var(--gold-light);
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   font-style: italic;
 }
 .hero-wrapper {
-  position: relative;
   text-align: center;
-  margin: 20px 0 50px;
+  margin: 0 auto 40px;
+  padding: 20px 0;
   perspective: 800px;
-  height: 260px;
+  height: 240px;
+  position: relative;
+  z-index: 1;
 }
 .flip-container {
   width: 220px;
@@ -170,6 +170,8 @@ h2 {
   margin: 20px 0;
   border: 1px solid rgba(212,175,55,0.15);
   box-shadow: var(--shadow-gold);
+  position: relative;
+  z-index: 2;
 }
 .btn {
   display: inline-block;
@@ -185,6 +187,7 @@ h2 {
   transition: all 0.3s ease;
   text-transform: uppercase;
   letter-spacing: 1px;
+  font-size: 16px;
 }
 .btn:hover { transform: translateY(-2px); }
 .btn.red {
@@ -197,6 +200,8 @@ h2 {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
   margin: 30px 0;
+  position: relative;
+  z-index: 2;
 }
 .feature-card {
   background: rgba(40,40,40,0.6);
@@ -466,3 +471,6 @@ footer {
   <div class="card">
     <h2>⭐ Basic Play</h2>
     <ul>
+      <li>Play on any flat, dry surface with a defined edge</li>
+      <li>The Badger must complete at least <strong>one full rotation</strong> in the air for the flip to count</li>
+      <li>Continue flipping until you choose to end your turn
