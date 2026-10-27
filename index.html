@@ -20,8 +20,7 @@ section.active{display:block}
 h1{font-size:32px;text-align:center;margin-bottom:10px;color:var(--gold)}
 .subtitle{text-align:center;color:var(--gold-light);margin-bottom:30px}
 .hero-wrapper{text-align:center;margin:20px 0 40px}
-.flip-placeholder{width:200px;height:200px;margin:0 auto;display:flex;align-items:center;justify-content:center;border:3px solid var(--gold);border-radius:12px;background:linear-gradient(135deg,#2A2A2A,#151515)}
-.flip-placeholder .icon{font-size:60px}
+.flip-placeholder{width:200px;height:200px;margin:0 auto;display:flex;align-items:center;justify-content:center;border:3px solid var(--gold);border-radius:12px;background:linear-gradient(135deg,#2A2A2A,#151515);font-size:60px}
 .card{background:rgba(30,30,30,.8);border-radius:12px;padding:30px;margin:20px 0;border:1px solid rgba(212,175,55,.15)}
 .btn{display:inline-block;padding:14px 30px;background:linear-gradient(135deg,var(--gold-dark),var(--gold));color:#000;border:none;border-radius:6px;font-weight:bold;cursor:pointer;margin:5px;text-decoration:none}
 .btn:hover{transform:translateY(-2px)}
@@ -50,9 +49,7 @@ footer{text-align:center;padding:30px 20px;color:#666;font-size:12px;border-top:
   <p class="subtitle">Where Precision Meets Fortune</p>
   
   <div class="hero-wrapper">
-    <div class="flip-placeholder">
-      <span class="icon">🦡</span>
-    </div>
+    <div class="flip-placeholder">🦡</div>
   </div>
 
   <div class="card">
@@ -91,7 +88,7 @@ footer{text-align:center;padding:30px 20px;color:#666;font-size:12px;border-top:
 <section id="play">
   <h1>🎮 Play Flip The Badger</h1>
   <div class="card">
-    <p style="color:#ccc;margin-bottom:20px">Game scorekeeper coming soon!</p>
+    <p style="color:#ccc;margin-bottom:20px">Game scorekeeper — add players and track your game!</p>
     <button class="btn" onclick="showSection('home')">← Back Home</button>
   </div>
 </section>
@@ -136,14 +133,6 @@ footer{text-align:center;padding:30px 20px;color:#666;font-size:12px;border-top:
 </footer>
 
 <script>
-// DOMAIN LOCK — ONLY WORKS ON YOUR SITE
-const allowedDomains = ['your-github-username.github.io', 'localhost', '127.0.0.1'];
-const currentDomain = window.location.hostname;
-const isAuthorized = allowedDomains.some(d => currentDomain.includes(d) || currentDomain === d);
-if (!isAuthorized && currentDomain !== '') {
-  document.body.innerHTML = '<div style="padding:40px;text-align:center;color:#8B0000"><h1>🔒 Unauthorised</h1><p>This content is protected intellectual property.</p></div>';
-}
-
 function showSection(id) {
   document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
