@@ -174,13 +174,13 @@ Rotated -90deg around Y, then moved right by W/2
   color: var(--blue);
 }
 
-@keyframes spinBox {
-  0% { transform: rotateX(12deg) rotateY(0deg); }
-  100% { transform: rotateX(12deg) rotateY(720deg); }
-}
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(15px); }
-  to { opacity: 1; transform: translateY(0); }
+keyframes spinBox {
+  0% {
+    transform: rotateX(15deg) rotateY(0deg);
+  }
+  100% {
+    transform: rotateX(15deg) rotateY(360deg);
+  }
 }
 
 .card { background: rgba(30,30,30,0.8); padding: 30px; border-radius: 12px; margin: 20px 0; border: 1px solid rgba(212,175,55,0.15); }
